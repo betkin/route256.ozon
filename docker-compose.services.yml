@@ -1,0 +1,76 @@
+version: "3.9"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: act_device_api
+      APP_DB_USER: docker
+      APP_DB_PASS: docker
+    networks:
+      - ompnw
+    volumes:
+      # - pgdata:/var/lib/postgresql/data
+      - ./scripts/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:7.1.0
+    restart: unless-stopped
+    ports:
+      - 2181:2181
+    environment:
+      zk_id: "1"
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SYNC_LIMIT: 2
+    networks:
+      - ompnw
+
+  kafka_1:
+    container_name: kafka_1
+    image: confluentinc/cp-kafka:7.1.0
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+    ports:
+      - 9094:9094
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:32181"
+      KAFKA_LISTENERS: INTERNAL://kafka_1:9092,OUTSIDE://kafka_1:9094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka_1:9092,OUTSIDE://localhost:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    command: sh -c "((sleep 15 && kafka-topics --create --zookeeper zookeeper:32181 --replication-factor 1 --partitions 1 --topic templates)&) && /etc/confluent/docker/run"
+    networks:
+      - ompnw
+
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:1.32
+    restart: unless-stopped
+    ports:
+      - 6831:6831/udp
+      - 16686:16686
+    networks:
+      - ompnw
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  ompnw:
+    driver: bridge
