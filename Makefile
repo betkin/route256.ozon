@@ -123,3 +123,18 @@ dc-rebuild-reup:
 	make dc-down
 	docker-compose -p ozon_route256 up --build --force-recreate -V -d
 
+.PHONY: front-up
+front-up:
+	docker-compose -f docker-compose.project.yml up -d
+
+.PHONY: front-down
+front-down:
+	docker-compose -f docker-compose.project.yml down --remove-orphans
+
+.PHONY: back-up
+back-up:
+	docker-compose -f docker-compose.services.yml up -d
+
+.PHONY: back-down
+back-down:
+	docker-compose -f docker-compose.services.yml down
