@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.20
+    restart: unless-stopped
+    logging:
+      driver: 'gelf'
+      options:
+        gelf-address: 'udp://localhost:12201'
+        tag: nginx
+    networks:
+      - ompnw
+    ports:
+      - 8080:8080
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - act-device-api
+      - swagger-ui
+
+  act-device-api:
+    container_name: act-device-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - ompnw
+    ports:
+      - 8083:8080 # REST
+      - 8082:8082 # gRPC
+      - 9100:9100 # Metrics prometheus
+      - 8000:8000 # Status prometheus
+      - 40000:40000 # Debug port
+    healthcheck:
+      test: [ 'CMD', 'curl', '-v', 'http://localhost:8000/live' ]
+      interval: 10s
+      timeout: 10s
+      retries: 2
+      start_period: 20s
+    volumes:
+      - ./migrations:/root/migrations
+      - ./container-config.yml:/root/container-config.yml
+
+  swagger-ui:
+    container_name: swagger-ui
+    image: swaggerapi/swagger-ui:v4.10.3
+    ports:
+      - 8081:8080
+    restart: always
+    volumes:
+      - ./swagger:/swagger
+    environment:
+      SWAGGER_JSON: /swagger/ozonmp/act_device_api/v1/act_device_api.swagger.json
+    depends_on:
+      - act-device-api
+    networks:
+      - ompnw
+
+networks:
+  ompnw:
+    driver: bridge

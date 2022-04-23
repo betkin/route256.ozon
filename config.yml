@@ -4,35 +4,35 @@ project:
   environment: development
 
 grpc:
-  host: 0.0.0.0
+  host: 127.0.0.1
   port: 8082
   maxConnectionIdle: 5 # Minutes
   timeout: 15 # Seconds
   maxConnectionAge: 5 # Minutes
 
 rest:
-  host: 0.0.0.0
+  host: 127.0.0.1
   port: 8080
 
 metrics:
-  host: 0.0.0.0
+  host: 127.0.0.1
   port: 9100
   path: /metrics
 
 jaeger:
   service: "act-device-api"
-  host: "jaeger"
+  host: "127.0.0.1"
   port: ":6831"
 
 status:
-  host: 0.0.0.0
+  host: 127.0.0.1
   port: 8000
   livenessPath: /live
   readinessPath: /ready
   versionPath: /version
 
 database:
-  host: postgres
+  host: 127.0.0.1
   port: 5432
   user: docker
   password: docker
