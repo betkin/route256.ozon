@@ -1,0 +1,47 @@
+newman
+
+Ozon Route265
+
+❏ device-api / v1
+↳ Create a device
+  POST http://localhost:8080/api/v1/devices [200 OK, 217B, 106ms]
+  ✓  Status code is 200
+
+↳ Describe a device
+  GET http://localhost:8080/api/v1/devices/11 [200 OK, 299B, 8ms]
+  ✓  Status code is 200
+  ✓  ID is correct
+
+↳ Update a device
+  PUT http://localhost:8080/api/v1/devices/11 [200 OK, 216B, 9ms]
+  ✓  Status code is 200
+  ✓  Update is successful
+
+↳ Remove a device
+  DELETE http://localhost:8080/api/v1/devices/11 [200 OK, 214B, 14ms]
+  ✓  Status code is 200
+  ✓  Remove is successful
+
+↳ List of devices
+  GET http://localhost:8080/api/v1/devices?page=1&perPage=20 [200 OK, 1.2kB, 7ms]
+  ✓  Status code is 200
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                 5 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                10 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 5 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                 8 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 457ms                                      │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 1.15kB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 28ms [min: 7ms, max: 106ms, s.d.: 38ms] │
+└────────────────────────────────────────────────────────────────┘

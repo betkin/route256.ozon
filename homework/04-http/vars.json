@@ -1,0 +1,33 @@
+{
+	"id": "4027308c-1eb2-48bb-898e-a6b384362245",
+	"values": [
+		{
+			"key": "target",
+			"value": "http://localhost:8080/api/v1/devices",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "deviceID",
+			"value": "11",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "platform",
+			"value": "FreeBSD",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userID",
+			"value": "666",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-04-25T19:59:22.812Z",
+	"_postman_exported_using": "Postman/9.15.13"
+}

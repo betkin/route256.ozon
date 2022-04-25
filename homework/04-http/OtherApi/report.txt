@@ -1,0 +1,46 @@
+newman
+
+Other Api
+
+❏ v0
+↳ User info
+  GET https://gorest.co.in/public/v2/users/6211?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811 [200 OK, 832B, 1099ms]
+  ✓  Status code is 200
+  ✓  ID is correct
+
+↳ Update user info
+  PUT https://gorest.co.in/public/v2/users/6211?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811 [200 OK, 832B, 252ms]
+  ✓  Status code is 200
+  ✓  ID is correct
+
+↳ Remove user
+  DELETE https://gorest.co.in/public/v2/users/6211?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811 [204 No Content, 553B, 233ms]
+  ✓  Status code is 204
+
+↳ Create user
+  POST https://gorest.co.in/public/v2/users?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811 [201 Created, 843B, 238ms]
+  ✓  Status code is 201
+
+↳ List of users
+  GET https://gorest.co.in/public/v2/users?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811 [200 OK, 3.26kB, 236ms]
+  ✓  Status code is 200
+
+┌─────────────────────────┬─────────────────────┬─────────────────────┐
+│                         │            executed │              failed │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│              iterations │                   1 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│                requests │                   5 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│            test-scripts │                  10 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│      prerequest-scripts │                   5 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│              assertions │                   7 │                   0 │
+├─────────────────────────┴─────────────────────┴─────────────────────┤
+│ total run duration: 3s                                              │
+├─────────────────────────────────────────────────────────────────────┤
+│ total data received: 2.56kB (approx)                                │
+├─────────────────────────────────────────────────────────────────────┤
+│ average response time: 411ms [min: 233ms, max: 1099ms, s.d.: 343ms] │
+└─────────────────────────────────────────────────────────────────────┘
