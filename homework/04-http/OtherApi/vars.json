@@ -1,0 +1,51 @@
+{
+	"id": "4027308c-1eb2-48bb-898e-a6b384362245",
+	"values": [
+		{
+			"key": "target",
+			"value": "https://gorest.co.in/public/v2/users",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "auth",
+			"value": "?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userID",
+			"value": "6211",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "Boris Nemtsov",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "email",
+			"value": "nemtsov@mail.eu",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "gender",
+			"value": "male",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "status",
+			"value": "active",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2022-04-25T21:22:11.666Z",
+	"_postman_exported_using": "Postman/9.15.13"
+}

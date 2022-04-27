@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "905279b2-ee22-4101-96cd-fac0c146aadb",
+		"name": "Other Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v0",
+			"item": [
+				{
+					"name": "User info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"targetID = parseInt(pm.collectionVariables.get(\"userID\"));",
+									"",
+									"pm.test(\"ID is correct\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(targetID);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/{{userID}}{{auth}}",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"{{userID}}{{auth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"targetID = parseInt(pm.collectionVariables.get(\"userID\"));",
+									"",
+									"pm.test(\"ID is correct\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(targetID);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{name}}\",\n  \"email\": \"{{email}}\",\n  \"gender\": \"{{gender}}\",\n  \"status\": \"{{status}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{target}}/{{userID}}{{auth}}",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"{{userID}}{{auth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/{{userID}}{{auth}}",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"{{userID}}{{auth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{name}}\",\n  \"email\": \"{{email}}\",\n  \"gender\": \"{{gender}}\",\n  \"status\": \"{{status}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{target}}{{auth}}",
+							"host": [
+								"{{target}}{{auth}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}{{auth}}",
+							"host": [
+								"{{target}}{{auth}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "target",
+			"value": "https://gorest.co.in/public/v2/users",
+			"type": "string"
+		},
+		{
+			"key": "userID",
+			"value": "6211",
+			"type": "string"
+		},
+		{
+			"key": "name",
+			"value": "Boris Nemtsov",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "nemtsov@mail.kz",
+			"type": "string"
+		},
+		{
+			"key": "gender",
+			"value": "male",
+			"type": "string"
+		},
+		{
+			"key": "status",
+			"value": "active",
+			"type": "string"
+		},
+		{
+			"key": "auth",
+			"value": "?access-token=c9479c5d9a1a44f93a0411e06bc504ecb23d568c0432845c7261ac0d404f2811",
+			"type": "string"
+		}
+	]
+}
