@@ -1,24 +1,6 @@
-package task3
+package main
 
-import (
-	"testing"
-)
-
-func FromMaxToMin(digits []float32) float32 {
-	var max, min float32
-	max = digits[0]
-	min = digits[0]
-	for _, d := range digits {
-		if max < d {
-			max = d
-		} else {
-			if min > d {
-				min = d
-			}
-		}
-	}
-	return max - min
-}
+import "testing"
 
 func TestFromMaxToMin(t *testing.T) {
 	var r float32

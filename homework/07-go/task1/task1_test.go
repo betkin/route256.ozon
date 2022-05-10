@@ -1,36 +1,6 @@
-package task1
+package main
 
-import (
-	"testing"
-	"unicode"
-)
-
-func AutoCorrect(txt string) string {
-	var (
-		l       int = len(txt)
-		worker  string
-		dotFlag bool = true
-	)
-
-	if l == 0 {
-		return ""
-	}
-	for _, ch := range txt {
-		if dotFlag && unicode.IsLetter(ch) {
-			dotFlag = false
-			ch = unicode.ToUpper(ch)
-		}
-		if ch == 33 || ch == 46 || ch == 63 {
-			dotFlag = true
-		}
-		worker += string(ch)
-	}
-	var ch byte = txt[l-1]
-	if ch != 33 && ch != 46 && ch != 63 {
-		worker += "."
-	}
-	return worker
-}
+import "testing"
 
 func TestAutoCorrect(t *testing.T) {
 	var r string
