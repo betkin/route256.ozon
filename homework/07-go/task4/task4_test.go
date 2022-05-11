@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 // Sum row(x)
 
@@ -35,17 +38,15 @@ func Sumsdiag(sl [][]*int) (int, int) {
 }
 
 func TestMagicsgen(t *testing.T) {
-	const N = 5
+	const N = 3
 	var m int = N * (N*N + 1) / 2
 	var testgen = Magicsgen(N)
 
 	for i := 0; i < N; i++ {
-		if Sumrow(testgen, i) != m || Sumcol(testgen, i) != m {
-			t.Error("Magic error! Sum != ", m)
-		}
+		assert.Equal(t, m, Sumrow(testgen, i), "Summa of rows is wrong")
+		assert.Equal(t, m, Sumcol(testgen, i), "Summa of columns is wrong")
 	}
 	d1, d2 := Sumsdiag(testgen)
-	if d1 != m || d2 != m {
-		t.Error("Magic error! Sum != ", m)
-	}
+	assert.Equal(t, m, d1, "Summa of rows is wrong")
+	assert.Equal(t, m, d2, "Summa of columns is wrong")
 }

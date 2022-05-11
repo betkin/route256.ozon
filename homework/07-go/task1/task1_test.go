@@ -1,26 +1,25 @@
 package main
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestAutoCorrect(t *testing.T) {
-	var r string
 	var caseList [5]string = [5]string{
 		"hello",
 		"hello, it's me. you're looking for!",
 		"one? two! Zero",
 		".hello",
 		""}
-	var resultList [5]string = [5]string{
+	var expectList [5]string = [5]string{
 		"Hello.",
 		"Hello, it's me. You're looking for!",
 		"One? Two! Zero.",
 		".Hello.",
 		""}
 
-	for i := 0; i < 5; i++ {
-		r = AutoCorrect(caseList[i])
-		if r != resultList[i] {
-			t.Error("Expected ", resultList[i])
-		}
+	for i := 0; i < len(caseList); i++ {
+		assert.Equal(t, expectList[i], AutoCorrect(caseList[i]))
 	}
 }
