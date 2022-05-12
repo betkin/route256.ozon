@@ -43,10 +43,10 @@ func TestMagicsgen(t *testing.T) {
 	var testgen = Magicsgen(N)
 
 	for i := 0; i < N; i++ {
-		assert.Equal(t, m, Sumrow(testgen, i), "Summa of rows is wrong")
-		assert.Equal(t, m, Sumcol(testgen, i), "Summa of columns is wrong")
+		assert.Equal(t, m, Sumrow(testgen, i), "Summa of rows are wrong")
+		assert.Equal(t, m, Sumcol(testgen, i), "Summa of columns are wrong")
 	}
 	d1, d2 := Sumsdiag(testgen)
-	assert.Equal(t, m, d1, "Summa of rows is wrong")
-	assert.Equal(t, m, d2, "Summa of columns is wrong")
+	assert.Equal(t, m, d1, "Summa of diagonal is wrong")
+	assert.Equal(t, m, d2, "Summa of diagonal is wrong")
 }
