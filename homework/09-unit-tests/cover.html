@@ -55,7 +55,7 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">consoleApps/09-unit-tests/greeter.go (100.0%)</option>
+				<option value="file0">github.com/ozonmp/act-device-api/homework/09-unit-tests/greeter.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -80,25 +80,29 @@ func Greet(name string, hour int) string <span class="cov8" title="1">{
         if len(name) == 0 </span><span class="cov8" title="1">{
                 return "&lt;name&gt;: empty!"
         }</span>
+        <span class="cov8" title="1">trimmedName := strings.Trim(name, " ")
+        onlyName := strings.Split(trimmedName, " ")[0]
+        if len([]rune(trimmedName)) &gt; 256 </span><span class="cov8" title="1">{
+                return "&lt;name&gt;: too much!"
+        }</span>
 
         <span class="cov8" title="1">var greeting string
         switch </span>{
-        case hour &gt;= 0 &amp;&amp; hour &lt; 6:<span class="cov8" title="1">
+        case hour &gt;= 0 &amp;&amp; hour &lt;= 6:<span class="cov8" title="1">
                 greeting = "Good night"</span>
-        case hour &gt;= 6 &amp;&amp; hour &lt; 12:<span class="cov8" title="1">
+        case hour &gt; 6 &amp;&amp; hour &lt;= 12:<span class="cov8" title="1">
                 greeting = "Good morning"</span>
-        case hour &gt;= 12 &amp;&amp; hour &lt; 18:<span class="cov8" title="1">
+        case hour &gt; 12 &amp;&amp; hour &lt;= 18:<span class="cov8" title="1">
                 greeting = "Hello"</span>
-        case hour &gt;= 18 &amp;&amp; hour &lt; 22:<span class="cov8" title="1">
+        case hour &gt; 18 &amp;&amp; hour &lt;= 22:<span class="cov8" title="1">
                 greeting = "Good evening"</span>
-        case hour &gt;= 22 &amp;&amp; hour &lt; 24:<span class="cov8" title="1">
+        case hour &gt; 22 &amp;&amp; hour &lt; 24:<span class="cov8" title="1">
                 greeting = "Good night"</span>
         default:<span class="cov8" title="1">
                 return "&lt;hour&gt;: range error!"</span>
         }
 
-        <span class="cov8" title="1">trimmedName := strings.Trim(name, " ")
-        return fmt.Sprintf("%s %s!", greeting, strings.Title(trimmedName))</span>
+        <span class="cov8" title="1">return fmt.Sprintf("%s %s!", greeting, strings.Title(onlyName))</span>
 }
 </pre>
 		
