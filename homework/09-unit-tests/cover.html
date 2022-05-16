@@ -88,15 +88,15 @@ func Greet(name string, hour int) string <span class="cov8" title="1">{
 
         <span class="cov8" title="1">var greeting string
         switch </span>{
-        case hour &gt;= 0 &amp;&amp; hour &lt;= 6:<span class="cov8" title="1">
+        case hour &gt;= 0 &amp;&amp; hour &lt; 6:<span class="cov8" title="1">
                 greeting = "Good night"</span>
-        case hour &gt; 6 &amp;&amp; hour &lt;= 12:<span class="cov8" title="1">
+        case hour &gt;= 6 &amp;&amp; hour &lt; 12:<span class="cov8" title="1">
                 greeting = "Good morning"</span>
-        case hour &gt; 12 &amp;&amp; hour &lt;= 18:<span class="cov8" title="1">
+        case hour &gt;= 12 &amp;&amp; hour &lt; 18:<span class="cov8" title="1">
                 greeting = "Hello"</span>
-        case hour &gt; 18 &amp;&amp; hour &lt;= 22:<span class="cov8" title="1">
+        case hour &gt;= 18 &amp;&amp; hour &lt; 22:<span class="cov8" title="1">
                 greeting = "Good evening"</span>
-        case hour &gt; 22 &amp;&amp; hour &lt; 24:<span class="cov8" title="1">
+        case hour &gt;= 22 &amp;&amp; hour &lt; 24:<span class="cov8" title="1">
                 greeting = "Good night"</span>
         default:<span class="cov8" title="1">
                 return "&lt;hour&gt;: range error!"</span>
