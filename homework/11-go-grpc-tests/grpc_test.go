@@ -71,7 +71,7 @@ func TestDescribeDevice(t *testing.T) {
 		_, err = deviceApiClient.DescribeDeviceV1(ctx, getRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.NotEqual(t, codes.OK.String(), status.Code(err).String())
+		assert.Equal(t, codes.NotFound.String(), status.Code(err).String())
 	})
 
 	t.Run("Zero ID value returns error", func(t *testing.T) {
@@ -84,7 +84,7 @@ func TestDescribeDevice(t *testing.T) {
 		_, err = deviceApiClient.DescribeDeviceV1(ctx, getRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.NotEqual(t, codes.OK.String(), status.Code(err).String())
+		assert.Equal(t, codes.InvalidArgument.String(), status.Code(err).String())
 	})
 
 	t.Run("Device ID datatype testing", func(t *testing.T) {
@@ -138,7 +138,7 @@ func TestListDevices(t *testing.T) {
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
 		testRequest := &act_device_api.ListDevicesV1Request{
 			Page:    1,
-			PerPage: math.MaxUint16,
+			PerPage: math.MaxUint32,
 		}
 		testResponse, err := deviceApiClient.ListDevicesV1(ctx, testRequest)
 		t.Logf("status.Code: %v", status.Code(err).String())
@@ -160,7 +160,7 @@ func TestListDevices(t *testing.T) {
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
 		testRequest := &act_device_api.ListDevicesV1Request{
 			Page:    1,
-			PerPage: math.MaxUint16,
+			PerPage: math.MaxUint32,
 		}
 		testResponse, err := deviceApiClient.ListDevicesV1(ctx, testRequest)
 		t.Logf("status.Code: %v", status.Code(err).String())
@@ -174,7 +174,7 @@ func TestListDevices(t *testing.T) {
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
 		assert.Equal(t, codes.OK.String(), status.Code(err).String())
-		assert.LessOrEqual(t, uint64(len(listResponse.Items)), testCount)
+		assert.Less(t, uint64(len(listResponse.Items)), testCount)
 	})
 
 	t.Run("No items on page return error", func(t *testing.T) {
@@ -182,7 +182,7 @@ func TestListDevices(t *testing.T) {
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
 		testRequest := &act_device_api.ListDevicesV1Request{
 			Page:    1,
-			PerPage: math.MaxUint16,
+			PerPage: math.MaxUint32,
 		}
 		testResponse, err := deviceApiClient.ListDevicesV1(ctx, testRequest)
 		t.Logf("status.Code: %v", status.Code(err).String())
@@ -195,7 +195,7 @@ func TestListDevices(t *testing.T) {
 		listResponse, err := deviceApiClient.ListDevicesV1(ctx, listRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.NotEqual(t, codes.OK.String(), status.Code(err).String())
+		assert.Equal(t, codes.NotFound.String(), status.Code(err).String())
 		assert.Nil(t, listResponse.Items)
 	})
 
@@ -210,7 +210,7 @@ func TestListDevices(t *testing.T) {
 		_, err := deviceApiClient.ListDevicesV1(ctx, listRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.NotEqual(t, codes.OK.String(), status.Code(err).String())
+		assert.Equal(t, codes.Internal.String(), status.Code(err).String())
 	})
 
 	t.Run("Zero Page returns OK", func(t *testing.T) {
@@ -342,7 +342,7 @@ func TestCreateDevices(t *testing.T) {
 		_, err := deviceApiClient.CreateDeviceV1(ctx, createRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.NotEqual(t, codes.OK.String(), status.Code(err).String())
+		assert.Equal(t, codes.InvalidArgument.String(), status.Code(err).String())
 	})
 
 	t.Run("Empty Platform returns error", func(t *testing.T) {
@@ -419,56 +419,3 @@ func TestCreateDevices(t *testing.T) {
 	})
 
 }
-
-/*
-func TestDevice(t *testing.T) {
-	ctx := context.Background()
-	host := "localhost:8082"
-	conn, err := grpc.Dial(host, grpc.WithInsecure())
-	if err != nil {
-		t.Fatalf("grpc.Dial err:%v", err)
-	}
-	defer func(conn *grpc.ClientConn) {
-		err := conn.Close()
-		if err != nil {
-			t.Logf("conn.Close err:%v", err)
-		}
-	}(conn)
-	t.Run("empty result", func(t *testing.T) {
-
-		// grpc клиент act_device_api
-		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
-		request := &act_device_api.ListDevicesV1Request{}
-		t.Logf("status.Code: %v", status.Code(err).String())
-		listDevicesV1Response, err := deviceApiClient.ListDevicesV1(ctx, request)
-		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.Equal(t, codes.OK.String(), status.Code(err).String())
-		require.NoError(t, err)
-		require.NotNil(t, listDevicesV1Response)
-		t.Logf("listDevicesV1Response: %v", listDevicesV1Response)
-		// где структура listDevicesV1Response
-		assert.Emptyf(t, listDevicesV1Response.GetItems(), "listDevicesV1Response.Items - не пустой")
-		assert.NotEmptyf(t, listDevicesV1Response.Items, "listDevicesV1Response.Items - пустой")
-
-	})
-	t.Run("first grpc test", func(t *testing.T) {
-
-		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
-		pages := uint64(3)
-		request := &act_device_api.ListDevicesV1Request{
-			Page:    1,
-			PerPage: pages,
-		}
-
-		listDevicesV1Response, err := deviceApiClient.ListDevicesV1(ctx, request)
-		require.NoError(t, err)
-		require.NotNil(t, listDevicesV1Response)
-		assert.Equal(t, len(listDevicesV1Response.Items), int(pages))
-		for _, value := range listDevicesV1Response.Items {
-			require.NotEmpty(t, value.Platform)
-			t.Log(value.Platform)
-		}
-
-	})
-
-}*/
