@@ -356,7 +356,7 @@ func TestCreateDevices(t *testing.T) {
 		_, err := deviceApiClient.CreateDeviceV1(ctx, createRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
-		assert.NotEqual(t, codes.OK.String(), status.Code(err).String())
+		assert.Equal(t, codes.InvalidArgument.String(), status.Code(err).String())
 	})
 
 	t.Run("UserId datatype testing", func(t *testing.T) {
