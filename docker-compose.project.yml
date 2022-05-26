@@ -42,7 +42,7 @@ services:
       start_period: 20s
     volumes:
       - ./migrations:/root/migrations
-      - ./container-config.yml:/root/container-config.yml
+      - ./container-config.yml:/root/config.yml
 
   swagger-ui:
     container_name: swagger-ui
