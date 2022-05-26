@@ -382,10 +382,11 @@ func TestCreateDevices(t *testing.T) {
 					UserId:   data.value,
 				}
 				//act
-				_, err := deviceApiClient.CreateDeviceV1(ctx, createRequest)
+				createResponse, err := deviceApiClient.CreateDeviceV1(ctx, createRequest)
 				//assert
 				t.Logf("status.Code: %v", status.Code(err).String())
 				assert.Equal(t, codes.OK.String(), status.Code(err).String())
+				assert.Greater(t, createResponse.DeviceId, uint64(0))
 			})
 		}
 	})
@@ -410,10 +411,11 @@ func TestCreateDevices(t *testing.T) {
 					UserId:   54337,
 				}
 				//act
-				_, err := deviceApiClient.CreateDeviceV1(ctx, createRequest)
+				createResponse, err := deviceApiClient.CreateDeviceV1(ctx, createRequest)
 				//assert
 				t.Logf("status.Code: %v", status.Code(err).String())
 				assert.Equal(t, codes.OK.String(), status.Code(err).String())
+				assert.Greater(t, createResponse.DeviceId, uint64(0))
 			})
 		}
 	})
