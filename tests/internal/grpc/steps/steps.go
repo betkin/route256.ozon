@@ -2,6 +2,9 @@ package steps
 
 import (
 	"context"
+	"fmt"
+	"github.com/ozonmp/act-device-api/internal/config"
+	route_sql "github.com/ozonmp/act-device-api/tests/route-sql"
 	"testing"
 
 	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
@@ -31,6 +34,19 @@ func CreateDevice(ctx context.Context, t *testing.T, deviceApiClient act_device_
 	return createResponse, err
 }
 
+func UpdateDevice(ctx context.Context, t *testing.T, deviceApiClient act_device_api.ActDeviceApiServiceClient, id uint64, platform string, userId uint64) (*act_device_api.UpdateDeviceV1Response, error) {
+	t.Helper()
+	updateRequest := &act_device_api.UpdateDeviceV1Request{
+		DeviceId: id,
+		Platform: platform,
+		UserId:   userId,
+	}
+	updateResponse, err := deviceApiClient.UpdateDeviceV1(ctx, updateRequest)
+	t.Logf("status.Code: %v", status.Code(err).String())
+
+	return updateResponse, err
+}
+
 func ListDevices(ctx context.Context, t *testing.T, deviceApiClient act_device_api.ActDeviceApiServiceClient, page uint64, perPage uint64) (*act_device_api.ListDevicesV1Response, error) {
 	t.Helper()
 	listDevicesRequest := &act_device_api.ListDevicesV1Request{
@@ -50,4 +66,17 @@ func RemoveDevice(ctx context.Context, t *testing.T, deviceApiClient act_device_
 	removeResponse, err := deviceApiClient.RemoveDeviceV1(ctx, removeRequest)
 	t.Logf("status.Code: %v", status.Code(err).String())
 	return removeResponse, err
+}
+
+func ConnectDB(t *testing.T) *route_sql.Storage {
+	if err := config.ReadConfigYML("../config.yml"); err != nil {
+		t.Fatalf("Configuration fail! err:%v", err)
+	}
+	cfgApi := config.GetConfigInstance()
+	dsn := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=%v", cfgApi.Database.Host, cfgApi.Database.Port, cfgApi.Database.User, cfgApi.Database.Password, cfgApi.Database.Name, cfgApi.Database.SslMode)
+	apiDB, err := route_sql.NewPostgres(dsn, cfgApi.Database.Driver)
+	if err != nil {
+		t.Fatalf("Postgres init err:%v", err)
+	}
+	return apiDB
 }
