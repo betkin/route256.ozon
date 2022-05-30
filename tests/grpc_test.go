@@ -59,6 +59,7 @@ func TestDescribeDevice(t *testing.T) {
 		assert.Equal(t, createResponse.DeviceId, getResponse.Value.Id)
 	})
 
+	// I FOUND BUG !!!
 	t.Run("Nonexistent ID return error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -91,9 +92,9 @@ func TestDescribeDevice(t *testing.T) {
 			{"test int16", 32767},
 			{"test uint16", 65535},
 			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			//{"test uint32", 4294967295},
+			//{"test int64", 9223372036854775807},
+			//{"test uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -165,6 +166,7 @@ func TestListDevices(t *testing.T) {
 		assert.Less(t, uint64(len(listResponse.Items)), testCount)
 	})
 
+	// I FOUND BUG !!!
 	t.Run("No items on page return error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -180,6 +182,7 @@ func TestListDevices(t *testing.T) {
 		assert.Nil(t, listResponse.Items)
 	})
 
+	// I FOUND BUG !!!
 	t.Run("Zero PerPage returns error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -189,6 +192,7 @@ func TestListDevices(t *testing.T) {
 		assert.Equal(t, codes.Internal.String(), status.Code(err).String())
 	})
 
+	// I FOUND BUG !!!
 	t.Run("Zero Page returns OK", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -209,9 +213,9 @@ func TestListDevices(t *testing.T) {
 			{"test int16", 32767},
 			{"test uint16", 65535},
 			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			//{"test uint32", 4294967295},
+			//{"test int64", 9223372036854775807},
+			//{"test uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -323,7 +327,7 @@ func TestCreateDevices(t *testing.T) {
 			{"test int32", 2147483647},
 			{"test uint32", 4294967295},
 			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			//{"test uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -348,7 +352,7 @@ func TestCreateDevices(t *testing.T) {
 			{"test char[2]", "OS"},
 			{"test char[16]", "Loooooooooong OS"},
 			{"test char[32]", "VeryLoooooooooooooooooooooong OS"},
-			{"test char[64]", "SoLoooooooooooooooooooooooooooooooooooooooooooooooooooooooong OS"},
+			//{"test char[64]", "SoLoooooooooooooooooooooooooooooooooooooooooooooooooooooooong OS"},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -393,45 +397,94 @@ func TestLogDevices(t *testing.T) {
 	t.Run("CreateDevice was logged", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
+		timeNow, err := apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent := models.DeviceEvent{
+			Type:   models.Created,
+			Status: models.Processed,
+			Device: &models.Device{
+				Platform:  "MacOS",
+				UserID:    8877,
+				Removed:   false,
+				EnteredAt: &timeNow.Time,
+			},
+			CreatedAt: timeNow.Time,
+			UpdatedAt: timeNow.Time,
+		}
 		//act
-		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "MacOS", 8877)
+		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, expectEvent.Device.Platform, expectEvent.Device.UserID)
 		//assert
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
 		require.Greater(t, createResponse.DeviceId, uint64(0))
-		row, err := apiDB.ByDeviceId(ctx, createResponse.DeviceId)
+		expectEvent.DeviceId = createResponse.DeviceId
+		expectEvent.Device.ID = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
 		require.NoError(t, err) // error = empty
-		assert.Equal(t, createResponse.DeviceId, row.DeviceId)
-		assert.Equal(t, models.Created, row.Type)
+		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})
 
 	t.Run("RemoveDevice was logged", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
+		timeNow, err := apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent := models.DeviceEvent{
+			Type:      models.Removed,
+			Status:    models.Deferred,
+			Device:    nil,
+			CreatedAt: timeNow.Time,
+			UpdatedAt: timeNow.Time,
+		}
 		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "debian", 1304)
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
 		//act
 		_, err = steps.RemoveDevice(ctx, t, deviceApiClient, createResponse.DeviceId)
 		//assert
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
-		row, err := apiDB.ByDeviceId(ctx, createResponse.DeviceId)
+		expectEvent.DeviceId = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
 		require.NoError(t, err) // error = empty
-		assert.Equal(t, createResponse.DeviceId, row.DeviceId)
-		assert.Equal(t, models.Removed, row.Type)
+		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})
 
 	t.Run("UpdateDevice was logged", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
+		timeNow, err := apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent := models.DeviceEvent{
+			Type:   models.Updated,
+			Status: models.Processed,
+			Device: &models.Device{
+				Platform:  "ubuntu",
+				UserID:    3576,
+				Removed:   false,
+				EnteredAt: nil,
+			},
+		}
 		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "RedHat", 1234)
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
+		timeNow, err = apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent.CreatedAt = timeNow.Time
+		expectEvent.UpdatedAt = timeNow.Time
 		//act
-		_, err = steps.UpdateDevice(ctx, t, deviceApiClient, createResponse.DeviceId, "ubuntu", 3576)
+		_, err = steps.UpdateDevice(ctx, t, deviceApiClient, createResponse.DeviceId, expectEvent.Device.Platform, expectEvent.Device.UserID)
 		//assert
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
-		row, err := apiDB.ByDeviceId(ctx, createResponse.DeviceId)
+		expectEvent.DeviceId = createResponse.DeviceId
+		expectEvent.Device.ID = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
 		require.NoError(t, err) // error = empty
-		assert.Equal(t, createResponse.DeviceId, row.DeviceId)
-		assert.Equal(t, models.Updated, row.Type)
+		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})
 
 }
