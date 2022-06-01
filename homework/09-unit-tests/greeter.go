@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Greet prints greetings for each times of day
 func Greet(name string, hour int) string {
 	if len(name) == 0 {
 		return "<name>: empty!"

@@ -10,8 +10,7 @@ import (
 	"os/exec"
 )
 
-// This function checks the health status of the test object
-
+// IsAlive checks the health status of the test object
 func IsAlive(checkurl url.URL) {
 	response, err := http.Get(checkurl.String())
 	if err != nil {
@@ -22,8 +21,7 @@ func IsAlive(checkurl url.URL) {
 	}
 }
 
-// This function create XML-config for Allure report
-
+// CfgToXML creates XML-config for Allure report
 func CfgToXML(path string) error {
 	type parameter struct {
 		Key   string `xml:"key"`
@@ -43,21 +41,24 @@ func CfgToXML(path string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer func() {
+		if _err := file.Close(); _err != nil {
+			log.Fatalf("Close file error: %v", err.Error())
+		}
+	}()
 
 	xlmWriter := io.Writer(file)
 
 	enc := xml.NewEncoder(xlmWriter)
 
 	enc.Indent("  ", "    ")
-	if err := enc.Encode(data); err != nil {
+	if err = enc.Encode(data); err != nil {
 		return err
 	}
 	return nil
 }
 
-// This function generates files for Allure trends and replaces them
-
+// GenAllureHistory generates files for Allure trends and replaces them
 func GenAllureHistory() {
 	cmd := exec.Command("allure", "generate", "--clean", "./allure-results")
 	err := cmd.Run()

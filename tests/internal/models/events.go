@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Device describes SQL structure
 type Device struct {
 	ID        uint64     `db:"id"         json:"id,omitempty"`
 	Platform  string     `db:"platform"   json:"platform,omitempty"`
@@ -30,6 +31,7 @@ func (a *Device) Scan(value interface{}) error {
 	return json.Unmarshal(b, &a)
 }
 
+// EventType describes type for event constants
 type EventType uint8
 
 const (
@@ -38,6 +40,7 @@ const (
 	Removed
 )
 
+// EventStatus describes type for event constants
 type EventStatus uint8
 
 const (
@@ -45,6 +48,7 @@ const (
 	Processed
 )
 
+// DeviceEvent describes SQL structure
 type DeviceEvent struct {
 	ID        uint64      `db:"id"`
 	DeviceId  uint64      `db:"device_id"`
@@ -55,10 +59,12 @@ type DeviceEvent struct {
 	UpdatedAt time.Time   `db:"updated_at"`
 }
 
+// DevicesCount describes SQL structure for count request
 type DevicesCount struct {
 	Count uint64 `db:"count"`
 }
 
+// TimeDB describes SQL structure for time request
 type TimeDB struct {
 	Time time.Time `db:"time_db"`
 }
