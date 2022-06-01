@@ -1,0 +1,23 @@
+image: golang:latest
+
+variables:
+  TASK09_DIR: ./homework/09-unit-tests
+  REPO_NAME: gitlab.ozon.dev/betkin/device-api
+
+before_script:
+  - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
+  - ln -svf $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
+  - cd $GOPATH/src/$REPO_NAME
+  - go install gotest.tools/gotestsum@latest
+  - go mod tidy
+
+stages:
+  - test
+
+unit_tests:
+  stage: test
+  script:
+    - gotestsum --format testname --jsonfile json_report.txt $TASK09_DIR
+  artifacts:
+    paths:
+      - json_report.txt
