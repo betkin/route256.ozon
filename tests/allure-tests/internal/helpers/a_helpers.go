@@ -10,6 +10,8 @@ import (
 	"os/exec"
 )
 
+// This function checks the health status of the test object
+
 func IsAlive(checkurl url.URL) {
 	response, err := http.Get(checkurl.String())
 	if err != nil {
@@ -19,6 +21,8 @@ func IsAlive(checkurl url.URL) {
 		log.Fatalf("Unexpected status code: %v", response.StatusCode)
 	}
 }
+
+// This function create XML-config for Allure report
 
 func CfgToXML(path string) error {
 	type parameter struct {
@@ -31,8 +35,8 @@ func CfgToXML(path string) error {
 	}
 
 	data := &environment{}
-	data.Parameters = append(data.Parameters, parameter{Key: "ApiHost", Value: "127.0.0.1"})
-	data.Parameters = append(data.Parameters, parameter{Key: "ApiPort", Value: "8080"})
+	data.Parameters = append(data.Parameters, parameter{Key: "APIHost", Value: "127.0.0.1"})
+	data.Parameters = append(data.Parameters, parameter{Key: "APIPort", Value: "8080"})
 	data.Parameters = append(data.Parameters, parameter{Key: "gRPCPort", Value: "8082"})
 
 	file, err := os.Create(path)
@@ -51,6 +55,8 @@ func CfgToXML(path string) error {
 	}
 	return nil
 }
+
+// This function generates files for Allure trends and replaces them
 
 func GenAllureHistory() {
 	cmd := exec.Command("allure", "generate", "--clean", "./allure-results")

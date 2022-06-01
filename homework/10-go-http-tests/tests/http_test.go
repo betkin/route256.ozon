@@ -81,6 +81,9 @@ func TestHttpServerRemove(t *testing.T) {
 		}
 		//assert
 		list, _, err = client.ListDevices(ctx, opts)
+		if err != nil {
+			t.Errorf("Device list error!")
+		}
 		afterRemoval := len(list.Items)
 		t.Log("Unexpected action")
 		assert.Equal(t, beforeRemoval, afterRemoval)

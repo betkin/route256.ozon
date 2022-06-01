@@ -5,44 +5,51 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/hashicorp/go-retryablehttp"
-	"github.com/ozonmp/act-device-api/internal/pkg/logger"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/hashicorp/go-retryablehttp"
+	"github.com/ozonmp/act-device-api/internal/pkg/logger"
 )
 
+// Client describes HTTP client methods
 type Client interface {
 	Do(req *http.Request) (*http.Response, error)
 	CreateDevice(ctx context.Context, body CreateDeviceRequest) (CreateDeviceResponse, *http.Response, error)
 	ListDevices(ctx context.Context, opts url.Values) (ListDevicesResponse, *http.Response, error)
-	DescribeDevice(ctx context.Context, deviceId string) (DescribeDeviceResponse, *http.Response, error)
-	RemoveDevice(ctx context.Context, deviceId string) (RemoveDeviceResponse, *http.Response, error)
-	UpdateDevice(ctx context.Context, deviceId string, body UpdateDeviceRequest) (UpdateDeviceResponse, *http.Response, error)
+	DescribeDevice(ctx context.Context, deviceID string) (DescribeDeviceResponse, *http.Response, error)
+	RemoveDevice(ctx context.Context, deviceID string) (RemoveDeviceResponse, *http.Response, error)
+	UpdateDevice(ctx context.Context, deviceID string, body UpdateDeviceRequest) (UpdateDeviceResponse, *http.Response, error)
 }
 
+// Body structure for client object
 type client struct {
 	client   *retryablehttp.Client
 	BasePath string
 }
 
+// CreateDeviceRequest - HTTP request body structure
 type CreateDeviceRequest struct {
 	Platform string `json:"platform"`
-	UserId   string `json:"userId"`
+	UserID   string `json:"userId"`
 }
 
+// CreateDeviceResponse - HTTP response body structure
 type CreateDeviceResponse struct {
-	DeviceId int `json:"deviceId,string"`
+	DeviceID int `json:"deviceId,string"`
 }
 
+// ListDevicesResponse - HTTP response body structure
 type ListDevicesResponse struct {
 	Items []struct {
 		Item
 	} `json:"items"`
 }
 
+// Item describes structure for DescribeDeviceResponse
 type Item struct {
 	ID        string     `json:"id"`
 	Platform  string     `json:"platform"`
@@ -50,23 +57,28 @@ type Item struct {
 	EnteredAt *time.Time `json:"enteredAt"`
 }
 
+// DescribeDeviceResponse HTTP response body structure
 type DescribeDeviceResponse struct {
 	Value Item `json:"value"`
 }
 
+// RemoveDeviceResponse HTTP response body structure
 type RemoveDeviceResponse struct {
 	Found bool `json:"found"`
 }
 
+// UpdateDeviceRequest HTTP request body structure
 type UpdateDeviceRequest struct {
 	Platform string `json:"platform"`
-	UserId   string `json:"userId"`
+	UserID   string `json:"userId"`
 }
 
+// UpdateDeviceResponse HTTP response body structure
 type UpdateDeviceResponse struct {
 	Success bool `json:"success"`
 }
 
+// NewHTTPClient creates client object for HTTP connection
 func NewHTTPClient(basePath string, retryMax int, timeout time.Duration) Client {
 	c := &retryablehttp.Client{
 		HTTPClient:      &http.Client{Timeout: timeout},
@@ -112,191 +124,99 @@ func (c *client) Do(request *http.Request) (*http.Response, error) {
 	return c.client.Do(req)
 }
 
-func (c *client) CreateDevice(ctx context.Context, body CreateDeviceRequest) (CreateDeviceResponse, *http.Response, error) {
+func (c *client) makeRequest(ctx context.Context, deviceResponse interface{}, method string, urlString string, body interface{}) (*http.Response, error) {
 	var (
-		localResponse CreateDeviceResponse
+		req *http.Request
+		err error
 	)
-
-	b := new(bytes.Buffer)
-	err := json.NewEncoder(b).Encode(body)
-	if err != nil {
-		return localResponse, nil, err
+	if body != nil {
+		b := new(bytes.Buffer)
+		err = json.NewEncoder(b).Encode(body)
+		if err != nil {
+			return nil, err
+		}
+		req, err = http.NewRequest(method, urlString, b)
+	} else {
+		req, err = http.NewRequest(method, urlString, nil)
 	}
-
-	req, err := http.NewRequest(http.MethodPost, c.BasePath+"/api/v1/devices", b)
 	if err != nil {
-		return localResponse, nil, err
+		return nil, err
 	}
 	res, err := c.Do(req)
 	if err != nil {
-		return localResponse, res, err
+		return res, err
 	}
-
 	if res.StatusCode != http.StatusOK {
 		logger.ErrorKV(ctx, "Bad status code", res.StatusCode)
-		return localResponse, res, err
+		return res, err
 	}
 	data, _ := ioutil.ReadAll(res.Body)
-	device := new(CreateDeviceResponse)
-	err = json.Unmarshal(data, &device)
+	err = json.Unmarshal(data, &deviceResponse)
 	if err != nil {
-		return localResponse, res, err
+		return res, err
 	}
-	return *device, res, nil
+	return res, nil
+}
+
+func (c *client) CreateDevice(ctx context.Context, body CreateDeviceRequest) (CreateDeviceResponse, *http.Response, error) {
+	createResponse := new(CreateDeviceResponse)
+	urlString := c.BasePath + "/api/v1/devices"
+	res, err := c.makeRequest(ctx, createResponse, http.MethodPost, urlString, body)
+	if err != nil {
+		return CreateDeviceResponse{}, res, err
+	}
+	return *createResponse, res, nil
 }
 
 func (c *client) ListDevices(ctx context.Context, opts url.Values) (ListDevicesResponse, *http.Response, error) {
-	var (
-		localResponse ListDevicesResponse
-	)
-
-	apiUrl, err := url.Parse(c.BasePath + "/api/v1/devices")
+	listDevicesResponse := new(ListDevicesResponse)
+	apiURL, err := url.Parse(c.BasePath + "/api/v1/devices")
 	if err != nil {
-		return localResponse, nil, err
+		return ListDevicesResponse{}, nil, err
 	}
-
-	query := apiUrl.Query()
+	query := apiURL.Query()
 	for k, v := range opts {
 		for _, iv := range v {
 			query.Add(k, iv)
 		}
 	}
-	apiUrl.RawQuery = query.Encode()
-
-	req, err := http.NewRequest(http.MethodGet, apiUrl.String(), nil)
+	apiURL.RawQuery = query.Encode()
+	res, err := c.makeRequest(ctx, listDevicesResponse, http.MethodGet, apiURL.String(), nil)
 	if err != nil {
-		return localResponse, nil, err
+		return ListDevicesResponse{}, res, err
 	}
-
-	res, err := c.Do(req)
-	if err != nil {
-		return localResponse, res, err
-	}
-
-	if res.StatusCode != http.StatusOK {
-		logger.ErrorKV(ctx, "Bad status code", res.StatusCode)
-	}
-
-	data, _ := ioutil.ReadAll(res.Body)
-	devices := new(ListDevicesResponse)
-
-	err = json.Unmarshal(data, &devices)
-	if err != nil {
-		return localResponse, res, err
-	}
-	return *devices, res, nil
+	return *listDevicesResponse, res, nil
 }
 
-func (c *client) DescribeDevice(ctx context.Context, deviceId string) (DescribeDeviceResponse, *http.Response, error) {
-	var (
-		localResponse DescribeDeviceResponse
-	)
-
-	apiUrlString := c.BasePath + "/api/v1/devices/{deviceId}"
-	apiUrlString = strings.Replace(apiUrlString, "{deviceId}", fmt.Sprintf("%v", deviceId), -1)
-	apiUrl, err := url.Parse(apiUrlString)
+func (c *client) DescribeDevice(ctx context.Context, deviceID string) (DescribeDeviceResponse, *http.Response, error) {
+	describeResponse := new(DescribeDeviceResponse)
+	urlString := c.BasePath + "/api/v1/devices/{deviceId}"
+	urlString = strings.Replace(urlString, "{deviceId}", fmt.Sprintf("%v", deviceID), -1)
+	res, err := c.makeRequest(ctx, describeResponse, http.MethodGet, urlString, nil)
 	if err != nil {
-		return localResponse, nil, err
+		return DescribeDeviceResponse{}, res, err
 	}
-
-	req, err := http.NewRequest(http.MethodGet, apiUrl.String(), nil)
-	if err != nil {
-		return localResponse, nil, err
-	}
-
-	res, err := c.Do(req)
-	if err != nil {
-		return localResponse, res, err
-	}
-
-	if res.StatusCode != http.StatusOK {
-		logger.ErrorKV(ctx, "Bad status code", res.StatusCode)
-	}
-
-	data, _ := ioutil.ReadAll(res.Body)
-	device := new(DescribeDeviceResponse)
-
-	err = json.Unmarshal(data, &device)
-	if err != nil {
-		return localResponse, res, err
-	}
-	return *device, res, nil
+	return *describeResponse, res, nil
 }
 
-func (c *client) RemoveDevice(ctx context.Context, deviceId string) (RemoveDeviceResponse, *http.Response, error) {
-	var (
-		localResponse RemoveDeviceResponse
-	)
-
-	apiUrlString := c.BasePath + "/api/v1/devices/{deviceId}"
-	apiUrlString = strings.Replace(apiUrlString, "{deviceId}", fmt.Sprintf("%v", deviceId), -1)
-	apiUrl, err := url.Parse(apiUrlString)
+func (c *client) RemoveDevice(ctx context.Context, deviceID string) (RemoveDeviceResponse, *http.Response, error) {
+	removeResponse := new(RemoveDeviceResponse)
+	urlString := c.BasePath + "/api/v1/devices/{deviceId}"
+	urlString = strings.Replace(urlString, "{deviceId}", fmt.Sprintf("%v", deviceID), -1)
+	res, err := c.makeRequest(ctx, removeResponse, http.MethodDelete, urlString, nil)
 	if err != nil {
-		return localResponse, nil, err
+		return RemoveDeviceResponse{}, res, err
 	}
-
-	req, err := http.NewRequest(http.MethodDelete, apiUrl.String(), nil)
-	if err != nil {
-		return localResponse, nil, err
-	}
-
-	res, err := c.Do(req)
-	if err != nil {
-		return localResponse, res, err
-	}
-
-	if res.StatusCode != http.StatusOK {
-		logger.ErrorKV(ctx, "Bad status code", res.StatusCode)
-	}
-
-	data, _ := ioutil.ReadAll(res.Body)
-	device := new(RemoveDeviceResponse)
-
-	err = json.Unmarshal(data, &device)
-	if err != nil {
-		return localResponse, res, err
-	}
-	return *device, res, nil
+	return *removeResponse, res, nil
 }
 
-func (c *client) UpdateDevice(ctx context.Context, deviceId string, body UpdateDeviceRequest) (UpdateDeviceResponse, *http.Response, error) {
-	var (
-		localResponse UpdateDeviceResponse
-	)
-
-	b := new(bytes.Buffer)
-	err := json.NewEncoder(b).Encode(body)
+func (c *client) UpdateDevice(ctx context.Context, deviceID string, body UpdateDeviceRequest) (UpdateDeviceResponse, *http.Response, error) {
+	updateResponse := new(UpdateDeviceResponse)
+	urlString := c.BasePath + "/api/v1/devices/{deviceId}"
+	urlString = strings.Replace(urlString, "{deviceId}", fmt.Sprintf("%v", deviceID), -1)
+	res, err := c.makeRequest(ctx, updateResponse, http.MethodPut, urlString, body)
 	if err != nil {
-		return localResponse, nil, err
+		return UpdateDeviceResponse{}, res, err
 	}
-
-	apiUrlString := c.BasePath + "/api/v1/devices/{deviceId}"
-	apiUrlString = strings.Replace(apiUrlString, "{deviceId}", fmt.Sprintf("%v", deviceId), -1)
-	apiUrl, err := url.Parse(apiUrlString)
-	if err != nil {
-		return localResponse, nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPut, apiUrl.String(), b)
-	if err != nil {
-		return localResponse, nil, err
-	}
-
-	res, err := c.Do(req)
-	if err != nil {
-		return localResponse, res, err
-	}
-
-	if res.StatusCode != http.StatusOK {
-		logger.ErrorKV(ctx, "Bad status code", res.StatusCode)
-	}
-
-	data, _ := ioutil.ReadAll(res.Body)
-	device := new(UpdateDeviceResponse)
-
-	err = json.Unmarshal(data, &device)
-	if err != nil {
-		return localResponse, res, err
-	}
-	return *device, res, nil
+	return *updateResponse, res, nil
 }

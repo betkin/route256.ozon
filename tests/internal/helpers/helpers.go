@@ -6,6 +6,8 @@ import (
 	"net/url"
 )
 
+// This function checks the health status of the test object
+
 func IsAlive(checkurl url.URL) {
 	response, err := http.Get(checkurl.String())
 	if err != nil {

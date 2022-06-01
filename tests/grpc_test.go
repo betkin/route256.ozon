@@ -2,17 +2,17 @@ package tests
 
 import (
 	"context"
+	"math"
+	"math/rand"
+	"testing"
+	"time"
+
 	"github.com/jmoiron/sqlx"
 	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
 	test_config "github.com/ozonmp/act-device-api/tests/config"
 	"github.com/ozonmp/act-device-api/tests/internal/grpc/expects"
 	"github.com/ozonmp/act-device-api/tests/internal/grpc/steps"
 	"github.com/ozonmp/act-device-api/tests/internal/models"
-	"math"
-	"math/rand"
-	"testing"
-	"time"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
@@ -234,13 +234,13 @@ func TestListDevices(t *testing.T) {
 func TestCreateDevices(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	ctx := context.Background()
-	cfgTest, err := test_config.GetConfig()
-	if err != nil {
-		t.Fatalf("Config err:%v", err)
+	cfgTest, _err := test_config.GetConfig()
+	if _err != nil {
+		t.Fatalf("Config err:%v", _err)
 	}
-	conn, err := grpc.Dial(test_config.GetGrpcURL(cfgTest), grpc.WithInsecure())
-	if err != nil {
-		t.Fatalf("grpc.Dial err:%v", err)
+	conn, _err := grpc.Dial(test_config.GetGrpcURL(cfgTest), grpc.WithInsecure())
+	if _err != nil {
+		t.Fatalf("grpc.Dial err:%v", _err)
 	}
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
@@ -291,12 +291,13 @@ func TestCreateDevices(t *testing.T) {
 		//act
 		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "Vista", 666)
 		//assert
-		assert.Equal(t, codes.OK.String(), status.Code(err).String())
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
 		getResponse, err := steps.DescribeDevice(ctx, t, deviceApiClient, createResponse.DeviceId)
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
 		assert.Less(t, getResponse.Value.EnteredAt.AsTime().UnixMilli()-createTime.Time.UnixMilli(), int64(20))
 	})
 
-	t.Run("Zero UserId returns error", func(t *testing.T) {
+	t.Run("Zero UserID returns error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
 		//act
@@ -314,7 +315,7 @@ func TestCreateDevices(t *testing.T) {
 		assert.Equal(t, codes.InvalidArgument.String(), status.Code(err).String())
 	})
 
-	t.Run("UserId datatype testing", func(t *testing.T) {
+	t.Run("UserID datatype testing", func(t *testing.T) {
 		//arrange
 		tests := []struct {
 			name  string

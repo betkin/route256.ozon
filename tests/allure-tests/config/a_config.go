@@ -5,12 +5,14 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
+// This data structure describes the configuration of the test object
+
 type Config struct {
 	ApiHost       string `envconfig:"API_HOST" default:"127.0.0.1"`
 	ApiPort       string `envconfig:"API_PORT" default:"8080"`
 	GRPCPort      string `envconfig:"GRPC_PORT" default:"8082"`
 	LivecheckPort string `envconfig:"LIVECHECK_PORT" default:"8000"`
-	LivecheckUri  string `envconfig:"LIVECHECK_URI" default:"live"`
+	LivecheckURI  string `envconfig:"LIVECHECK_URI" default:"live"`
 }
 
 func GetConfig() (Config, error) {

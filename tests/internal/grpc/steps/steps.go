@@ -3,12 +3,11 @@ package steps
 import (
 	"context"
 	"fmt"
-	"github.com/ozonmp/act-device-api/internal/config"
-	route_sql "github.com/ozonmp/act-device-api/tests/route-sql"
 	"testing"
 
+	"github.com/ozonmp/act-device-api/internal/config"
 	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
-
+	route_sql "github.com/ozonmp/act-device-api/tests/route-sql"
 	"google.golang.org/grpc/status"
 )
 

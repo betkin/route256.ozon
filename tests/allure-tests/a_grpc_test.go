@@ -1,24 +1,22 @@
 package atests
 
 import (
+	"context"
+	"math"
+	"math/rand"
+	"testing"
+	"time"
+
 	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
+	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
+	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/grpc/expects"
+	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/grpc/steps"
 	"github.com/ozontech/allure-go/pkg/framework/provider"
 	"github.com/ozontech/allure-go/pkg/framework/runner"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"math"
-	"testing"
-	"time"
-)
-
-import (
-	"context"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/grpc/expects"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/grpc/steps"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	"math/rand"
 )
 
 func TestDescribeDevice(t *testing.T) {
@@ -212,13 +210,13 @@ func TestListDevices(t *testing.T) {
 func TestCreateDevices(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	ctx := context.Background()
-	cfg, err := config.GetConfig()
-	if err != nil {
-		t.Fatalf("Config err:%v", err)
+	cfg, _err := config.GetConfig()
+	if _err != nil {
+		t.Fatalf("Config err:%v", _err)
 	}
-	conn, err := grpc.Dial(config.GetGrpcURL(cfg), grpc.WithInsecure())
-	if err != nil {
-		t.Fatalf("grpc.Dial err:%v", err)
+	conn, _err := grpc.Dial(config.GetGrpcURL(cfg), grpc.WithInsecure())
+	if _err != nil {
+		t.Fatalf("grpc.Dial err:%v", _err)
 	}
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
@@ -262,10 +260,11 @@ func TestCreateDevices(t *testing.T) {
 		//assert
 		t.Assert().Equal(codes.OK.String(), status.Code(err).String())
 		getResponse, err := steps.DescribeDevice(ctx, t, deviceApiClient, createResponse.DeviceId)
+		t.Assert().Equal(codes.OK.String(), status.Code(err).String())
 		t.Assert().Less(getResponse.Value.EnteredAt.AsTime().UnixMilli()-createTime, int64(20))
 	})
 
-	runner.Run(t, "Zero UserId returns error", func(t provider.T) {
+	runner.Run(t, "Zero UserID returns error", func(t provider.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
 		//act
@@ -283,7 +282,7 @@ func TestCreateDevices(t *testing.T) {
 		t.Assert().Equal(codes.InvalidArgument.String(), status.Code(err).String())
 	})
 
-	t.Run("UserId datatype testing", func(t *testing.T) {
+	t.Run("UserID datatype testing", func(t *testing.T) {
 		//arrange
 		tests := []struct {
 			name  string

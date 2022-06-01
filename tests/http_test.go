@@ -3,14 +3,14 @@ package tests
 import (
 	"context"
 	"fmt"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
-	test_config "github.com/ozonmp/act-device-api/tests/config"
 	"math/rand"
 	"net/url"
 	"strconv"
 	"testing"
 	"time"
 
+	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
+	test_config "github.com/ozonmp/act-device-api/tests/config"
 	"github.com/ozonmp/act-device-api/tests/internal/http/steps"
 	route_client "github.com/ozonmp/act-device-api/tests/route-client"
 	"github.com/stretchr/testify/assert"
@@ -79,7 +79,7 @@ func TestHttpServerRemove(t *testing.T) {
 		//arrange
 		deviceUpdate := route_client.UpdateDeviceRequest{
 			Platform: "Ubuntu",
-			UserId:   "6",
+			UserID:   "6",
 		}
 		testId, err := steps.CreateDevice(ctx, t, client, "Xubuntu", "7")
 		require.NoError(t, err, "CreateDevices error")
@@ -119,7 +119,7 @@ func TestHttpServerUpdate(t *testing.T) {
 		//arrange
 		deviceUpdate := route_client.UpdateDeviceRequest{
 			Platform: "MsDos",
-			UserId:   "66",
+			UserID:   "66",
 		}
 		testId, err := steps.CreateDevice(ctx, t, client, "Dos", "99")
 		require.NoError(t, err, "CreateDevices error")
@@ -137,7 +137,7 @@ func TestHttpServerUpdate(t *testing.T) {
 		opts.Add("perPage", "9223372036854775807")
 		deviceUpdate := route_client.UpdateDeviceRequest{
 			Platform: "Windows Me",
-			UserId:   "666",
+			UserID:   "666",
 		}
 		list, _, err := client.ListDevices(ctx, opts)
 		require.NoError(t, err, "ListDevices error")
@@ -158,7 +158,7 @@ func TestHttpServerUpdate(t *testing.T) {
 
 		deviceUpdate := route_client.UpdateDeviceRequest{
 			Platform: "Ubuntu",
-			UserId:   "9600",
+			UserID:   "9600",
 		}
 		testId, err := steps.CreateDevice(ctx, t, client, "RedHat", "6900")
 		require.NoError(t, err, "CreateDevices error")
@@ -178,7 +178,7 @@ func TestHttpServerUpdate(t *testing.T) {
 
 		deviceUpdate := route_client.UpdateDeviceRequest{
 			Platform: "AltLinux",
-			UserId:   "999",
+			UserID:   "999",
 		}
 		testId, err := steps.CreateDevice(ctx, t, client, "MacOS", "10")
 		require.NoError(t, err, "CreateDevices error")
@@ -195,7 +195,7 @@ func TestHttpServerUpdate(t *testing.T) {
 		// arrange
 		deviceUpdate := route_client.UpdateDeviceRequest{
 			Platform: "Lubuntu",
-			UserId:   "7707",
+			UserID:   "7707",
 		}
 		testId, err := steps.CreateDevice(ctx, t, client, "Mint", "101010")
 		require.NoError(t, err, "CreateDevices error")

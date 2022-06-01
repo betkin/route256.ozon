@@ -2,11 +2,12 @@ package atests
 
 import (
 	"fmt"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/helpers"
 	"log"
 	"net/url"
 	"testing"
+
+	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
+	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/helpers"
 )
 
 func TestMain(m *testing.M) {
@@ -18,7 +19,7 @@ func TestMain(m *testing.M) {
 	checkurl := url.URL{
 		Scheme: "http",
 		Host:   fmt.Sprintf("%s:%s", cfg.ApiHost, cfg.LivecheckPort),
-		Path:   fmt.Sprintf("/%s", cfg.LivecheckUri),
+		Path:   fmt.Sprintf("/%s", cfg.LivecheckURI),
 	}
 	helpers.IsAlive(checkurl)
 
