@@ -18,10 +18,12 @@ type Device struct {
 	UpdatedAt *time.Time `db:"updated_at" json:"updated_at,omitempty"`
 }
 
+// Value create json structure from Device object
 func (a Device) Value() (driver.Value, error) {
 	return json.Marshal(a)
 }
 
+// Scan read json structure in Device object
 func (a *Device) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
@@ -34,6 +36,7 @@ func (a *Device) Scan(value interface{}) error {
 // EventType describes type for event constants
 type EventType uint8
 
+// EventType constants
 const (
 	Created EventType = iota + 1
 	Updated
@@ -43,6 +46,7 @@ const (
 // EventStatus describes type for event constants
 type EventStatus uint8
 
+// EvenStatus constants
 const (
 	Deferred EventStatus = iota + 1
 	Processed
