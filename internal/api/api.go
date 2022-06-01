@@ -313,7 +313,7 @@ func (o *deviceAPI) RemoveDeviceV1(
 
 		err = o.eventRepo.Add(ctx, &model.DeviceEvent{
 			DeviceId: deviceId,
-			Type:     model.Created,
+			Type:     model.Removed,
 			Status:   model.Deferred,
 		})
 		if err != nil {

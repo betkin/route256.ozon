@@ -2,10 +2,12 @@ package tests
 
 import (
 	"context"
+	"github.com/jmoiron/sqlx"
 	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
-	"github.com/ozonmp/act-device-api/tests/config"
+	test_config "github.com/ozonmp/act-device-api/tests/config"
 	"github.com/ozonmp/act-device-api/tests/internal/grpc/expects"
 	"github.com/ozonmp/act-device-api/tests/internal/grpc/steps"
+	"github.com/ozonmp/act-device-api/tests/internal/models"
 	"math"
 	"math/rand"
 	"testing"
@@ -16,17 +18,16 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func TestDescribeDevice(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	ctx := context.Background()
-	cfg, err := config.GetConfig()
+	cfg, err := test_config.GetConfig()
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	conn, err := grpc.Dial(config.GetGrpcURL(cfg), grpc.WithInsecure())
+	conn, err := grpc.Dial(test_config.GetGrpcURL(cfg), grpc.WithInsecure())
 	if err != nil {
 		t.Fatalf("grpc.Dial err:%v", err)
 	}
@@ -36,6 +37,14 @@ func TestDescribeDevice(t *testing.T) {
 			t.Logf("conn.Close err:%v", err)
 		}
 	}(conn)
+
+	apiDB := steps.ConnectDB(t)
+	defer func(DB *sqlx.DB) {
+		err := DB.Close()
+		if err != nil {
+			t.Logf("Postgres init err:%v", err)
+		}
+	}(apiDB.DB)
 
 	t.Run("Describe device returns correct ID", func(t *testing.T) {
 		//arrange
@@ -50,15 +59,15 @@ func TestDescribeDevice(t *testing.T) {
 		assert.Equal(t, createResponse.DeviceId, getResponse.Value.Id)
 	})
 
+	// I FOUND BUG !!!
 	t.Run("Nonexistent ID return error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
-		listItems, err := steps.ListDevices(ctx, t, deviceApiClient, 1, math.MaxUint32-1)
-		assert.Equal(t, codes.OK.String(), status.Code(err).String())
-		require.NoError(t, err)
-		require.NotNil(t, listItems.Items)
+		devicesCount, err := apiDB.GetCountDevices(ctx, false)
+		require.NoError(t, err, "GetCountDevices error!")
 		//act
-		_, err = steps.DescribeDevice(ctx, t, deviceApiClient, listItems.Items[0].Id+1)
+		t.Logf("%v", devicesCount.Count)
+		_, err = steps.DescribeDevice(ctx, t, deviceApiClient, devicesCount.Count+1)
 		//assert
 		assert.Equal(t, codes.NotFound.String(), status.Code(err).String())
 	})
@@ -83,9 +92,9 @@ func TestDescribeDevice(t *testing.T) {
 			{"test int16", 32767},
 			{"test uint16", 65535},
 			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			//{"test uint32", 4294967295},
+			//{"test int64", 9223372036854775807},
+			//{"test uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -104,11 +113,11 @@ func TestDescribeDevice(t *testing.T) {
 func TestListDevices(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	ctx := context.Background()
-	cfg, err := config.GetConfig()
+	cfg, err := test_config.GetConfig()
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	conn, err := grpc.Dial(config.GetGrpcURL(cfg), grpc.WithInsecure())
+	conn, err := grpc.Dial(test_config.GetGrpcURL(cfg), grpc.WithInsecure())
 	if err != nil {
 		t.Fatalf("grpc.Dial err:%v", err)
 	}
@@ -118,6 +127,14 @@ func TestListDevices(t *testing.T) {
 			t.Logf("conn.Close err:%v", err)
 		}
 	}(conn)
+
+	apiDB := steps.ConnectDB(t)
+	defer func(DB *sqlx.DB) {
+		err := DB.Close()
+		if err != nil {
+			t.Logf("Postgres init err:%v", err)
+		}
+	}(apiDB.DB)
 
 	t.Run("Items count equal PerPage", func(t *testing.T) {
 		//arrange
@@ -149,6 +166,7 @@ func TestListDevices(t *testing.T) {
 		assert.Less(t, uint64(len(listResponse.Items)), testCount)
 	})
 
+	// I FOUND BUG !!!
 	t.Run("No items on page return error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -164,6 +182,7 @@ func TestListDevices(t *testing.T) {
 		assert.Nil(t, listResponse.Items)
 	})
 
+	// I FOUND BUG !!!
 	t.Run("Zero PerPage returns error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -173,6 +192,7 @@ func TestListDevices(t *testing.T) {
 		assert.Equal(t, codes.Internal.String(), status.Code(err).String())
 	})
 
+	// I FOUND BUG !!!
 	t.Run("Zero Page returns OK", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
@@ -193,9 +213,9 @@ func TestListDevices(t *testing.T) {
 			{"test int16", 32767},
 			{"test uint16", 65535},
 			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			//{"test uint32", 4294967295},
+			//{"test int64", 9223372036854775807},
+			//{"test uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -214,11 +234,11 @@ func TestListDevices(t *testing.T) {
 func TestCreateDevices(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	ctx := context.Background()
-	cfg, err := config.GetConfig()
+	cfgTest, err := test_config.GetConfig()
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	conn, err := grpc.Dial(config.GetGrpcURL(cfg), grpc.WithInsecure())
+	conn, err := grpc.Dial(test_config.GetGrpcURL(cfgTest), grpc.WithInsecure())
 	if err != nil {
 		t.Fatalf("grpc.Dial err:%v", err)
 	}
@@ -228,6 +248,14 @@ func TestCreateDevices(t *testing.T) {
 			t.Logf("conn.Close err:%v", err)
 		}
 	}(conn)
+
+	apiDB := steps.ConnectDB(t)
+	defer func(DB *sqlx.DB) {
+		err := DB.Close()
+		if err != nil {
+			t.Logf("Postgres init err:%v", err)
+		}
+	}(apiDB.DB)
 
 	t.Run("Create Device returns ID", func(t *testing.T) {
 		//arrange
@@ -258,13 +286,14 @@ func TestCreateDevices(t *testing.T) {
 	t.Run("Creation date/time is correct", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
-		createTime := timestamppb.Now().AsTime().UnixMilli()
+		createTime, err := apiDB.GetDBTime(ctx)
+		require.NoError(t, err, "GetDB time error!")
 		//act
 		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "Vista", 666)
 		//assert
 		assert.Equal(t, codes.OK.String(), status.Code(err).String())
 		getResponse, err := steps.DescribeDevice(ctx, t, deviceApiClient, createResponse.DeviceId)
-		assert.Less(t, getResponse.Value.EnteredAt.AsTime().UnixMilli()-createTime, int64(20))
+		assert.Less(t, getResponse.Value.EnteredAt.AsTime().UnixMilli()-createTime.Time.UnixMilli(), int64(20))
 	})
 
 	t.Run("Zero UserId returns error", func(t *testing.T) {
@@ -298,7 +327,7 @@ func TestCreateDevices(t *testing.T) {
 			{"test int32", 2147483647},
 			{"test uint32", 4294967295},
 			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			//{"test uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -323,7 +352,7 @@ func TestCreateDevices(t *testing.T) {
 			{"test char[2]", "OS"},
 			{"test char[16]", "Loooooooooong OS"},
 			{"test char[32]", "VeryLoooooooooooooooooooooong OS"},
-			{"test char[64]", "SoLoooooooooooooooooooooooooooooooooooooooooooooooooooooooong OS"},
+			//{"test char[64]", "SoLoooooooooooooooooooooooooooooooooooooooooooooooooooooooong OS"},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -336,6 +365,126 @@ func TestCreateDevices(t *testing.T) {
 				assert.Equal(t, codes.OK.String(), status.Code(err).String())
 			})
 		}
+	})
+}
+
+func TestLogDevices(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+	ctx := context.Background()
+	cfgTest, err := test_config.GetConfig()
+	if err != nil {
+		t.Fatalf("Config err:%v", err)
+	}
+	conn, err := grpc.Dial(test_config.GetGrpcURL(cfgTest), grpc.WithInsecure())
+	if err != nil {
+		t.Fatalf("grpc.Dial err:%v", err)
+	}
+	defer func(conn *grpc.ClientConn) {
+		err := conn.Close()
+		if err != nil {
+			t.Logf("conn.Close err:%v", err)
+		}
+	}(conn)
+
+	apiDB := steps.ConnectDB(t)
+	defer func(DB *sqlx.DB) {
+		err := DB.Close()
+		if err != nil {
+			t.Logf("Postgres init err:%v", err)
+		}
+	}(apiDB.DB)
+
+	t.Run("CreateDevice was logged", func(t *testing.T) {
+		//arrange
+		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
+		timeNow, err := apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent := models.DeviceEvent{
+			Type:   models.Created,
+			Status: models.Processed,
+			Device: &models.Device{
+				Platform:  "MacOS",
+				UserID:    8877,
+				Removed:   false,
+				EnteredAt: &timeNow.Time,
+			},
+			CreatedAt: timeNow.Time,
+			UpdatedAt: timeNow.Time,
+		}
+		//act
+		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, expectEvent.Device.Platform, expectEvent.Device.UserID)
+		//assert
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
+		require.Greater(t, createResponse.DeviceId, uint64(0))
+		expectEvent.DeviceId = createResponse.DeviceId
+		expectEvent.Device.ID = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
+		require.NoError(t, err) // error = empty
+		expects.ExpectEventFields(t, &expectEvent, actualEvent)
+	})
+
+	t.Run("RemoveDevice was logged", func(t *testing.T) {
+		//arrange
+		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
+		timeNow, err := apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent := models.DeviceEvent{
+			Type:      models.Removed,
+			Status:    models.Deferred,
+			Device:    nil,
+			CreatedAt: timeNow.Time,
+			UpdatedAt: timeNow.Time,
+		}
+		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "debian", 1304)
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
+		//act
+		_, err = steps.RemoveDevice(ctx, t, deviceApiClient, createResponse.DeviceId)
+		//assert
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
+		expectEvent.DeviceId = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
+		require.NoError(t, err) // error = empty
+		expects.ExpectEventFields(t, &expectEvent, actualEvent)
+	})
+
+	t.Run("UpdateDevice was logged", func(t *testing.T) {
+		//arrange
+		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
+		timeNow, err := apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent := models.DeviceEvent{
+			Type:   models.Updated,
+			Status: models.Processed,
+			Device: &models.Device{
+				Platform:  "ubuntu",
+				UserID:    3576,
+				Removed:   false,
+				EnteredAt: nil,
+			},
+		}
+		createResponse, err := steps.CreateDevice(ctx, t, deviceApiClient, "RedHat", 1234)
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
+		timeNow, err = apiDB.GetDBTime(ctx)
+		if err != nil {
+			t.Fatalf("GetDBTime err:%v", err)
+		}
+		expectEvent.CreatedAt = timeNow.Time
+		expectEvent.UpdatedAt = timeNow.Time
+		//act
+		_, err = steps.UpdateDevice(ctx, t, deviceApiClient, createResponse.DeviceId, expectEvent.Device.Platform, expectEvent.Device.UserID)
+		//assert
+		require.Equal(t, codes.OK.String(), status.Code(err).String())
+		expectEvent.DeviceId = createResponse.DeviceId
+		expectEvent.Device.ID = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
+		require.NoError(t, err) // error = empty
+		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})
 
 }

@@ -3,13 +3,14 @@ package tests
 import (
 	"context"
 	"fmt"
+	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
+	test_config "github.com/ozonmp/act-device-api/tests/config"
 	"math/rand"
 	"net/url"
 	"strconv"
 	"testing"
 	"time"
 
-	"github.com/ozonmp/act-device-api/tests/config"
 	"github.com/ozonmp/act-device-api/tests/internal/http/steps"
 	route_client "github.com/ozonmp/act-device-api/tests/route-client"
 	"github.com/stretchr/testify/assert"
@@ -18,11 +19,11 @@ import (
 
 func TestHttpServerRemove(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
-	cfg, err := config.GetConfig()
+	cfg, err := test_config.GetConfig()
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	client := route_client.NewHTTPClient(config.GetApiURL(cfg), 5, 1*time.Second)
+	client := route_client.NewHTTPClient(test_config.GetApiURL(cfg), 5, 1*time.Second)
 	ctx := context.TODO()
 
 	t.Run("Device removing returns true", func(t *testing.T) {

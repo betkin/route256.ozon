@@ -1,4 +1,4 @@
-package config
+package test_config
 
 import (
 	"fmt"
