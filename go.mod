@@ -9,8 +9,10 @@ require (
 
 require (
 	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
+	github.com/Lucas-C/pre-commit-hooks-go v1.0.1 // indirect
 	github.com/Masterminds/squirrel v1.5.1
 	github.com/Shopify/sarama v1.30.0
+	github.com/docopt/docopt-go v0.0.0-20180111231733-ee0de3bc6815 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0
@@ -19,6 +21,8 @@ require (
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.10.3
+	github.com/mrtazz/checkmake v0.0.0-20220218190217-7c87b7fb129f // indirect
+	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/ozonmp/act-device-api/pkg/act-device-api v0.0.0-00010101000000-000000000000
 	github.com/ozontech/allure-go/pkg/framework v0.5.8
