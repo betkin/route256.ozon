@@ -17,7 +17,7 @@ func ExpectDeviceFields(t *testing.T, expectId uint64, expectData *act_device_ap
 
 // ExpectEventFields compares expect events fields values with actual
 func ExpectEventFields(t *testing.T, expect *models.DeviceEvent, actual *models.DeviceEvent) {
-	assert.Equal(t, expect.DeviceId, actual.DeviceId)
+	assert.Equal(t, expect.DeviceID, actual.DeviceID)
 	assert.Equal(t, expect.Type, actual.Type)
 	if expect.Device != nil {
 		assert.Equal(t, expect.Device.UserID, actual.Device.UserID)

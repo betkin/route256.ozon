@@ -419,9 +419,9 @@ func TestLogDevices(t *testing.T) {
 		//assert
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
 		require.Greater(t, createResponse.DeviceId, uint64(0))
-		expectEvent.DeviceId = createResponse.DeviceId
+		expectEvent.DeviceID = createResponse.DeviceId
 		expectEvent.Device.ID = createResponse.DeviceId
-		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceID)
 		require.NoError(t, err) // error = empty
 		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})
@@ -446,8 +446,8 @@ func TestLogDevices(t *testing.T) {
 		_, err = steps.RemoveDevice(ctx, t, deviceApiClient, createResponse.DeviceId)
 		//assert
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
-		expectEvent.DeviceId = createResponse.DeviceId
-		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
+		expectEvent.DeviceID = createResponse.DeviceId
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceID)
 		require.NoError(t, err) // error = empty
 		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})
@@ -481,9 +481,9 @@ func TestLogDevices(t *testing.T) {
 		_, err = steps.UpdateDevice(ctx, t, deviceApiClient, createResponse.DeviceId, expectEvent.Device.Platform, expectEvent.Device.UserID)
 		//assert
 		require.Equal(t, codes.OK.String(), status.Code(err).String())
-		expectEvent.DeviceId = createResponse.DeviceId
+		expectEvent.DeviceID = createResponse.DeviceId
 		expectEvent.Device.ID = createResponse.DeviceId
-		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceId)
+		actualEvent, err := apiDB.ByDeviceId(ctx, expectEvent.DeviceID)
 		require.NoError(t, err) // error = empty
 		expects.ExpectEventFields(t, &expectEvent, actualEvent)
 	})

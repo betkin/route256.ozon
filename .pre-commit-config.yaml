@@ -19,8 +19,3 @@ repos:
     rev: v0.35.2
     hooks:
       - id: protolint
-
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-go
-    rev: v1.0.1
-    hooks:
-      - id: checkmake
