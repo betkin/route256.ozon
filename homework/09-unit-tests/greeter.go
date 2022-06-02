@@ -5,6 +5,13 @@ import (
 	"strings"
 )
 
+const (
+	gn  string = "Good night"
+	gm  string = "Good morning"
+	ge  string = "Good evening"
+	def string = "Hello"
+)
+
 // Greet prints greetings for each times of day
 func Greet(name string, hour int) string {
 	if len(name) == 0 {
@@ -19,15 +26,15 @@ func Greet(name string, hour int) string {
 	var greeting string
 	switch {
 	case hour >= 0 && hour < 6:
-		greeting = "Good night"
+		greeting = gn
 	case hour >= 6 && hour < 12:
-		greeting = "Good morning"
+		greeting = gm
 	case hour >= 12 && hour < 18:
-		greeting = "Hello"
+		greeting = def
 	case hour >= 18 && hour < 22:
-		greeting = "Good evening"
+		greeting = ge
 	case hour >= 22 && hour < 24:
-		greeting = "Good night"
+		greeting = gn
 	default:
 		return "<hour>: range error!"
 	}

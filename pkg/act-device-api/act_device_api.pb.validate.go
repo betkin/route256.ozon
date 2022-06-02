@@ -202,7 +202,7 @@ func (m *CreateDeviceV1Response) Validate() error {
 		return nil
 	}
 
-	// no validation rules for DeviceId
+	// no validation rules for DeviceID
 
 	return nil
 }
@@ -273,7 +273,7 @@ func (m *DescribeDeviceV1Request) Validate() error {
 
 	if m.GetDeviceId() <= 0 {
 		return DescribeDeviceV1RequestValidationError{
-			field:  "DeviceId",
+			field:  "DeviceID",
 			reason: "value must be greater than 0",
 		}
 	}
@@ -577,7 +577,7 @@ func (m *UpdateDeviceV1Request) Validate() error {
 
 	if m.GetDeviceId() <= 0 {
 		return UpdateDeviceV1RequestValidationError{
-			field:  "DeviceId",
+			field:  "DeviceID",
 			reason: "value must be greater than 0",
 		}
 	}
@@ -734,7 +734,7 @@ func (m *RemoveDeviceV1Request) Validate() error {
 
 	if m.GetDeviceId() <= 0 {
 		return RemoveDeviceV1RequestValidationError{
-			field:  "DeviceId",
+			field:  "DeviceID",
 			reason: "value must be greater than 0",
 		}
 	}
@@ -884,7 +884,7 @@ func (m *DeviceEvent) Validate() error {
 
 	if m.GetDeviceId() <= 0 {
 		return DeviceEventValidationError{
-			field:  "DeviceId",
+			field:  "DeviceID",
 			reason: "value must be greater than 0",
 		}
 	}

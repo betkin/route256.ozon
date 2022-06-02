@@ -82,7 +82,7 @@ func (o *deviceAPI) CreateDeviceV1(
 	}
 
 	err = o.eventRepo.Add(ctx, &model.DeviceEvent{
-		DeviceId: deviceId,
+		DeviceID: deviceId,
 		Type:     model.Created,
 		Status:   model.Deferred,
 		Device:   device,
@@ -251,7 +251,7 @@ func (o *deviceAPI) UpdateDeviceV1(
 		cudActionsTotal.WithLabelValues("update").Inc()
 
 		err = o.eventRepo.Add(ctx, &model.DeviceEvent{
-			DeviceId: deviceId,
+			DeviceID: deviceId,
 			Type:     model.Updated,
 			Status:   model.Deferred,
 			Device:   device,
@@ -312,7 +312,7 @@ func (o *deviceAPI) RemoveDeviceV1(
 		cudActionsTotal.WithLabelValues("remove").Inc()
 
 		err = o.eventRepo.Add(ctx, &model.DeviceEvent{
-			DeviceId: deviceId,
+			DeviceID: deviceId,
 			Type:     model.Removed,
 			Status:   model.Deferred,
 		})

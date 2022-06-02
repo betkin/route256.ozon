@@ -37,7 +37,7 @@ const (
 // DeviceEvent describes SQL structure
 type DeviceEvent struct {
 	ID        uint64      `db:"id"`
-	DeviceId  uint64      `db:"device_id"`
+	DeviceID  uint64      `db:"device_id"`
 	Type      EventType   `db:"type"`
 	Status    EventStatus `db:"status"`
 	Device    *Device     `db:"payload"`
