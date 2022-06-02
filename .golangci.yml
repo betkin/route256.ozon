@@ -35,12 +35,10 @@ linters:
     - errcheck
     - goconst
     # - goimports - your IDE should do this automatically as 'On save' action anyways
-    - gosec
     - govet
     - ineffassign
     # - megacheck (staticcheck + gosimple + unused in one linter) - enable before push
     - revive
-    - typecheck
     - unused # will be used insted of varcheck + deadcode + structcheck. More info https://github.com/golangci/golangci-lint/issues/1841
 
 issues:
