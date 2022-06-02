@@ -9,8 +9,8 @@ import (
 )
 
 // ExpectDeviceFields compares expect device fields values with actual
-func ExpectDeviceFields(t *testing.T, expectId uint64, expectData *act_device_api.CreateDeviceV1Request, actualResponse *act_device_api.DescribeDeviceV1Response) {
-	assert.Equal(t, actualResponse.Value.Id, expectId)
+func ExpectDeviceFields(t *testing.T, expectID uint64, expectData *act_device_api.CreateDeviceV1Request, actualResponse *act_device_api.DescribeDeviceV1Response) {
+	assert.Equal(t, actualResponse.Value.Id, expectID)
 	assert.Equal(t, actualResponse.Value.UserId, expectData.UserId)
 	assert.Equal(t, actualResponse.Value.Platform, expectData.Platform)
 }

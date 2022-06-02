@@ -18,7 +18,7 @@ func TestMain(m *testing.M) {
 	}
 	checkurl := url.URL{
 		Scheme: "http",
-		Host:   fmt.Sprintf("%s:%s", cfg.ApiHost, cfg.LivecheckPort),
+		Host:   fmt.Sprintf("%s:%s", cfg.APIHost, cfg.LivecheckPort),
 		Path:   fmt.Sprintf("/%s", cfg.LivecheckURI),
 	}
 	helpers.IsAlive(checkurl)

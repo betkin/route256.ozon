@@ -23,15 +23,15 @@ func TestHttpServerRemove(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	client := route_client.NewHTTPClient(test_config.GetApiURL(cfg), 5, 1*time.Second)
+	client := route_client.NewHTTPClient(test_config.GetAPIURL(cfg), 5, 1*time.Second)
 	ctx := context.TODO()
 
 	t.Run("Device removing returns true", func(t *testing.T) {
 		//arrange
-		testId, err := steps.CreateDevice(ctx, t, client, "Windows", "12")
+		testID, err := steps.CreateDevice(ctx, t, client, "Windows", "12")
 		require.NoError(t, err, "CreateDevices error")
 		//act
-		responseBody, _, err := client.RemoveDevice(ctx, fmt.Sprintf("%d", testId))
+		responseBody, _, err := client.RemoveDevice(ctx, fmt.Sprintf("%d", testID))
 		//assert
 		require.NoError(t, err, "RemoveDevices error")
 		assert.Equal(t, true, responseBody.Found, "RemoveDevice error")
@@ -44,11 +44,11 @@ func TestHttpServerRemove(t *testing.T) {
 		opts.Add("perPage", "9223372036854775807")
 		list, _, err := client.ListDevices(ctx, opts)
 		require.NoError(t, err, "ListDevices error")
-		nonId, err := strconv.Atoi(list.Items[0].ID)
+		nonID, err := strconv.Atoi(list.Items[0].ID)
 		require.NoError(t, err, "ID to string error")
-		nonId += 1 // last device ID + 1 = nonexistent device ID
+		nonID++ // last device ID + 1 = nonexistent device ID
 		//act
-		responseBody, _, err := client.RemoveDevice(ctx, fmt.Sprintf("%d", nonId))
+		responseBody, _, err := client.RemoveDevice(ctx, fmt.Sprintf("%d", nonID))
 		//assert
 		require.NoError(t, err, "RemoveDevices error")
 		assert.Equal(t, false, responseBody.Found, "RemoveDevice error")
@@ -62,11 +62,11 @@ func TestHttpServerRemove(t *testing.T) {
 		list, _, err := client.ListDevices(ctx, opts)
 		require.NoError(t, err, "ListDevices error")
 		beforeRemoval := len(list.Items)
-		nonId, err := strconv.Atoi(list.Items[0].ID)
+		nonID, err := strconv.Atoi(list.Items[0].ID)
 		require.NoError(t, err, "ID to string error")
-		nonId += 1 // last device ID + 1 = nonexistent device ID
+		nonID++ // last device ID + 1 = nonexistent device ID
 		//act
-		_, _, err = client.RemoveDevice(ctx, fmt.Sprintf("%d", nonId))
+		_, _, err = client.RemoveDevice(ctx, fmt.Sprintf("%d", nonID))
 		//assert
 		require.NoError(t, err, "RemoveDevices error")
 		list, _, err = client.ListDevices(ctx, opts)
@@ -81,12 +81,12 @@ func TestHttpServerRemove(t *testing.T) {
 			Platform: "Ubuntu",
 			UserID:   "6",
 		}
-		testId, err := steps.CreateDevice(ctx, t, client, "Xubuntu", "7")
+		testID, err := steps.CreateDevice(ctx, t, client, "Xubuntu", "7")
 		require.NoError(t, err, "CreateDevices error")
-		_, _, err = client.UpdateDevice(ctx, fmt.Sprintf("%d", testId), deviceUpdate)
+		_, _, err = client.UpdateDevice(ctx, fmt.Sprintf("%d", testID), deviceUpdate)
 		require.NoError(t, err, "UpdateDevices error")
 		//act
-		responseBody, _, _ := client.RemoveDevice(ctx, fmt.Sprintf("%d", testId))
+		responseBody, _, _ := client.RemoveDevice(ctx, fmt.Sprintf("%d", testID))
 		//assert
 		require.NoError(t, err, "RemoveDevices error")
 		assert.Equal(t, true, responseBody.Found)
@@ -94,12 +94,12 @@ func TestHttpServerRemove(t *testing.T) {
 
 	t.Run("Double removal", func(t *testing.T) {
 		//arrange
-		testId, err := steps.CreateDevice(ctx, t, client, "Windows", "4567")
+		testID, err := steps.CreateDevice(ctx, t, client, "Windows", "4567")
 		require.NoError(t, err, "CreateDevices error")
-		_, _, err = client.RemoveDevice(ctx, fmt.Sprintf("%d", testId))
+		_, _, err = client.RemoveDevice(ctx, fmt.Sprintf("%d", testID))
 		require.NoError(t, err, "RemoveDevices error")
 		//act
-		responseBody, _, _ := client.RemoveDevice(ctx, fmt.Sprintf("%d", testId))
+		responseBody, _, _ := client.RemoveDevice(ctx, fmt.Sprintf("%d", testID))
 		//assert
 		require.NoError(t, err, "RemoveDevices error")
 		assert.Equal(t, false, responseBody.Found)
@@ -112,7 +112,7 @@ func TestHttpServerUpdate(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	client := route_client.NewHTTPClient(config.GetApiURL(cfg), 5, 1*time.Second)
+	client := route_client.NewHTTPClient(config.GetAPIURL(cfg), 5, 1*time.Second)
 	ctx := context.Background()
 
 	t.Run("Device updating returns true", func(t *testing.T) {
@@ -121,10 +121,10 @@ func TestHttpServerUpdate(t *testing.T) {
 			Platform: "MsDos",
 			UserID:   "66",
 		}
-		testId, err := steps.CreateDevice(ctx, t, client, "Dos", "99")
+		testID, err := steps.CreateDevice(ctx, t, client, "Dos", "99")
 		require.NoError(t, err, "CreateDevices error")
 		//act
-		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", testId), deviceUpdate)
+		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", testID), deviceUpdate)
 		//assert
 		require.NoError(t, err, "UpdateDevices error")
 		assert.Equal(t, true, responseBody.Success)
@@ -141,13 +141,13 @@ func TestHttpServerUpdate(t *testing.T) {
 		}
 		list, _, err := client.ListDevices(ctx, opts)
 		require.NoError(t, err, "ListDevices error")
-		nonId, err := strconv.Atoi(list.Items[0].ID)
+		nonID, err := strconv.Atoi(list.Items[0].ID)
 		if err != nil {
 			t.Fatalf("Read ID error!")
 		}
-		nonId += 1 // last device ID + 1 = nonexistent device ID
+		nonID++ // last device ID + 1 = nonexistent device ID
 		//act
-		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", nonId), deviceUpdate)
+		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", nonID), deviceUpdate)
 		//assert
 		require.NoError(t, err, "UpdateDevices error")
 		assert.Equal(t, false, responseBody.Success)
@@ -160,15 +160,15 @@ func TestHttpServerUpdate(t *testing.T) {
 			Platform: "Ubuntu",
 			UserID:   "9600",
 		}
-		testId, err := steps.CreateDevice(ctx, t, client, "RedHat", "6900")
+		testID, err := steps.CreateDevice(ctx, t, client, "RedHat", "6900")
 		require.NoError(t, err, "CreateDevices error")
-		testedBody, _, err := client.DescribeDevice(ctx, fmt.Sprintf("%d", testId))
+		testedBody, _, err := client.DescribeDevice(ctx, fmt.Sprintf("%d", testID))
 		require.NoError(t, err, "DescribeDevices error")
 		//action
-		_, _, err = client.UpdateDevice(ctx, fmt.Sprintf("%d", testId), deviceUpdate)
+		_, _, err = client.UpdateDevice(ctx, fmt.Sprintf("%d", testID), deviceUpdate)
 		require.NoError(t, err, "UpdateDevices error")
 		//assert
-		updatedBody, _, err := client.DescribeDevice(ctx, fmt.Sprintf("%d", testId))
+		updatedBody, _, err := client.DescribeDevice(ctx, fmt.Sprintf("%d", testID))
 		require.NoError(t, err, "DescribeDevices error")
 		assert.Equal(t, testedBody.Value.EnteredAt, updatedBody.Value.EnteredAt)
 	})
@@ -180,12 +180,12 @@ func TestHttpServerUpdate(t *testing.T) {
 			Platform: "AltLinux",
 			UserID:   "999",
 		}
-		testId, err := steps.CreateDevice(ctx, t, client, "MacOS", "10")
+		testID, err := steps.CreateDevice(ctx, t, client, "MacOS", "10")
 		require.NoError(t, err, "CreateDevices error")
-		_, _, err = client.UpdateDevice(ctx, fmt.Sprintf("%d", testId), deviceUpdate)
+		_, _, err = client.UpdateDevice(ctx, fmt.Sprintf("%d", testID), deviceUpdate)
 		require.NoError(t, err, "UpdateDevices error")
 		//act
-		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", testId), deviceUpdate)
+		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", testID), deviceUpdate)
 		//assert
 		require.NoError(t, err, "UpdateDevices error")
 		assert.Equal(t, true, responseBody.Success)
@@ -197,12 +197,12 @@ func TestHttpServerUpdate(t *testing.T) {
 			Platform: "Lubuntu",
 			UserID:   "7707",
 		}
-		testId, err := steps.CreateDevice(ctx, t, client, "Mint", "101010")
+		testID, err := steps.CreateDevice(ctx, t, client, "Mint", "101010")
 		require.NoError(t, err, "CreateDevices error")
-		_, _, err = client.RemoveDevice(ctx, fmt.Sprintf("%d", testId))
+		_, _, err = client.RemoveDevice(ctx, fmt.Sprintf("%d", testID))
 		require.NoError(t, err, "RemoveDevices error")
 		//act
-		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", testId), deviceUpdate)
+		responseBody, _, _ := client.UpdateDevice(ctx, fmt.Sprintf("%d", testID), deviceUpdate)
 		//assert
 		require.NoError(t, err, "UpdateDevices error")
 		assert.Equal(t, false, responseBody.Success)

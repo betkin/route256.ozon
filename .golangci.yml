@@ -8,6 +8,8 @@ run:
     - vendor
     - var
     - tmp
+    - homework
+    - internal
   skip-files:
     - \.pb\.go$
     - \.pb\.gw\.go$
@@ -39,6 +41,7 @@ linters:
     - ineffassign
     # - megacheck (staticcheck + gosimple + unused in one linter) - enable before push
     - revive
+    - typecheck
     - unused # will be used insted of varcheck + deadcode + structcheck. More info https://github.com/golangci/golangci-lint/issues/1841
 
 issues:
