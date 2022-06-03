@@ -1,29 +1,111 @@
-image: golang:latest
-
-variables:
-  TASK09_DIR: ./homework/09-unit-tests
-  REPO_NAME: gitlab.ozon.dev/betkin/device-api
-
-before_script:
-  - export GO111MODULE=auto
-  - make deps
-  - make build
-  - go install gotest.tools/gotestsum@latest
-  - go mod tidy
+image: golang:1.16-alpine
 
 stages:
-  - test
+  - build
+  - publish
+  - deploy
+  - e2e
+  - post-deploy
+  - close
 
-golangci_lint:
-  stage: test
-  image: golangci/golangci-lint:v1.43
+build:
+  stage: build
   script:
-    - golangci-lint run ./...
+    - echo "Build"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)\/.+$/ || $CI_COMMIT_TAG != null
+      when: never
+    - when: always
 
-unit_tests:
-  stage: test
+unit:
+  stage: build
   script:
-    - gotestsum --format testname --jsonfile json_report.txt $TASK09_DIR
-  artifacts:
-    paths:
-      - json_report.txt
+    - echo "Unit testing"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+      when: always
+
+linter:
+  stage: build
+  script:
+    - echo "Linter"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+      when: always
+
+create image:
+  stage: publish
+  script:
+    - echo "Create image for dev/stg"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(hotfix)|(feature)\/.+$/ || $CI_COMMIT_REF_NAME == "master"
+      when: always
+
+release image:
+  stage: publish
+  script:
+    - echo "Create image for prod"
+  only:
+    refs:
+      - tags
+
+development:
+  stage: deploy
+  script:
+    - echo "Deploy to stg environment"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(feature)\/.+$/ || $CI_COMMIT_REF_NAME == "master"
+      when: manual
+      allow_failure: true
+
+staging:
+  stage: deploy
+  script:
+    - echo "Deploy to stg environment"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(release)|(hotfix)\/.+$/
+      when: always
+
+staging latest:
+  stage: deploy
+  script:
+    - echo "Update stg with last version"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
+      when: always
+
+production:
+  stage: deploy
+  script:
+    - echo "Deploy to prod environment"
+  rules:
+    - if: $CI_COMMIT_TAG != null
+      when: manual
+      allow_failure: true
+
+
+test:
+  stage: e2e
+  script:
+    - echo "API testing on stg"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(test|release)\/.+$/
+      when: always
+
+ready to prod:
+  stage: close
+  script:
+    - echo "Ready to prod"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(release)|(hotfix)\/.+$/
+      when: manual
+      allow_failure: true
+
+close release:
+  stage: close
+  script:
+    - echo "Ready to prod"
+  rules:
+    - if: $CI_COMMIT_TAG != null
+      when: manual
+      allow_failure: true
