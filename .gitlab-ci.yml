@@ -38,7 +38,7 @@ create image:
   script:
     - echo "Create image for dev/stg"
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(hotfix)|(feature)\/.+$/ || $CI_COMMIT_REF_NAME == "master"
+    - if: $CI_COMMIT_REF_NAME =~ /^(hotfix)|(release)|(feature)\/.+$/ || $CI_COMMIT_REF_NAME == "master"
       when: always
 
 release image:
