@@ -19,9 +19,9 @@ func TestDescribeDevice(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
 	ctx := context.Background()
 	host := "localhost:8082"
-	conn, err := grpc.Dial(host, grpc.WithInsecure())
-	if err != nil {
-		t.Fatalf("grpc.Dial err:%v", err)
+	conn, _err := grpc.Dial(host, grpc.WithInsecure())
+	if _err != nil {
+		t.Fatalf("grpc.Dial err:%v", _err)
 	}
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
@@ -81,7 +81,7 @@ func TestDescribeDevice(t *testing.T) {
 			DeviceId: 0,
 		}
 		//act
-		_, err = deviceApiClient.DescribeDeviceV1(ctx, getRequest)
+		_, err := deviceApiClient.DescribeDeviceV1(ctx, getRequest)
 		//assert
 		t.Logf("status.Code: %v", status.Code(err).String())
 		assert.Equal(t, codes.InvalidArgument.String(), status.Code(err).String())
@@ -331,7 +331,7 @@ func TestCreateDevices(t *testing.T) {
 		assert.Less(t, getResponse.Value.EnteredAt.AsTime().UnixMilli()-createTime, int64(20))
 	})
 
-	t.Run("Zero UserId returns error", func(t *testing.T) {
+	t.Run("Zero UserID returns error", func(t *testing.T) {
 		//arrange
 		deviceApiClient := act_device_api.NewActDeviceApiServiceClient(conn)
 		createRequest := &act_device_api.CreateDeviceV1Request{
@@ -359,7 +359,7 @@ func TestCreateDevices(t *testing.T) {
 		assert.Equal(t, codes.InvalidArgument.String(), status.Code(err).String())
 	})
 
-	t.Run("UserId datatype testing", func(t *testing.T) {
+	t.Run("UserID datatype testing", func(t *testing.T) {
 		//arrange
 		tests := []struct {
 			name  string

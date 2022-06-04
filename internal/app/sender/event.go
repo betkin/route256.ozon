@@ -33,7 +33,7 @@ func (s *Sender) Send(event *model.DeviceEvent) error {
 
 	pbDeviceEvent := &pb.DeviceEvent{
 		Id:       event.ID,
-		DeviceId: event.DeviceId,
+		DeviceId: event.DeviceID,
 		Type:     uint64(event.Type),
 		Status:   uint64(event.Status),
 		Payload:  payload,

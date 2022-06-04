@@ -33,7 +33,7 @@ func (list *IndList) Init(x []int) bool {
 		return false
 	}
 	p := list.Head
-	pp := list.Head
+	var pp *Node
 	for i := 0; i < len(x)-1; i++ {
 		p.Data = x[i]
 		p.Next = new(Node)

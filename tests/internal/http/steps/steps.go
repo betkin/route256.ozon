@@ -2,17 +2,21 @@ package steps
 
 import (
 	"context"
-	"github.com/ozonmp/act-device-api/tests/route-client"
 	"testing"
+
+	route_client "github.com/ozonmp/act-device-api/tests/route-client"
 )
 
-func CreateDevice(ctx context.Context, t *testing.T, client route_client.Client, platform string, userId string) (uint64, error) {
+// These function contain the actions for the HTTP test
+// Get create device response
+
+func CreateDevice(ctx context.Context, t *testing.T, client route_client.Client, platform string, userID string) (uint64, error) {
 	t.Helper()
 	device := route_client.CreateDeviceRequest{
 		Platform: platform,
-		UserId:   userId,
+		UserID:   userID,
 	}
 	tested, _, err := client.CreateDevice(ctx, device)
 
-	return uint64(tested.DeviceId), err
+	return uint64(tested.DeviceID), err
 }

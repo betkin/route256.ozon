@@ -3,12 +3,11 @@ package steps
 import (
 	"context"
 	"fmt"
-	"github.com/ozonmp/act-device-api/internal/config"
-	route_sql "github.com/ozonmp/act-device-api/tests/route-sql"
 	"testing"
 
+	"github.com/ozonmp/act-device-api/internal/config"
 	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
-
+	route_sql "github.com/ozonmp/act-device-api/tests/route-sql"
 	"google.golang.org/grpc/status"
 )
 
@@ -72,9 +71,9 @@ func ConnectDB(t *testing.T) *route_sql.Storage {
 	if err := config.ReadConfigYML("../config.yml"); err != nil {
 		t.Fatalf("Configuration fail! err:%v", err)
 	}
-	cfgApi := config.GetConfigInstance()
-	dsn := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=%v", cfgApi.Database.Host, cfgApi.Database.Port, cfgApi.Database.User, cfgApi.Database.Password, cfgApi.Database.Name, cfgApi.Database.SslMode)
-	apiDB, err := route_sql.NewPostgres(dsn, cfgApi.Database.Driver)
+	cfgAPI := config.GetConfigInstance()
+	dsn := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=%v", cfgAPI.Database.Host, cfgAPI.Database.Port, cfgAPI.Database.User, cfgAPI.Database.Password, cfgAPI.Database.Name, cfgAPI.Database.SslMode)
+	apiDB, err := route_sql.NewPostgres(dsn, cfgAPI.Database.Driver)
 	if err != nil {
 		t.Fatalf("Postgres init err:%v", err)
 	}

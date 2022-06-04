@@ -8,6 +8,8 @@ run:
     - vendor
     - var
     - tmp
+    - homework
+    - internal
   skip-files:
     - \.pb\.go$
     - \.pb\.gw\.go$
@@ -35,7 +37,6 @@ linters:
     - errcheck
     - goconst
     # - goimports - your IDE should do this automatically as 'On save' action anyways
-    - gosec
     - govet
     - ineffassign
     # - megacheck (staticcheck + gosimple + unused in one linter) - enable before push

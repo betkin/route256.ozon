@@ -32,11 +32,11 @@ func (r repo) Lock(ctx context.Context, n uint64) ([]model.DeviceEvent, error) {
 		Set("updated_at", "now()").
 		Where(sq.Select("id").PlaceholderFormat(sq.Dollar).
 			Prefix("id IN (").
-				From("devices_events").
-				Where(sq.NotEq{"status": model.Processed}).
-				OrderBy("created_at").
-				Limit(n).
-				Suffix("FOR UPDATE SKIP LOCKED)"),
+			From("devices_events").
+			Where(sq.NotEq{"status": model.Processed}).
+			OrderBy("created_at").
+			Limit(n).
+			Suffix("FOR UPDATE SKIP LOCKED)"),
 		).
 		Suffix("RETURNING id, device_id, type, status, payload, created_at, updated_at")
 
@@ -82,7 +82,7 @@ func (r repo) Add(ctx context.Context, event *model.DeviceEvent) error {
 
 	query := sq.Insert("devices_events").PlaceholderFormat(sq.Dollar).
 		Columns("device_id", "type", "status", "payload").
-		Values(event.DeviceId, event.Type, event.Status, payload).
+		Values(event.DeviceID, event.Type, event.Status, payload).
 		Suffix("RETURNING id")
 
 	s, args, err := query.ToSql()

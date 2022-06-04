@@ -138,3 +138,7 @@ back-up:
 .PHONY: back-down
 back-down:
 	docker-compose -f docker-compose.services.yml down
+
+.PHONY: install-pre-commit
+install-pre-commit:
+	pre-commit install && export GO111MODULE=off && pre-commit install-hooks
