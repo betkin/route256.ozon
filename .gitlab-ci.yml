@@ -1,4 +1,4 @@
-image: gitlab.ozon.dev/qa/classroom-2/students/dependency_proxy/containers/golang:1.16-alpine
+image: gitlab.ozon.dev/betkin/device-api/container_registry/golang:1.16-alpine
 
 variables:
   ADD_DATA: 'data from vars.yml'
@@ -39,7 +39,7 @@ linter:
 
 pre-commit:
   stage: build
-  image: gitlab.ozon.dev/qa/classroom-2/students/dependency_proxy/containers/kiwicom/pre-commit
+  image: gitlab.ozon.dev/betkin/device-api/container_registry/kiwicom/pre-commit
   script:
     - echo "Run pre-commit"
   rules:
@@ -99,11 +99,11 @@ production:
 httptest:
   stage: e2e
   services:
-    - name: gitlab.ozon.dev/qa/classroom-2/students/dependency_proxy/containers/postgres:12
+    - name: gitlab.ozon.dev/betkin/device-api/container_registry/postgres:12
       alias: postgres
-    - name: gitlab.ozon.dev/qa/classroom-2/students/dependency_proxy/containers/confluentinc/cp-zookeeper:7.1.0
+    - name: gitlab.ozon.dev/betkin/device-api/container_registry/confluentinc/cp-zookeeper:7.1.0
       alias: zookeeper
-    - name: gitlab.ozon.dev/qa/classroom-2/students/dependency_proxy/containers/confluentinc/cp-kafka:7.1.0
+    - name: gitlab.ozon.dev/betkin/device-api/container_registry/confluentinc/cp-kafka:7.1.0
       alias: kafka
   variables:
     # enable network
