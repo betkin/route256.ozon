@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/http/steps"
-	route_client "github.com/ozonmp/act-device-api/tests/allure-tests/route-client"
 	"github.com/ozontech/allure-go/pkg/framework/provider"
 	"github.com/ozontech/allure-go/pkg/framework/runner"
 	"github.com/ozontech/allure-go/pkg/framework/suite"
+	"gitlab.ozon.dev/betkin/device-api/tests/allure-tests/config"
+	"gitlab.ozon.dev/betkin/device-api/tests/allure-tests/internal/http/steps"
+	route_client "gitlab.ozon.dev/betkin/device-api/tests/allure-tests/route-client"
 )
 
 type CustomSuite struct {

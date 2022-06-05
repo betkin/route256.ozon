@@ -2,11 +2,11 @@ package consumer
 
 import (
 	"context"
-	"github.com/ozonmp/act-device-api/internal/app/repo"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"sync"
 	"time"
 
-	"github.com/ozonmp/act-device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 type Consumer interface {

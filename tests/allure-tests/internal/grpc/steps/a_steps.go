@@ -3,8 +3,8 @@ package steps
 import (
 	"context"
 
-	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
 	"github.com/ozontech/allure-go/pkg/framework/provider"
+	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 	"google.golang.org/grpc/status"
 )
 

@@ -2,14 +2,14 @@ package retranslator
 
 import (
 	"errors"
-	"github.com/ozonmp/act-device-api/internal/app/repo"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"testing"
 	"time"
 
 	"github.com/golang/mock/gomock"
-	"github.com/ozonmp/act-device-api/internal/app/sender"
-	"github.com/ozonmp/act-device-api/internal/mocks"
-	"github.com/ozonmp/act-device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/sender"
+	"gitlab.ozon.dev/betkin/device-api/internal/mocks"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 func TestStart(t *testing.T) {

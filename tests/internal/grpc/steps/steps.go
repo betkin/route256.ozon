@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ozonmp/act-device-api/internal/config"
-	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
-	route_sql "github.com/ozonmp/act-device-api/tests/route-sql"
+	"gitlab.ozon.dev/betkin/device-api/internal/config"
+	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
+	route_sql "gitlab.ozon.dev/betkin/device-api/tests/route-sql"
 	"google.golang.org/grpc/status"
 )
 

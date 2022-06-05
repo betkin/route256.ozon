@@ -3,8 +3,8 @@ package steps
 import (
 	"context"
 
-	route_client "github.com/ozonmp/act-device-api/tests/allure-tests/route-client"
 	"github.com/ozontech/allure-go/pkg/framework/provider"
+	route_client "gitlab.ozon.dev/betkin/device-api/tests/allure-tests/route-client"
 )
 
 // These function contain the actions for the HTTP test

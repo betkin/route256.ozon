@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"github.com/opentracing/opentracing-go"
-	repo2 "github.com/ozonmp/act-device-api/internal/app/repo"
-	"github.com/ozonmp/act-device-api/internal/model"
-	"github.com/ozonmp/act-device-api/internal/pkg/logger"
+	repo2 "gitlab.ozon.dev/betkin/device-api/internal/app/repo"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 	tspb "google.golang.org/protobuf/types/known/timestamppb"
 	"time"
 
@@ -16,7 +16,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	pb "github.com/ozonmp/act-device-api/pkg/act-device-api"
+	pb "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 )
 
 var (

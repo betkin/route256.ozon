@@ -1,9 +1,9 @@
 package expects
 
 import (
-	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
 	"github.com/ozontech/allure-go/pkg/framework/provider"
 	"github.com/stretchr/testify/assert"
+	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 )
 
 // The function compares the response fields with the expectation

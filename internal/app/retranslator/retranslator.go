@@ -1,14 +1,14 @@
 package retranslator
 
 import (
-	"github.com/ozonmp/act-device-api/internal/app/repo"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"time"
 
 	"github.com/gammazero/workerpool"
-	"github.com/ozonmp/act-device-api/internal/app/consumer"
-	"github.com/ozonmp/act-device-api/internal/app/producer"
-	"github.com/ozonmp/act-device-api/internal/app/sender"
-	"github.com/ozonmp/act-device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/consumer"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/producer"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/sender"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 type Retranslator interface {

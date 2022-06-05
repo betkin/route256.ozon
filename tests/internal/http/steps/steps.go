@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	route_client "github.com/ozonmp/act-device-api/tests/route-client"
+	route_client "gitlab.ozon.dev/betkin/device-api/tests/route-client"
 )
 
 // These function contain the actions for the HTTP test

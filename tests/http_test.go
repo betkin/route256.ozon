@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
-	test_config "github.com/ozonmp/act-device-api/tests/config"
-	"github.com/ozonmp/act-device-api/tests/internal/http/steps"
-	route_client "github.com/ozonmp/act-device-api/tests/route-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"gitlab.ozon.dev/betkin/device-api/tests/allure-tests/config"
+	test_config "gitlab.ozon.dev/betkin/device-api/tests/config"
+	"gitlab.ozon.dev/betkin/device-api/tests/internal/http/steps"
+	route_client "gitlab.ozon.dev/betkin/device-api/tests/route-client"
 )
 
 func TestHttpServerRemove(t *testing.T) {

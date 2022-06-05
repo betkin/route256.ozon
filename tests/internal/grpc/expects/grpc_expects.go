@@ -3,9 +3,9 @@ package expects
 import (
 	"testing"
 
-	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
-	"github.com/ozonmp/act-device-api/tests/internal/models"
 	"github.com/stretchr/testify/assert"
+	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
+	"gitlab.ozon.dev/betkin/device-api/tests/internal/models"
 )
 
 // ExpectDeviceFields compares expect device fields values with actual

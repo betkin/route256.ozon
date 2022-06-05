@@ -2,7 +2,7 @@ package server
 
 import (
 	"context"
-	"github.com/ozonmp/act-device-api/internal/pkg/logger"
+	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )

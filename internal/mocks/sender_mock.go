@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	model "github.com/ozonmp/act-device-api/internal/model"
+	model "gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 // MockEventSender is a mock of EventSender interface.

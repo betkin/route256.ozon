@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"testing"
 
-	test_config "github.com/ozonmp/act-device-api/tests/config"
-	"github.com/ozonmp/act-device-api/tests/internal/helpers"
+	test_config "gitlab.ozon.dev/betkin/device-api/tests/config"
+	"gitlab.ozon.dev/betkin/device-api/tests/internal/helpers"
 )
 
 func TestMain(m *testing.M) {

@@ -3,7 +3,7 @@ package tests
 import (
 	"context"
 	"fmt"
-	route_client "github.com/ozonmp/act-device-api/homework/10-go-http-tests/tests/route-client"
+	route_client "gitlab.ozon.dev/betkin/device-api/homework/10-go-http-tests/tests/route-client"
 
 	"github.com/stretchr/testify/assert"
 	"math/rand"

@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/ozonmp/act-device-api/tests/allure-tests/config"
-	"github.com/ozonmp/act-device-api/tests/allure-tests/internal/helpers"
+	"gitlab.ozon.dev/betkin/device-api/tests/allure-tests/config"
+	"gitlab.ozon.dev/betkin/device-api/tests/allure-tests/internal/helpers"
 )
 
 func TestMain(m *testing.M) {

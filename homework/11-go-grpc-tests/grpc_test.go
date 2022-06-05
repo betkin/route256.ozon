@@ -2,9 +2,9 @@ package tests
 
 import (
 	"context"
-	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

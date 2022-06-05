@@ -5,14 +5,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/hashicorp/go-retryablehttp"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
 
-	"github.com/hashicorp/go-retryablehttp"
-	"github.com/ozonmp/act-device-api/internal/pkg/logger"
+	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 )
 
 // Client describes HTTP client methods

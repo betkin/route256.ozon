@@ -11,8 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hashicorp/go-retryablehttp"
-	"github.com/ozonmp/act-device-api/internal/pkg/logger"
+	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 )
 
 // Client describes HTTP client methods

@@ -6,7 +6,7 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
 	"github.com/opentracing/opentracing-go"
-	"github.com/ozonmp/act-device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 //go:generate mockgen -source=./event.go -destination=./../../mocks/repo_mock.go -package=mocks

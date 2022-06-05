@@ -5,8 +5,8 @@ import (
 
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
-	"github.com/ozonmp/act-device-api/internal/database"
-	"github.com/ozonmp/act-device-api/tests/internal/models"
+	"gitlab.ozon.dev/betkin/device-api/internal/database"
+	"gitlab.ozon.dev/betkin/device-api/tests/internal/models"
 )
 
 // EventStorage describes SQL methods for DB object

@@ -6,7 +6,7 @@ import "validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/ozonmp/act-device-api/pkg/act-device-api;act_device_api";
+option go_package = "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api;act_device_api";
 
 // ActDeviceApiService - Service for working with templates
 service ActDeviceApiService {

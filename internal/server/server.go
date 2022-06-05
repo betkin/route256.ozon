@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	repo2 "github.com/ozonmp/act-device-api/internal/app/repo"
+	repo2 "gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"net"
 	"net/http"
 	"os"
@@ -25,9 +25,9 @@ import (
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 
-	"github.com/ozonmp/act-device-api/internal/api"
-	"github.com/ozonmp/act-device-api/internal/config"
-	pb "github.com/ozonmp/act-device-api/pkg/act-device-api"
+	"gitlab.ozon.dev/betkin/device-api/internal/api"
+	"gitlab.ozon.dev/betkin/device-api/internal/config"
+	pb "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 )
 
 // GrpcServer is gRPC server
