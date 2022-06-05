@@ -4,7 +4,6 @@ variables:
   ADD_DATA: 'data from vars.yml'
   DOCKER_AUTH_CONFIG: '{"auths":{"gitlab.ozon.dev":{"username":"$CI_DEPENDENCY_PROXY_USER","password":"$CI_DEPENDENCY_PROXY_PASSWORD"}}}'
 
-
 stages:
   - build
   - publish
@@ -18,7 +17,7 @@ build:
   script:
     - echo "Build"
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(test)\/.+$/ || $CI_COMMIT_TAG != null
+    - if: $CI_COMMIT_TAG != null
       when: never
     - when: always
 
