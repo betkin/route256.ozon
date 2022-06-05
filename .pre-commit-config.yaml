@@ -22,7 +22,7 @@ repos:
           - '.gitlab-ci.yml'
           - '--insecure'
           - '--private-token'
-          - 'glpat-AmVfsPLHY5Y91NHu8oCW'
+          - 'glpat-zChaDrzaBB5Bzsi3CPgo'
 
   - repo: https://github.com/yoheimuta/protolint
     rev: v0.35.2

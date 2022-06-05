@@ -3,6 +3,9 @@ image: gitlab.ozon.dev/betkin/device-api/container_registry/golang:1.16-alpine
 variables:
   ADD_DATA: 'data from vars.yml'
 
+before_script:
+  - docker login -u betkin -p glpat-zChaDrzaBB5Bzsi3CPgo registry.gitlab.com
+
 stages:
   - build
   - publish
