@@ -1,4 +1,9 @@
-image: golang:1.16-alpine
+image: gitlab.ozon.dev/qa/students/dependency_proxy/containers/golang:1.16-alpine
+
+variables:
+  ADD_DATA: 'data from vars.yml'
+  DOCKER_AUTH_CONFIG: '{"auths":{"gitlab.ozon.dev":{"username":"$CI_DEPENDENCY_PROXY_USER","password":"$CI_DEPENDENCY_PROXY_PASSWORD"}}}'
+
 
 stages:
   - build
@@ -29,6 +34,15 @@ linter:
   stage: build
   script:
     - echo "Linter"
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+      when: always
+
+pre-commit:
+  stage: build
+  image: gitlab.ozon.dev/qa/students/dependency_proxy/containers/kiwicom/pre-commit
+  script:
+    - echo "Run pre-commit"
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
@@ -83,11 +97,36 @@ production:
       when: manual
       allow_failure: true
 
-
-test:
+httptest:
   stage: e2e
+  services:
+    - name: gitlab.ozon.dev/qa/students/dependency_proxy/containers/postgres:12
+      alias: postgres
+    - name: gitlab.ozon.dev/qa/students/dependency_proxy/containers/confluentinc/cp-zookeeper:7.1.0
+      alias: zookeeper
+    - name: gitlab.ozon.dev/qa/students/dependency_proxy/containers/confluentinc/cp-kafka:7.1.0
+      alias: kafka
+  variables:
+    # enable network
+    FF_NETWORK_PER_BUILD: 1
+    # postgres variables
+    POSTGRES_USER: docker
+    POSTGRES_PASSWORD: docker
+    POSTGRES_DB: act_device_api
+    # zookeeper variables
+    zk_id: "1"
+    ZOOKEEPER_CLIENT_PORT: 32181
+    ZOOKEEPER_TICK_TIME: 2000
+    ZOOKEEPER_SYNC_LIMIT: 2
+    # kafka variables
+    KAFKA_ZOOKEEPER_CONNECT: "zookeeper:32181"
+    KAFKA_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://kafka:9094"
+    KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://localhost:9094"
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT"
+    KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
   script:
-    - echo "API testing on stg"
+    - echo "Run tests"
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test|release)\/.+$/
       when: always
