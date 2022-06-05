@@ -1,10 +1,7 @@
-image: gitlab.ozon.dev/betkin/device-api/container_registry/golang:1.16-alpine
+image: gitlab-registry.ozon.dev/betkin/device-api/golang:1.16-alpine
 
 variables:
   ADD_DATA: 'data from vars.yml'
-
-before_script:
-  - docker login -u betkin -p glpat-zChaDrzaBB5Bzsi3CPgo registry.gitlab.com
 
 stages:
   - build
@@ -41,7 +38,7 @@ linter:
 
 pre-commit:
   stage: build
-  image: gitlab.ozon.dev/betkin/device-api/container_registry/kiwicom/pre-commit
+  image: gitlab-registry.ozon.dev/betkin/device-api/kiwicom/pre-commit
   script:
     - echo "Run pre-commit"
   rules:
@@ -101,11 +98,11 @@ production:
 httptest:
   stage: e2e
   services:
-    - name: gitlab.ozon.dev/betkin/device-api/container_registry/postgres:12
+    - name: gitlab-registry.ozon.dev/betkin/device-api/postgres:12
       alias: postgres
-    - name: gitlab.ozon.dev/betkin/device-api/container_registry/confluentinc/cp-zookeeper:7.1.0
+    - name: gitlab-registry.ozon.dev/betkin/device-api/confluentinc/cp-zookeeper:7.1.0
       alias: zookeeper
-    - name: gitlab.ozon.dev/betkin/device-api/container_registry/confluentinc/cp-kafka:7.1.0
+    - name: gitlab-registry.ozon.dev/betkin/device-api/confluentinc/cp-kafka:7.1.0
       alias: kafka
   variables:
     # enable network
