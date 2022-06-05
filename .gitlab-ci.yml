@@ -2,7 +2,6 @@ image: gitlab.ozon.dev/betkin/device-api/container_registry/golang:1.16-alpine
 
 variables:
   ADD_DATA: 'data from vars.yml'
-  DOCKER_AUTH_CONFIG: '{"auths":{"gitlab.ozon.dev":{"username":"$CI_DEPENDENCY_PROXY_USER","password":"$CI_DEPENDENCY_PROXY_PASSWORD"}}}'
 
 stages:
   - build
