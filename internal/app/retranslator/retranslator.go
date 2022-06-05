@@ -1,8 +1,9 @@
 package retranslator
 
 import (
-	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"time"
+
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 
 	"github.com/gammazero/workerpool"
 	"gitlab.ozon.dev/betkin/device-api/internal/app/consumer"

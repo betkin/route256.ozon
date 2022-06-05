@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/hashicorp/go-retryablehttp"
 	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 )
 

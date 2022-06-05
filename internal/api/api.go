@@ -3,12 +3,13 @@ package api
 import (
 	"context"
 	"database/sql"
+	"time"
+
 	"github.com/opentracing/opentracing-go"
 	repo2 "gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"gitlab.ozon.dev/betkin/device-api/internal/model"
 	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 	tspb "google.golang.org/protobuf/types/known/timestamppb"
-	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"

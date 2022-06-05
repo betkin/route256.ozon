@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	repo2 "gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"net"
 	"net/http"
 	"os"
@@ -12,6 +11,8 @@ import (
 	"sync/atomic"
 	"syscall"
 	"time"
+
+	repo2 "gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/rs/zerolog/log"

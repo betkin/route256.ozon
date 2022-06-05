@@ -2,9 +2,10 @@ package retranslator
 
 import (
 	"errors"
-	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"testing"
 	"time"
+
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 
 	"github.com/golang/mock/gomock"
 	"gitlab.ozon.dev/betkin/device-api/internal/app/sender"

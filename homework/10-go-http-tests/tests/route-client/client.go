@@ -5,13 +5,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/hashicorp/go-retryablehttp"
+	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 )
 
 type Client interface {

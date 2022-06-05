@@ -2,6 +2,7 @@ package test_config
 
 import (
 	"fmt"
+
 	"github.com/kelseyhightower/envconfig"
 )
 

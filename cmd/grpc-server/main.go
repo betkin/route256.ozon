@@ -3,6 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
 	_ "github.com/jackc/pgx/v4"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
@@ -19,10 +24,6 @@ import (
 	"gitlab.ozon.dev/betkin/device-api/internal/server"
 	"gitlab.ozon.dev/betkin/device-api/internal/tracer"
 	"go.uber.org/zap"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
 )
 
 var (

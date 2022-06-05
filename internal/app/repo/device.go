@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+
 	"github.com/opentracing/opentracing-go"
 
 	sq "github.com/Masterminds/squirrel"

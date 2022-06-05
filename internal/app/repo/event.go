@@ -3,6 +3,7 @@ package repo
 import (
 	"context"
 	"encoding/json"
+
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
 	"github.com/opentracing/opentracing-go"

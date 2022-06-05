@@ -2,9 +2,10 @@ package consumer
 
 import (
 	"context"
-	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"sync"
 	"time"
+
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 
 	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )

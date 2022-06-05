@@ -1,9 +1,10 @@
 package tracer
 
 import (
+	"io"
+
 	"github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-client-go"
-	"io"
 
 	"github.com/rs/zerolog/log"
 	"gitlab.ozon.dev/betkin/device-api/internal/config"

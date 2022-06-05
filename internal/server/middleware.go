@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+
 	"gitlab.ozon.dev/betkin/device-api/internal/pkg/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

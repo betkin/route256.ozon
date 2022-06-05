@@ -2,6 +2,11 @@ package tests
 
 import (
 	"context"
+	"math"
+	"math/rand"
+	"testing"
+	"time"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
@@ -9,10 +14,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	"math"
-	"math/rand"
-	"testing"
-	"time"
 )
 
 func TestDescribeDevice(t *testing.T) {

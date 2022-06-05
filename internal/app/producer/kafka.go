@@ -2,10 +2,11 @@ package producer
 
 import (
 	"context"
-	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 	"log"
 	"sync"
 	"time"
+
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
 
 	"github.com/gammazero/workerpool"
 	"gitlab.ozon.dev/betkin/device-api/internal/app/sender"
