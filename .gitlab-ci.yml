@@ -30,7 +30,7 @@ unit:
   stage: build
   image: gitlab-registry.ozon.dev/betkin/device-api/pricec/gotestsum
   script:
-    - go tests -json ./homework/09-unit-tests/ > out.json
+    - go test -json ./homework/09-unit-tests/ > out.json
     - cat out.json | gotestsum --format testname
   allow_failure: true
   rules:
@@ -143,7 +143,7 @@ httptest:
     - .bin/grpc-server 2>&1 >/dev/null &
     - sleep 5
   script:
-    - go tests -json -tags httptest ./test/httptest/... > out.json
+    - go test -json -tags httptest ./test/httptest/... > out.json
     - cat out.json
   artifacts:
     paths:
