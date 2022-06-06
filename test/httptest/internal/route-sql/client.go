@@ -3,11 +3,10 @@ package route_sql
 import (
 	"context"
 
-	"gitlab.ozon.dev/betkin/device-api/test/grpctest/internal/models"
-
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
 	"gitlab.ozon.dev/betkin/device-api/internal/database"
+	"gitlab.ozon.dev/betkin/device-api/test/httptest/internal/models"
 )
 
 // EventStorage describes SQL methods for DB object
