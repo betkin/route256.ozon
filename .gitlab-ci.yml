@@ -14,8 +14,9 @@ stages:
 build:
   stage: build
   script:
+    - export PATH=$PATH:/usr/local/go/bin
     - apk add --update make curl git protoc protobuf protobuf-dev
-    - go version
+    - ls
     - make deps-go
     - make build-go
   artifacts:
