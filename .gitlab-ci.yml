@@ -30,13 +30,12 @@ unit:
   stage: build
   image: gitlab-registry.ozon.dev/betkin/device-api/pricec/gotestsum
   script:
-    - go test -json ./homework/09-unit-tests > out.json
+    - go tests -json ./homework/09-unit-tests/ > out.json
     - cat out.json | gotestsum --format testname
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(tests)|(release)\/.+$/
       when: always
-
 
 linter:
   stage: build
@@ -45,7 +44,7 @@ linter:
     - golangci-lint run -v ./...
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(tests)|(release)\/.+$/
       when: always
 
 pre-commit:
@@ -55,7 +54,7 @@ pre-commit:
     - pre-commit run -a
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(tests)|(release)\/.+$/
       when: always
 
 create image:
@@ -136,11 +135,22 @@ httptest:
     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT"
     KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  dependencies:
+    - build
+  before_script:
+    - apk add --update make curl git protoc protobuf protobuf-dev build-base
+    - make deps-go
+    - .bin/grpc-server 2>&1 >/dev/null &
+    - sleep 5
   script:
-    - echo "Run tests"
+    - go tests -json -tags httptest ./test/httptest/... > out.json
+    - cat out.json
+  artifacts:
+    paths:
+      - out.json
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(test|release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(tests|release)\/.+$/
       when: always
 
 ready to prod:
