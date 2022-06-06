@@ -140,7 +140,7 @@ httptest:
   before_script:
     - apk add --update make curl git protoc protobuf protobuf-dev build-base
     - make deps-go
-    - .bin/grpc-server 2>&1 >/dev/null &
+    - ./bin/grpc-server 2>&1 >/dev/null &
     - sleep 5
   script:
     - go test -json -tags httptest ./test/httptest/... > out.json
