@@ -23,9 +23,9 @@ func ExpectEventFields(t *testing.T, expect *models.DeviceEvent, actual *models.
 		assert.Equal(t, expect.Device.UserID, actual.Device.UserID)
 		assert.Equal(t, expect.Device.Platform, actual.Device.Platform)
 		if expect.Device.EnteredAt != nil {
-			assert.Less(t, expect.Device.EnteredAt.UnixMilli()-actual.Device.EnteredAt.UnixMilli(), int64(20))
+			assert.Less(t, expect.Device.EnteredAt.Nanosecond()-actual.Device.EnteredAt.Nanosecond(), 20000000)
 		}
 	}
-	assert.Less(t, expect.CreatedAt.UnixMilli()-actual.CreatedAt.UnixMilli(), int64(20))
-	assert.Less(t, expect.UpdatedAt.UnixMilli()-actual.UpdatedAt.UnixMilli(), int64(20))
+	assert.Less(t, expect.CreatedAt.Nanosecond()-actual.CreatedAt.Nanosecond(), 20000000)
+	assert.Less(t, expect.UpdatedAt.Nanosecond()-actual.UpdatedAt.Nanosecond(), 20000000)
 }
