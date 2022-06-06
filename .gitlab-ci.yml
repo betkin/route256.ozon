@@ -14,9 +14,7 @@ stages:
 build:
   stage: build
   script:
-    - export PATH=$PATH:/usr/local/go/bin
     - apk add --update make curl git protoc protobuf protobuf-dev
-    - find / -name go
     - make deps-go
     - make build-go
   artifacts:
@@ -32,7 +30,7 @@ unit:
   stage: build
   image: gitlab-registry.ozon.dev/betkin/device-api/pricec/gotestsum
   script:
-    - go test -json ./homework/09-unit-tests > out.json
+    - go test -json homework/09-unit-tests > out.json
     - cat out.json | gotestsum --format testname
   allow_failure: true
   rules:
