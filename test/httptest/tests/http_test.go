@@ -14,14 +14,14 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gitlab.ozon.dev/betkin/device-api/test/allure-tests/config"
 	test_config "gitlab.ozon.dev/betkin/device-api/test/httptest/internal/config"
+	route_client "gitlab.ozon.dev/betkin/device-api/test/httptest/internal/route-client"
 	"gitlab.ozon.dev/betkin/device-api/test/httptest/internal/steps"
 )
 
 func TestHttpServerRemove(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
-	cfg, err := test_config.test_config.GetConfig()
+	cfg, err := test_config.GetConfig()
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
@@ -110,11 +110,11 @@ func TestHttpServerRemove(t *testing.T) {
 
 func TestHttpServerUpdate(t *testing.T) {
 	rand.Seed(time.Now().UnixNano())
-	cfg, err := config.GetConfig()
+	cfg, err := test_config.GetConfig()
 	if err != nil {
 		t.Fatalf("Config err:%v", err)
 	}
-	client := route_client.NewHTTPClient(config.GetAPIURL(cfg), 5, 1*time.Second)
+	client := route_client.NewHTTPClient(test_config.GetAPIURL(cfg), 5, 1*time.Second)
 	ctx := context.Background()
 
 	t.Run("Device updating returns true", func(t *testing.T) {

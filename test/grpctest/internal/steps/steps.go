@@ -69,7 +69,7 @@ func RemoveDevice(ctx context.Context, t *testing.T, deviceApiClient act_device_
 }
 
 func ConnectDB(t *testing.T) *route_sql.Storage {
-	if err := config.ReadConfigYML("../config.yml"); err != nil {
+	if err := config.ReadConfigYML("../../../config.yml"); err != nil {
 		t.Fatalf("Configuration fail! err:%v", err)
 	}
 	cfgAPI := config.GetConfigInstance()

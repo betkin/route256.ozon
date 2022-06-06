@@ -1,3 +1,6 @@
+//go:build allurereport
+// +build allurereport
+
 package atests
 
 import (

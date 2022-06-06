@@ -11,7 +11,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	fmt.Println("This is gRPC tests suite for device-api")
+	fmt.Println("This is HTTP test suite for device-api")
 	cfg, err := test_config.GetConfig()
 	if err != nil {
 		log.Fatalf("Config error: %v", err.Error())
