@@ -16,7 +16,7 @@ build:
   script:
     - export PATH=$PATH:/usr/local/go/bin
     - apk add --update make curl git protoc protobuf protobuf-dev
-    - ls /home
+    - find / -name go
     - make deps-go
     - make build-go
   artifacts:
