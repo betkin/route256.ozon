@@ -34,7 +34,7 @@ unit:
     - cat out.json | gotestsum --format testname
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(tests)|(release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
 
 linter:
@@ -44,7 +44,7 @@ linter:
     - golangci-lint run -v ./...
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(tests)|(release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
 
 pre-commit:
@@ -54,7 +54,7 @@ pre-commit:
     - pre-commit run -a
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(tests)|(release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
 
 create image:
@@ -150,7 +150,7 @@ httptest:
       - out.json
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(tests|release)\/.+$/
+    - if: $CI_COMMIT_REF_NAME =~ /^(test|release)\/.+$/
       when: always
 
 ready to prod:
