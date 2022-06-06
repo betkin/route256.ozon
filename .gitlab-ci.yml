@@ -14,8 +14,13 @@ stages:
 build:
   stage: build
   script:
-    - echo $CI_REGISTRY
-    - echo "Build"
+    - apk add --update make curl git protoc protobuf protobuf-dev
+    - make deps-go
+    - make build-go
+  artifacts:
+    paths:
+      - bin/
+    expire_in: 1 days
   rules:
     - if: $CI_COMMIT_TAG != null
       when: never
@@ -23,16 +28,19 @@ build:
 
 unit:
   stage: build
+  image: gitlab-registry.ozon.dev/betkin/device-api/pricec/gotestsum
   script:
-    - echo "Unit testing"
+    - go test -json ./homework/... > out.json
+    - cat out.json | gotestsum --format testname
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
 
 linter:
   stage: build
+  image: gitlab-registry.ozon.dev/betkin/device-api/golangci/golangci-lint
   script:
-    - echo "Linter"
+    - golangci-lint run -v ./...
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
@@ -41,7 +49,7 @@ pre-commit:
   stage: build
   image: gitlab-registry.ozon.dev/betkin/device-api/kiwicom/pre-commit
   script:
-    - echo "Run pre-commit"
+    - pre-commit run -a
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
@@ -99,7 +107,7 @@ production:
 httptest:
   stage: e2e
   services:
-    - name: gitlab-registry.ozon.dev/betkin/device-api/postgres:12
+    - name: gitlab-registry.ozon.dev/betkin/device-api/postgres:13
       alias: postgres
     - name: gitlab-registry.ozon.dev/betkin/device-api/confluentinc/cp-zookeeper:7.1.0
       alias: zookeeper
