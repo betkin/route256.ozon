@@ -15,6 +15,7 @@ build:
   stage: build
   script:
     - apk add --update make curl git protoc protobuf protobuf-dev
+    - printf "$(echo `go version` | sed -E 's/.* go(.*) .*/\1/g')\n1.16" | sort -V | head -1
     - make deps-go
     - make build-go
   artifacts:
@@ -30,7 +31,7 @@ unit:
   stage: build
   image: gitlab-registry.ozon.dev/betkin/device-api/pricec/gotestsum
   script:
-    - go test -json ./homework/... > out.json
+    - go test -json ./homework/09-unit-tests/... > out.json
     - cat out.json | gotestsum --format testname
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
