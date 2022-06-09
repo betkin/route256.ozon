@@ -2,14 +2,15 @@ package producer
 
 import (
 	"context"
-	"github.com/ozonmp/act-device-api/internal/app/repo"
 	"log"
 	"sync"
 	"time"
 
+	"gitlab.ozon.dev/betkin/device-api/internal/app/repo"
+
 	"github.com/gammazero/workerpool"
-	"github.com/ozonmp/act-device-api/internal/app/sender"
-	"github.com/ozonmp/act-device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/sender"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 type Producer interface {

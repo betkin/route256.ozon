@@ -1,6 +1,6 @@
 # Builder
 
-ARG GITHUB_PATH=github.com/ozonmp/act-device-api
+ARG GITHUB_PATH=gitlab.ozon.dev/betkin/device-api
 
 FROM golang:1.16-alpine AS builder
 RUN apk add --update make curl git protoc protobuf protobuf-dev

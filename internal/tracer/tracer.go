@@ -4,10 +4,10 @@ import (
 	"io"
 
 	"github.com/opentracing/opentracing-go"
-	"github.com/rs/zerolog/log"
 	"github.com/uber/jaeger-client-go"
 
-	"github.com/ozonmp/act-device-api/internal/config"
+	"github.com/rs/zerolog/log"
+	"gitlab.ozon.dev/betkin/device-api/internal/config"
 
 	jaegercfg "github.com/uber/jaeger-client-go/config"
 )

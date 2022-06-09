@@ -2,10 +2,10 @@ package sender
 
 import (
 	"github.com/Shopify/sarama"
-	"github.com/ozonmp/act-device-api/internal/model"
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/ozonmp/act-device-api/pkg/act-device-api"
+	pb "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 	tspb "google.golang.org/protobuf/types/known/timestamppb"
 )
 

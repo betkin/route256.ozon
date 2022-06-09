@@ -1,0 +1,851 @@
+[ {
+  "uid" : "66abd64cf26e9973",
+  "name" : "tests int8",
+  "time" : {
+    "start" : 1654547774584,
+    "stop" : 1654547774592,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6f79fd69ef74290",
+  "name" : "test int16",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559608,
+    "duration" : 23
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c3649985fd250bb2",
+  "name" : "tests uint64",
+  "time" : {
+    "start" : 1654547774588,
+    "stop" : 1654547774597,
+    "duration" : 9
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "f8d91f14b8645e5b",
+  "name" : "tests uint16",
+  "time" : {
+    "start" : 1654547774585,
+    "stop" : 1654547774617,
+    "duration" : 32
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "48451f6d7fde3fe0",
+  "name" : "test int32",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559506,
+    "duration" : 29
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9553c6ba5ddde63a",
+  "name" : "test char[2]",
+  "time" : {
+    "start" : 1653514559612,
+    "stop" : 1653514559629,
+    "duration" : 17
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d8e951aea7ca216f",
+  "name" : "test int16",
+  "time" : {
+    "start" : 1653514559535,
+    "stop" : 1653514559556,
+    "duration" : 21
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bdce396c7c311299",
+  "name" : "test int8",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559588,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3aadb1dd0cbe6b7a",
+  "name" : "test int8",
+  "time" : {
+    "start" : 1653514559535,
+    "stop" : 1653514559538,
+    "duration" : 3
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "52bd302c997a5cbb",
+  "name" : "Nonexistent ID return error",
+  "time" : {
+    "start" : 1654547774449,
+    "stop" : 1654547774456,
+    "duration" : 7
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ccb153be88e3927f",
+  "name" : "Device removing returns true",
+  "time" : {
+    "start" : 1654547774817,
+    "stop" : 1654547774855,
+    "duration" : 38
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "421eac0f323e6565",
+  "name" : "test uint8",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559514,
+    "duration" : 37
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c1a044953fb71400",
+  "name" : "test uint16",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559510,
+    "duration" : 33
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "85583fdbd3f9ce30",
+  "name" : "test int64",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559593,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bd131ee7eff693c5",
+  "name" : "test int8",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559478,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c0861824e126b70a",
+  "name" : "Items count equal PerPage",
+  "time" : {
+    "start" : 1653514559515,
+    "stop" : 1653514559519,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9d3db34f9d904662",
+  "name" : "Double change",
+  "time" : {
+    "start" : 1654547775186,
+    "stop" : 1654547775235,
+    "duration" : 49
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c817f508f9088e5a",
+  "name" : "test uint32",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559596,
+    "duration" : 11
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "93b0a063e6f927ed",
+  "name" : "Modified device can be removal",
+  "time" : {
+    "start" : 1654547774947,
+    "stop" : 1654547774997,
+    "duration" : 50
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1ce7e6136cf79b26",
+  "name" : "tests char[64]",
+  "time" : {
+    "start" : 1654547774770,
+    "stop" : 1654547774784,
+    "duration" : 14
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "c3f8963032256a37",
+  "name" : "test char[16]",
+  "time" : {
+    "start" : 1653514559612,
+    "stop" : 1653514559624,
+    "duration" : 12
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3bd9e810a507b85d",
+  "name" : "tests uint64",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774469,
+    "duration" : 9
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "5d758f9b7b899480",
+  "name" : "tests uint32",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774482,
+    "duration" : 22
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "39ba5996a8c8829f",
+  "name" : "tests int16",
+  "time" : {
+    "start" : 1654547774585,
+    "stop" : 1654547774621,
+    "duration" : 36
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6f9ab1c805a35c0c",
+  "name" : "tests int16",
+  "time" : {
+    "start" : 1654547774689,
+    "stop" : 1654547774761,
+    "duration" : 72
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "43f0a772d28edb9d",
+  "name" : "tests char[1]",
+  "time" : {
+    "start" : 1654547774769,
+    "stop" : 1654547774778,
+    "duration" : 9
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cdd844d874e5548",
+  "name" : "Items count not greater PerPage",
+  "time" : {
+    "start" : 1654547774538,
+    "stop" : 1654547774554,
+    "duration" : 16
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ed260514b02ccc4d",
+  "name" : "tests uint32",
+  "time" : {
+    "start" : 1654547774586,
+    "stop" : 1654547774606,
+    "duration" : 20
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "3e7dae79fbf08902",
+  "name" : "test uint32",
+  "time" : {
+    "start" : 1653514559536,
+    "stop" : 1653514559547,
+    "duration" : 11
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "aea5fc64455a176e",
+  "name" : "Create Device data equal request data",
+  "time" : {
+    "start" : 1654547774640,
+    "stop" : 1654547774656,
+    "duration" : 16
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "13bac7191e94c37",
+  "name" : "Removed device can't be modified",
+  "time" : {
+    "start" : 1654547775236,
+    "stop" : 1654547775286,
+    "duration" : 50
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a599a23c78b84500",
+  "name" : "No items on page return error",
+  "time" : {
+    "start" : 1653514559528,
+    "stop" : 1653514559532,
+    "duration" : 4
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "cad58e01d4247be9",
+  "name" : "Empty Platform returns error",
+  "time" : {
+    "start" : 1654547774684,
+    "stop" : 1654547774686,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d1e059726f98b265",
+  "name" : "test uint16",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559602,
+    "duration" : 17
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "52a5f689a015e4eb",
+  "name" : "Double removal",
+  "time" : {
+    "start" : 1654547774998,
+    "stop" : 1654547775042,
+    "duration" : 44
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "93849f4b67e631db",
+  "name" : "test char[1]",
+  "time" : {
+    "start" : 1653514559612,
+    "stop" : 1653514559614,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "180bb449634fc5a0",
+  "name" : "Nonexistent device updating returns false",
+  "time" : {
+    "start" : 1654547775074,
+    "stop" : 1654547775128,
+    "duration" : 54
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d6273e0ddb35f590",
+  "name" : "Date/time field hasn't changed after update",
+  "time" : {
+    "start" : 1654547775128,
+    "stop" : 1654547775186,
+    "duration" : 58
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e77aa4da39db9478",
+  "name" : "test char[32]",
+  "time" : {
+    "start" : 1653514559612,
+    "stop" : 1653514559620,
+    "duration" : 8
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "685ea853764288a3",
+  "name" : "tests uint8",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774501,
+    "duration" : 41
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "843a355f91dd59b",
+  "name" : "Creation date/time is correct",
+  "time" : {
+    "start" : 1654547774662,
+    "stop" : 1654547774681,
+    "duration" : 19
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bd47fa2a8f42fd6a",
+  "name" : "tests uint64",
+  "time" : {
+    "start" : 1654547774694,
+    "stop" : 1654547774707,
+    "duration" : 13
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "82beba3567860b89",
+  "name" : "Device updating returns true",
+  "time" : {
+    "start" : 1654547775042,
+    "stop" : 1654547775074,
+    "duration" : 32
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "276d1e8cf5aaea",
+  "name" : "Zero ID value returns error",
+  "time" : {
+    "start" : 1654547774456,
+    "stop" : 1654547774460,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f5915bcd8cada072",
+  "name" : "test uint8",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559611,
+    "duration" : 26
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1d8a79abf205ff9",
+  "name" : "test uint64",
+  "time" : {
+    "start" : 1653514559536,
+    "stop" : 1653514559543,
+    "duration" : 7
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "6f84669eff16de78",
+  "name" : "test int64",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559489,
+    "duration" : 12
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "30146b8158033c0a",
+  "name" : "test int16",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559512,
+    "duration" : 35
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "418dfe149c2835dc",
+  "name" : "tests char[16]",
+  "time" : {
+    "start" : 1654547774770,
+    "stop" : 1654547774800,
+    "duration" : 30
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f041596ee2874fc",
+  "name" : "tests int32",
+  "time" : {
+    "start" : 1654547774586,
+    "stop" : 1654547774610,
+    "duration" : 24
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "149726c4e0f27845",
+  "name" : "test int64",
+  "time" : {
+    "start" : 1653514559536,
+    "stop" : 1653514559545,
+    "duration" : 9
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f85d24a77576e92",
+  "name" : "tests int16",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774495,
+    "duration" : 35
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1ee2c8d2d54b89dd",
+  "name" : "Create Device returns ID",
+  "time" : {
+    "start" : 1654547774631,
+    "stop" : 1654547774640,
+    "duration" : 9
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "35f9df56ce259e66",
+  "name" : "Describe device returns correct ID",
+  "time" : {
+    "start" : 1654547774432,
+    "stop" : 1654547774446,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6ebbf5d3ef1357d2",
+  "name" : "tests uint16",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774489,
+    "duration" : 29
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b2046c085598a2f6",
+  "name" : "Items count equal PerPage",
+  "time" : {
+    "start" : 1654547774520,
+    "stop" : 1654547774537,
+    "duration" : 17
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "839c67caa9b6f5d7",
+  "name" : "test int32",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559598,
+    "duration" : 13
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d9101921028aff05",
+  "name" : "tests uint8",
+  "time" : {
+    "start" : 1654547774584,
+    "stop" : 1654547774629,
+    "duration" : 45
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "244848fae1450ca4",
+  "name" : "Zero Page returns OK",
+  "time" : {
+    "start" : 1654547774574,
+    "stop" : 1654547774582,
+    "duration" : 8
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "d0538e9f15025562",
+  "name" : "tests uint16",
+  "time" : {
+    "start" : 1654547774689,
+    "stop" : 1654547774754,
+    "duration" : 65
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5636dceff337b545",
+  "name" : "Zero UserId returns error",
+  "time" : {
+    "start" : 1653514559582,
+    "stop" : 1653514559583,
+    "duration" : 1
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "40339809de7253c3",
+  "name" : "tests int64",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774472,
+    "duration" : 12
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "a0babefc5edabc54",
+  "name" : "test uint8",
+  "time" : {
+    "start" : 1653514559535,
+    "stop" : 1653514559560,
+    "duration" : 25
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7086a2962ad6f5c1",
+  "name" : "tests int8",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774465,
+    "duration" : 5
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "aa00afc715b709a1",
+  "name" : "Nonexistent device removing returns false",
+  "time" : {
+    "start" : 1654547774856,
+    "stop" : 1654547774893,
+    "duration" : 37
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e3fb8bda1606f4ca",
+  "name" : "tests int8",
+  "time" : {
+    "start" : 1654547774688,
+    "stop" : 1654547774702,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "891c16558e288c81",
+  "name" : "tests uint32",
+  "time" : {
+    "start" : 1654547774693,
+    "stop" : 1654547774736,
+    "duration" : 43
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3c78e2a985ff8b71",
+  "name" : "test uint64",
+  "time" : {
+    "start" : 1653514559585,
+    "stop" : 1653514559590,
+    "duration" : 5
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "d347c97e04ee9a71",
+  "name" : "test uint16",
+  "time" : {
+    "start" : 1653514559535,
+    "stop" : 1653514559555,
+    "duration" : 20
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ec78a01be7ffc524",
+  "name" : "tests int32",
+  "time" : {
+    "start" : 1654547774460,
+    "stop" : 1654547774486,
+    "duration" : 26
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "23f4e75982f67ee",
+  "name" : "Items count not greater PerPage",
+  "time" : {
+    "start" : 1653514559524,
+    "stop" : 1653514559528,
+    "duration" : 4
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5481140b527d989f",
+  "name" : "test int32",
+  "time" : {
+    "start" : 1653514559535,
+    "stop" : 1653514559549,
+    "duration" : 14
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e15a2c32904d81e1",
+  "name" : "tests char[32]",
+  "time" : {
+    "start" : 1654547774770,
+    "stop" : 1654547774791,
+    "duration" : 21
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5dda685b576005ad",
+  "name" : "Zero UserID returns error",
+  "time" : {
+    "start" : 1654547774681,
+    "stop" : 1654547774683,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e530e7a0f09d90b0",
+  "name" : "Number of devices hasn't changed after a failed removal",
+  "time" : {
+    "start" : 1654547774893,
+    "stop" : 1654547774945,
+    "duration" : 52
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b670ff8ed9e01ff",
+  "name" : "Zero PerPage returns error",
+  "time" : {
+    "start" : 1654547774571,
+    "stop" : 1654547774574,
+    "duration" : 3
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "a6da2ba1c39f8026",
+  "name" : "test char[64]",
+  "time" : {
+    "start" : 1653514559612,
+    "stop" : 1653514559617,
+    "duration" : 5
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "6572086b934a2944",
+  "name" : "tests int32",
+  "time" : {
+    "start" : 1654547774690,
+    "stop" : 1654547774746,
+    "duration" : 56
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d7ebab8c32866184",
+  "name" : "tests char[2]",
+  "time" : {
+    "start" : 1654547774770,
+    "stop" : 1654547774808,
+    "duration" : 38
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "a553b806c087c6d7",
+  "name" : "tests int64",
+  "time" : {
+    "start" : 1654547774587,
+    "stop" : 1654547774601,
+    "duration" : 14
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "cb90dd404cc83ae6",
+  "name" : "test uint64",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559487,
+    "duration" : 10
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "91d828d66522cfd0",
+  "name" : "No items on page return error",
+  "time" : {
+    "start" : 1654547774554,
+    "stop" : 1654547774571,
+    "duration" : 17
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "bf043a1a13e36653",
+  "name" : "test uint32",
+  "time" : {
+    "start" : 1653514559477,
+    "stop" : 1653514559498,
+    "duration" : 21
+  },
+  "status" : "failed",
+  "severity" : "normal"
+}, {
+  "uid" : "f18e9cd5086844e2",
+  "name" : "tests uint8",
+  "time" : {
+    "start" : 1654547774689,
+    "stop" : 1654547774769,
+    "duration" : 80
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f9577b43c2b1d26e",
+  "name" : "tests int64",
+  "time" : {
+    "start" : 1654547774693,
+    "stop" : 1654547774718,
+    "duration" : 25
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

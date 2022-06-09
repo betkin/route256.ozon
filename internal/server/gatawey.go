@@ -14,7 +14,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 
-	pb "github.com/ozonmp/act-device-api/pkg/act-device-api"
+	pb "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
 )
 
 var (

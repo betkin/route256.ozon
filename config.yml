@@ -32,7 +32,7 @@ status:
   versionPath: /version
 
 database:
-  host: 127.0.0.1
+  host: postgres
   port: 5432
   user: docker
   password: docker

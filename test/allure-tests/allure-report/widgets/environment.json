@@ -1,0 +1,10 @@
+[ {
+  "values" : [ "127.0.0.1" ],
+  "name" : "APIHost"
+}, {
+  "values" : [ "8080" ],
+  "name" : "APIPort"
+}, {
+  "values" : [ "8082" ],
+  "name" : "gRPCPort"
+} ]

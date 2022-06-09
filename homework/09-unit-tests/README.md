@@ -35,6 +35,6 @@
 
 Команды для получения отчета о покрытии:
 ```bash
-go test -coverprofile=cover.txt
+go tests -coverprofile=cover.txt
 go tool cover -html=cover.txt -o cover.html
 ```

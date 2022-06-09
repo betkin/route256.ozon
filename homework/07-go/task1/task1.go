@@ -38,7 +38,7 @@ func AutoCorrect(txt string) string {
 
 func main() {
 	var s string
-	fmt.Println("Please, enter sentences for test.")
+	fmt.Println("Please, enter sentences for tests.")
 	reader := bufio.NewReader(os.Stdin)
 	s, _ = reader.ReadString('\n')
 	fmt.Println("\nResult:")

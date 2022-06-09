@@ -5,7 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/ozonmp/act-device-api/internal/app/retranslator"
+	"gitlab.ozon.dev/betkin/device-api/internal/app/retranslator"
 )
 
 func main() {

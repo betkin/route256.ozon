@@ -3,13 +3,12 @@ package repo
 import (
 	"context"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/opentracing/opentracing-go"
 
 	sq "github.com/Masterminds/squirrel"
+	"github.com/jmoiron/sqlx"
 
-	"github.com/ozonmp/act-device-api/internal/model"
-
+	"gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 // Repo is DAO for Template
@@ -81,7 +80,7 @@ func (r *repo) ListDevices(ctx context.Context, page uint64, perPage uint64) ([]
 		Where(sq.Eq{"removed": false}).
 		OrderBy("created_at DESC").
 		Limit(perPage).
-		Offset((page-1)*perPage)
+		Offset((page - 1) * perPage)
 
 	s, args, err := query.ToSql()
 	if err != nil {
@@ -121,7 +120,6 @@ func (r *repo) UpdateDevice(ctx context.Context, device *model.Device) (bool, er
 
 	return rows > 0, nil
 }
-
 
 func (r *repo) RemoveDevice(ctx context.Context, deviceID uint64) (bool, error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.RemoveDevice")

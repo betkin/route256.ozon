@@ -1,18 +1,22 @@
+//go:build grpctest
+// +build grpctest
+
 package tests
 
 import (
 	"context"
-	act_device_api "github.com/ozonmp/act-device-api/pkg/act-device-api"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/timestamppb"
 	"math"
 	"math/rand"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	act_device_api "gitlab.ozon.dev/betkin/device-api/pkg/act-device-api"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func TestDescribeDevice(t *testing.T) {
@@ -93,14 +97,14 @@ func TestDescribeDevice(t *testing.T) {
 			name string
 			id   uint64
 		}{
-			{"test int8", 99},
-			{"test uint8", 127},
-			{"test int16", 32767},
-			{"test uint16", 65535},
-			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			{"tests int8", 99},
+			{"tests uint8", 127},
+			{"tests int16", 32767},
+			{"tests uint16", 65535},
+			{"tests int32", 2147483647},
+			{"tests uint32", 4294967295},
+			{"tests int64", 9223372036854775807},
+			{"tests uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -233,14 +237,14 @@ func TestListDevices(t *testing.T) {
 			name  string
 			value uint64
 		}{
-			{"test int8", 99},
-			{"test uint8", 127},
-			{"test int16", 32767},
-			{"test uint16", 65535},
-			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			{"tests int8", 99},
+			{"tests uint8", 127},
+			{"tests int16", 32767},
+			{"tests uint16", 65535},
+			{"tests int32", 2147483647},
+			{"tests uint32", 4294967295},
+			{"tests int64", 9223372036854775807},
+			{"tests uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -365,14 +369,14 @@ func TestCreateDevices(t *testing.T) {
 			name  string
 			value uint64
 		}{
-			{"test int8", 99},
-			{"test uint8", 127},
-			{"test int16", 32767},
-			{"test uint16", 65535},
-			{"test int32", 2147483647},
-			{"test uint32", 4294967295},
-			{"test int64", 9223372036854775807},
-			{"test uint64", 18446744073709551611},
+			{"tests int8", 99},
+			{"tests uint8", 127},
+			{"tests int16", 32767},
+			{"tests uint16", 65535},
+			{"tests int32", 2147483647},
+			{"tests uint32", 4294967295},
+			{"tests int64", 9223372036854775807},
+			{"tests uint64", 18446744073709551611},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {
@@ -397,11 +401,11 @@ func TestCreateDevices(t *testing.T) {
 			name  string
 			value string
 		}{
-			{"test char[1]", "I"},
-			{"test char[2]", "OS"},
-			{"test char[16]", "Loooooooooong OS"},
-			{"test char[32]", "VeryLoooooooooooooooooooooong OS"},
-			{"test char[64]", "SoLoooooooooooooooooooooooooooooooooooooooooooooooooooooooong OS"},
+			{"tests char[1]", "I"},
+			{"tests char[2]", "OS"},
+			{"tests char[16]", "Loooooooooong OS"},
+			{"tests char[32]", "VeryLoooooooooooooooooooooong OS"},
+			{"tests char[64]", "SoLoooooooooooooooooooooooooooooooooooooooooooooooooooooooong OS"},
 		}
 		for _, data := range tests {
 			t.Run(data.name, func(t *testing.T) {

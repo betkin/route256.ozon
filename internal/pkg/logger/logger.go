@@ -2,9 +2,10 @@ package logger
 
 import (
 	"context"
-	"google.golang.org/grpc/metadata"
 	"log"
 	"strings"
+
+	"google.golang.org/grpc/metadata"
 
 	"github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-client-go"

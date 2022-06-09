@@ -1,0 +1,114 @@
+{
+  "total" : 11,
+  "items" : [ {
+    "uid" : "e8d24c5b894e2ae43b834589f77ea095",
+    "name" : "TestDescribeDevice/Device_ID_datatype_testing",
+    "statistic" : {
+      "failed" : 7,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 9,
+      "unknown" : 0,
+      "total" : 16
+    }
+  }, {
+    "uid" : "6ee464b80d79cc3b4381fbdf2296149c",
+    "name" : "TestListDevices/Page_and_PerPage_datatype_testing",
+    "statistic" : {
+      "failed" : 6,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 10,
+      "unknown" : 0,
+      "total" : 16
+    }
+  }, {
+    "uid" : "179d468f305ff076b3c60bcdd0af3caf",
+    "name" : "TestListDevices",
+    "statistic" : {
+      "failed" : 3,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 5
+    }
+  }, {
+    "uid" : "90857603cc1696c1d03e5a816944b039",
+    "name" : "TestCreateDevices/Platform_datatype_testing",
+    "statistic" : {
+      "failed" : 2,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 8,
+      "unknown" : 0,
+      "total" : 10
+    }
+  }, {
+    "uid" : "7875cff4903fe9b9b265d4f2af10f45a",
+    "name" : "TestCreateDevices/UserId_datatype_testing",
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 7,
+      "unknown" : 0,
+      "total" : 8
+    }
+  }, {
+    "uid" : "f9038afcc2cba1a405007a3cb50ddbbd",
+    "name" : "TestCreateDevices/UserID_datatype_testing",
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 7,
+      "unknown" : 0,
+      "total" : 8
+    }
+  }, {
+    "uid" : "2da506755d7dd4a69a100f0c1b0cc505",
+    "name" : "TestListDevices/View_pages_tests",
+    "statistic" : {
+      "failed" : 1,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 2,
+      "unknown" : 0,
+      "total" : 3
+    }
+  }, {
+    "uid" : "5cec56257b365b8506cf735ee8e9c940",
+    "name" : "TestCreateDevices",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 6,
+      "unknown" : 0,
+      "total" : 6
+    }
+  }, {
+    "uid" : "3839844e6ad720c92b6e4f190392d99d",
+    "name" : "TestHttpServerRemove",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 5,
+      "unknown" : 0,
+      "total" : 5
+    }
+  }, {
+    "uid" : "03c47fe065430104c22ed62670768ffd",
+    "name" : "TestHttpServerUpdate",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 5,
+      "unknown" : 0,
+      "total" : 5
+    }
+  } ]
+}

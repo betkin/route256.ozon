@@ -202,7 +202,7 @@ breaking:
   # that is one of the unstable forms recognized by the "PACKAGE_VERSION_SUFFIX"
   # lint rule. The following forms will be ignored:
   #
-  # - v\d+test.*
+  # - v\d+tests.*
   # - v\d+(alpha|beta)\d+
   # - v\d+p\d+(alpha|beta)\d+
   #

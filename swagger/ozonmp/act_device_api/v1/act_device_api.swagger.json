@@ -36,21 +36,6 @@
         },
         "parameters": [
           {
-            "name": "grpc-metadata-log-level",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-request",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-response",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -88,21 +73,6 @@
         },
         "parameters": [
           {
-            "name": "grpc-metadata-log-level",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-request",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-response",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -136,21 +106,6 @@
         },
         "parameters": [
           {
-            "name": "grpc-metadata-log-level",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-request",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-response",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "deviceId",
             "in": "path",
             "required": true,
@@ -181,21 +136,6 @@
         },
         "parameters": [
           {
-            "name": "grpc-metadata-log-level",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-request",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-response",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "deviceId",
             "in": "path",
             "required": true,
@@ -225,21 +165,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "grpc-metadata-log-level",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-request",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "grpc-metadata-log-response",
-            "in": "header",
-            "type": "string"
-          },
           {
             "name": "deviceId",
             "in": "path",

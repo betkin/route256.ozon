@@ -1,4 +1,7 @@
-image: golang:1.16-alpine
+image: gitlab-registry.ozon.dev/betkin/device-api/golang:1.16-alpine
+
+variables:
+  ADD_DATA: 'data from vars.yml'
 
 stages:
   - build
@@ -11,24 +14,45 @@ stages:
 build:
   stage: build
   script:
-    - echo "Build"
+    - apk add --update make curl git protoc protobuf protobuf-dev
+    - make deps-go
+    - make build-go
+  artifacts:
+    paths:
+      - bin/
+    expire_in: 1 days
   rules:
-    - if: $CI_COMMIT_REF_NAME =~ /^(test)\/.+$/ || $CI_COMMIT_TAG != null
+    - if: $CI_COMMIT_TAG != null
       when: never
     - when: always
 
 unit:
   stage: build
+  image: gitlab-registry.ozon.dev/betkin/device-api/pricec/gotestsum
   script:
-    - echo "Unit testing"
+    - go test -json ./homework/09-unit-tests/ > out.json
+    - cat out.json | gotestsum --format testname
+  allow_failure: true
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
 
 linter:
   stage: build
+  image: gitlab-registry.ozon.dev/betkin/device-api/golangci/golangci-lint
   script:
-    - echo "Linter"
+    - golangci-lint run -v ./...
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
+      when: always
+
+pre-commit:
+  stage: build
+  image: gitlab-registry.ozon.dev/betkin/device-api/kiwicom/pre-commit
+  script:
+    - pre-commit run -a
+  allow_failure: true
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
@@ -83,11 +107,48 @@ production:
       when: manual
       allow_failure: true
 
-
-test:
+httptest:
   stage: e2e
+  services:
+    - name: gitlab-registry.ozon.dev/betkin/device-api/postgres:13
+      alias: postgres
+    - name: gitlab-registry.ozon.dev/betkin/device-api/confluentinc/cp-zookeeper:7.1.0
+      alias: zookeeper
+    - name: gitlab-registry.ozon.dev/betkin/device-api/confluentinc/cp-kafka:7.1.0
+      alias: kafka
+  variables:
+    # enable network
+    FF_NETWORK_PER_BUILD: 1
+    # postgres variables
+    POSTGRES_USER: docker
+    POSTGRES_PASSWORD: docker
+    POSTGRES_DB: act_device_api
+    # zookeeper variables
+    zk_id: "1"
+    ZOOKEEPER_CLIENT_PORT: 32181
+    ZOOKEEPER_TICK_TIME: 2000
+    ZOOKEEPER_SYNC_LIMIT: 2
+    # kafka variables
+    KAFKA_ZOOKEEPER_CONNECT: "zookeeper:32181"
+    KAFKA_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://kafka:9094"
+    KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://localhost:9094"
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT"
+    KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  dependencies:
+    - build
+  before_script:
+    - apk add --update make curl git protoc protobuf protobuf-dev build-base
+    - make deps-go
+    - ./bin/grpc-server 2>&1 >/dev/null &
+    - sleep 5
   script:
-    - echo "API testing on stg"
+    - go test -json -tags httptest ./test/httptest/... > out.json
+    - cat out.json
+  artifacts:
+    paths:
+      - out.json
+  allow_failure: true
   rules:
     - if: $CI_COMMIT_REF_NAME =~ /^(test|release)\/.+$/
       when: always

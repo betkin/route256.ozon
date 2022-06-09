@@ -1,16 +1,21 @@
+//go:build httptest
+// +build httptest
+
 package tests
 
 import (
 	"context"
 	"fmt"
-	route_client "github.com/ozonmp/act-device-api/homework/10-go-http-tests/tests/route-client"
 
-	"github.com/stretchr/testify/assert"
+	route_client "gitlab.ozon.dev/betkin/device-api/homework/10-go-http-tests/tests/route-client"
+
 	"math/rand"
 	"net/url"
 	"strconv"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestHttpServerRemove(t *testing.T) {

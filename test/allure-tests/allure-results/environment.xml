@@ -1,0 +1,14 @@
+  <environment>
+      <parameter>
+          <key>APIHost</key>
+          <value>127.0.0.1</value>
+      </parameter>
+      <parameter>
+          <key>APIPort</key>
+          <value>8080</value>
+      </parameter>
+      <parameter>
+          <key>gRPCPort</key>
+          <value>8082</value>
+      </parameter>
+  </environment>

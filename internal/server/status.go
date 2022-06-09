@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"sync/atomic"
 
-	"github.com/ozonmp/act-device-api/internal/config"
 	"github.com/rs/zerolog/log"
+	"gitlab.ozon.dev/betkin/device-api/internal/config"
 )
 
 func createStatusServer(cfg *config.Config, isReady *atomic.Value) *http.Server {
