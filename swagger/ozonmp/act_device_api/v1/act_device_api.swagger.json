@@ -86,6 +86,38 @@
         ]
       }
     },
+    "/api/v1/devices/log/{deviceId}": {
+      "get": {
+        "summary": "LogDeviceV1 - List of device events",
+        "operationId": "ActDeviceApiService_LogDeviceV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LogDeviceV1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ActDeviceApiService"
+        ]
+      }
+    },
     "/api/v1/devices/{deviceId}": {
       "get": {
         "summary": "DescribeDeviceV1 - Describe a device",
@@ -276,6 +308,31 @@
         }
       }
     },
+    "v1DeviceLog": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "type": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "status": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "v1ListDevicesV1Response": {
       "type": "object",
       "properties": {
@@ -283,6 +340,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1Device"
+          }
+        }
+      }
+    },
+    "v1LogDeviceV1Response": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DeviceLog"
           }
         }
       }

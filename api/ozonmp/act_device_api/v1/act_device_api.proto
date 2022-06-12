@@ -23,6 +23,12 @@ service ActDeviceApiService {
       get: "/api/v1/devices/{device_id}"
     };
   }
+  // LogDeviceV1 - List of device events
+  rpc LogDeviceV1(LogDeviceV1Request) returns (LogDeviceV1Response) {
+    option (google.api.http) = {
+      get: "/api/v1/devices/log/{device_id}"
+    };
+  }
   // ListDevicesV1 - List of devices
   rpc ListDevicesV1(ListDevicesV1Request) returns (ListDevicesV1Response) {
     option (google.api.http) = {
@@ -68,6 +74,14 @@ message DescribeDeviceV1Response {
   Device value = 1;
 }
 
+message LogDeviceV1Request {
+  uint64 device_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message LogDeviceV1Response {
+  repeated DeviceLog items = 1;
+}
+
 message ListDevicesV1Request {
   uint64 page = 1;
   uint64 per_page = 2;
@@ -101,4 +115,12 @@ message DeviceEvent {
   uint64 type = 3 [(validate.rules).uint64.gt = 0];
   uint64 status = 4 [(validate.rules).uint64.gt = 0];
   Device payload = 5;
+}
+
+message DeviceLog {
+  uint64 id = 1 [(validate.rules).uint64.gt = 0];
+  uint64 type = 3 [(validate.rules).uint64.gt = 0];
+  uint64 status = 4 [(validate.rules).uint64.gt = 0];
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
 }

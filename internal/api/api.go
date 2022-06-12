@@ -160,6 +160,57 @@ func (o *deviceAPI) DescribeDeviceV1(
 	}, nil
 }
 
+func (o *deviceAPI) LogDeviceV1(
+	ctx context.Context,
+	req *pb.LogDeviceV1Request,
+) (*pb.LogDeviceV1Response, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "api.LogDeviceV1")
+	defer span.Finish()
+
+	ctx = logger.LogLevelFromContext(ctx)
+
+	if err := req.Validate(); err != nil {
+		logger.ErrorKV(
+			ctx,
+			"LogDeviceV1 -- invalid argument",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	logs, err := o.repo.LogDevice(ctx, req.GetDeviceId())
+	if err != nil {
+		logger.ErrorKV(
+			ctx,
+			"LogDeviceV1 -- failed",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	logger.DebugKV(ctx, "LogDeviceV1 -- success")
+
+	var pbLogs []*pb.DeviceLog
+
+	for _, log := range logs {
+		pbLogs = append(pbLogs,
+			&pb.DeviceLog{
+				Id:        log.ID,
+				Type:      uint64(log.Type),
+				Status:    uint64(log.Status),
+				CreatedAt: tspb.New(log.CreatedAt),
+				UpdatedAt: tspb.New(log.UpdatedAt),
+			},
+		)
+	}
+
+	return &pb.LogDeviceV1Response{
+		Items: pbLogs,
+	}, nil
+}
+
 func (o *deviceAPI) ListDevicesV1(
 	ctx context.Context,
 	req *pb.ListDevicesV1Request,

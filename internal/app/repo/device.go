@@ -16,6 +16,7 @@ type Repo interface {
 	CreateDevice(ctx context.Context, device *model.Device) (uint64, error)
 	DescribeDevice(ctx context.Context, deviceID uint64) (*model.Device, error)
 	ListDevices(ctx context.Context, page uint64, perPage uint64) ([]*model.Device, error)
+	LogDevice(ctx context.Context, deviceID uint64) ([]*model.DeviceEvent, error)
 	UpdateDevice(ctx context.Context, device *model.Device) (bool, error)
 	RemoveDevice(ctx context.Context, deviceID uint64) (bool, error)
 }
@@ -92,6 +93,27 @@ func (r *repo) ListDevices(ctx context.Context, page uint64, perPage uint64) ([]
 	err = r.db.SelectContext(ctx, &devices, s, args...)
 
 	return devices, err
+}
+
+func (r *repo) LogDevice(ctx context.Context, deviceID uint64) ([]*model.DeviceEvent, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.LogDevices")
+	defer span.Finish()
+
+	query := sq.Select("id, type, status, created_at, updated_at").PlaceholderFormat(sq.Dollar).
+		From("devices_events").
+		Where(sq.Eq{"device_id": deviceID}).
+		OrderBy("id DESC")
+
+	s, args, err := query.ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	var events []*model.DeviceEvent
+
+	err = r.db.SelectContext(ctx, &events, s, args...)
+
+	return events, err
 }
 
 func (r *repo) UpdateDevice(ctx context.Context, device *model.Device) (bool, error) {
