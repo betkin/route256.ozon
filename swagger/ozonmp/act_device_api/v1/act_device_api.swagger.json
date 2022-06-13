@@ -86,6 +86,81 @@
         ]
       }
     },
+    "/api/v1/devices/last": {
+      "get": {
+        "summary": "DescribeLastDeviceV1 - Describe last device",
+        "operationId": "ActDeviceApiService_DescribeLastDeviceV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ActDeviceApiService"
+        ]
+      },
+      "delete": {
+        "summary": "RemoveLastDeviceV1 - Remove last device",
+        "operationId": "ActDeviceApiService_RemoveLastDeviceV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RemoveDeviceV1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ActDeviceApiService"
+        ]
+      },
+      "put": {
+        "summary": "UpdateLastDeviceV1 - Update last device",
+        "operationId": "ActDeviceApiService_UpdateLastDeviceV1",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateDeviceV1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateLastDeviceV1Request"
+            }
+          }
+        ],
+        "tags": [
+          "ActDeviceApiService"
+        ]
+      }
+    },
     "/api/v1/devices/log/{deviceId}": {
       "get": {
         "summary": "LogDeviceV1 - List of device events",
@@ -368,6 +443,18 @@
       "properties": {
         "success": {
           "type": "boolean"
+        }
+      }
+    },
+    "v1UpdateLastDeviceV1Request": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     }

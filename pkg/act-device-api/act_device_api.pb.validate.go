@@ -33,6 +33,70 @@ var (
 	_ = anypb.Any{}
 )
 
+// Validate checks the field values on Empty with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Empty) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// EmptyValidationError is the validation error returned by Empty.Validate if
+// the designated constraints aren't met.
+type EmptyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EmptyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EmptyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EmptyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EmptyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EmptyValidationError) ErrorName() string { return "EmptyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e EmptyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEmpty.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EmptyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EmptyValidationError{}
+
 // Validate checks the field values on Device with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
 func (m *Device) Validate() error {
@@ -810,6 +874,87 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateDeviceV1RequestValidationError{}
+
+// Validate checks the field values on UpdateLastDeviceV1Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *UpdateLastDeviceV1Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if utf8.RuneCountInString(m.GetPlatform()) < 1 {
+		return UpdateLastDeviceV1RequestValidationError{
+			field:  "Platform",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	if m.GetUserId() <= 0 {
+		return UpdateLastDeviceV1RequestValidationError{
+			field:  "UserId",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	return nil
+}
+
+// UpdateLastDeviceV1RequestValidationError is the validation error returned by
+// UpdateLastDeviceV1Request.Validate if the designated constraints aren't met.
+type UpdateLastDeviceV1RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateLastDeviceV1RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateLastDeviceV1RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateLastDeviceV1RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateLastDeviceV1RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateLastDeviceV1RequestValidationError) ErrorName() string {
+	return "UpdateLastDeviceV1RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateLastDeviceV1RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateLastDeviceV1Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateLastDeviceV1RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateLastDeviceV1RequestValidationError{}
 
 // Validate checks the field values on UpdateDeviceV1Response with the rules
 // defined in the proto definition for this message. If any rules are

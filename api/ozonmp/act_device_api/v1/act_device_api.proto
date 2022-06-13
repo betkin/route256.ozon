@@ -23,6 +23,12 @@ service ActDeviceApiService {
       get: "/api/v1/devices/{device_id}"
     };
   }
+  // DescribeLastDeviceV1 - Describe last device
+  rpc DescribeLastDeviceV1(Empty) returns (Device) {
+    option (google.api.http) = {
+      get: "/api/v1/devices/last"
+    };
+  }
   // LogDeviceV1 - List of device events
   rpc LogDeviceV1(LogDeviceV1Request) returns (LogDeviceV1Response) {
     option (google.api.http) = {
@@ -42,12 +48,29 @@ service ActDeviceApiService {
       body: "*"
     };
   }
+  // UpdateLastDeviceV1 - Update last device
+  rpc UpdateLastDeviceV1(UpdateLastDeviceV1Request) returns (UpdateDeviceV1Response) {
+    option (google.api.http) = {
+      put: "/api/v1/devices/last"
+      body: "*"
+    };
+  }
   // RemoveDeviceV1 - Remove a device
   rpc RemoveDeviceV1(RemoveDeviceV1Request) returns (RemoveDeviceV1Response) {
     option (google.api.http) = {
       delete: "/api/v1/devices/{device_id}"
     };
   }
+  // RemoveLastDeviceV1 - Remove last device
+  rpc RemoveLastDeviceV1(Empty) returns (RemoveDeviceV1Response) {
+    option (google.api.http) = {
+      delete: "/api/v1/devices/last"
+    };
+  }
+}
+
+message Empty {
+
 }
 
 message Device {
@@ -95,6 +118,11 @@ message UpdateDeviceV1Request {
   uint64 device_id = 1 [(validate.rules).uint64.gt = 0];
   string platform = 2 [(validate.rules).string.min_len = 1];
   uint64 user_id = 3 [(validate.rules).uint64.gt = 0];
+}
+
+message UpdateLastDeviceV1Request {
+  string platform = 1 [(validate.rules).string.min_len = 1];
+  uint64 user_id = 2 [(validate.rules).uint64.gt = 0];
 }
 
 message UpdateDeviceV1Response {
