@@ -6,10 +6,10 @@ package mocks_learning
 
 import (
 	context "context"
-	"gitlab.ozon.dev/betkin/device-api/internal/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	model "gitlab.ozon.dev/betkin/device-api/internal/model"
 )
 
 // MockRepo is a mock of Repo interface.
@@ -65,6 +65,21 @@ func (mr *MockRepoMockRecorder) DescribeDevice(ctx, deviceID interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeDevice", reflect.TypeOf((*MockRepo)(nil).DescribeDevice), ctx, deviceID)
 }
 
+// DescribeLastDevice mocks base method.
+func (m *MockRepo) DescribeLastDevice(ctx context.Context) (*model.Device, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DescribeLastDevice", ctx)
+	ret0, _ := ret[0].(*model.Device)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DescribeLastDevice indicates an expected call of DescribeLastDevice.
+func (mr *MockRepoMockRecorder) DescribeLastDevice(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DescribeLastDevice", reflect.TypeOf((*MockRepo)(nil).DescribeLastDevice), ctx)
+}
+
 // ListDevices mocks base method.
 func (m *MockRepo) ListDevices(ctx context.Context, page, perPage uint64) ([]*model.Device, error) {
 	m.ctrl.T.Helper()
@@ -78,6 +93,21 @@ func (m *MockRepo) ListDevices(ctx context.Context, page, perPage uint64) ([]*mo
 func (mr *MockRepoMockRecorder) ListDevices(ctx, page, perPage interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDevices", reflect.TypeOf((*MockRepo)(nil).ListDevices), ctx, page, perPage)
+}
+
+// LogDevice mocks base method.
+func (m *MockRepo) LogDevice(ctx context.Context, deviceID uint64) ([]*model.DeviceEvent, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LogDevice", ctx, deviceID)
+	ret0, _ := ret[0].([]*model.DeviceEvent)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LogDevice indicates an expected call of LogDevice.
+func (mr *MockRepoMockRecorder) LogDevice(ctx, deviceID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LogDevice", reflect.TypeOf((*MockRepo)(nil).LogDevice), ctx, deviceID)
 }
 
 // RemoveDevice mocks base method.
@@ -95,6 +125,21 @@ func (mr *MockRepoMockRecorder) RemoveDevice(ctx, deviceID interface{}) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveDevice", reflect.TypeOf((*MockRepo)(nil).RemoveDevice), ctx, deviceID)
 }
 
+// RemoveLastDevice mocks base method.
+func (m *MockRepo) RemoveLastDevice(ctx context.Context, deviceID *uint64) (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveLastDevice", ctx, deviceID)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveLastDevice indicates an expected call of RemoveLastDevice.
+func (mr *MockRepoMockRecorder) RemoveLastDevice(ctx, deviceID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveLastDevice", reflect.TypeOf((*MockRepo)(nil).RemoveLastDevice), ctx, deviceID)
+}
+
 // UpdateDevice mocks base method.
 func (m *MockRepo) UpdateDevice(ctx context.Context, device *model.Device) (bool, error) {
 	m.ctrl.T.Helper()
@@ -108,4 +153,19 @@ func (m *MockRepo) UpdateDevice(ctx context.Context, device *model.Device) (bool
 func (mr *MockRepoMockRecorder) UpdateDevice(ctx, device interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateDevice", reflect.TypeOf((*MockRepo)(nil).UpdateDevice), ctx, device)
+}
+
+// UpdateLastDevice mocks base method.
+func (m *MockRepo) UpdateLastDevice(ctx context.Context, device *model.Device) (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateLastDevice", ctx, device)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateLastDevice indicates an expected call of UpdateLastDevice.
+func (mr *MockRepoMockRecorder) UpdateLastDevice(ctx, device interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateLastDevice", reflect.TypeOf((*MockRepo)(nil).UpdateLastDevice), ctx, device)
 }
