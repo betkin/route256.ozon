@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-
 	"github.com/opentracing/opentracing-go"
 
 	sq "github.com/Masterminds/squirrel"
@@ -15,9 +14,13 @@ import (
 type Repo interface {
 	CreateDevice(ctx context.Context, device *model.Device) (uint64, error)
 	DescribeDevice(ctx context.Context, deviceID uint64) (*model.Device, error)
+	DescribeLastDevice(ctx context.Context) (*model.Device, error)
 	ListDevices(ctx context.Context, page uint64, perPage uint64) ([]*model.Device, error)
+	LogDevice(ctx context.Context, deviceID uint64) ([]*model.DeviceEvent, error)
 	UpdateDevice(ctx context.Context, device *model.Device) (bool, error)
+	UpdateLastDevice(ctx context.Context, device *model.Device) (bool, error)
 	RemoveDevice(ctx context.Context, deviceID uint64) (bool, error)
+	RemoveLastDevice(ctx context.Context, deviceID *uint64) (bool, error)
 }
 
 type repo struct {
@@ -71,6 +74,28 @@ func (r *repo) DescribeDevice(ctx context.Context, deviceID uint64) (*model.Devi
 	return &device, err
 }
 
+func (r *repo) DescribeLastDevice(ctx context.Context) (*model.Device, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.DescribeDevice")
+	defer span.Finish()
+
+	query := sq.Select("*").PlaceholderFormat(sq.Dollar).
+		From("devices").
+		Where(sq.Eq{"removed": false}).
+		OrderBy("id DESC").
+		Limit(1)
+
+	s, args, err := query.ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	var device model.Device
+
+	err = r.db.GetContext(ctx, &device, s, args...)
+
+	return &device, err
+}
+
 func (r *repo) ListDevices(ctx context.Context, page uint64, perPage uint64) ([]*model.Device, error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.ListDevices")
 	defer span.Finish()
@@ -92,6 +117,27 @@ func (r *repo) ListDevices(ctx context.Context, page uint64, perPage uint64) ([]
 	err = r.db.SelectContext(ctx, &devices, s, args...)
 
 	return devices, err
+}
+
+func (r *repo) LogDevice(ctx context.Context, deviceID uint64) ([]*model.DeviceEvent, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.LogDevices")
+	defer span.Finish()
+
+	query := sq.Select("id, type, status, created_at, updated_at").PlaceholderFormat(sq.Dollar).
+		From("devices_events").
+		Where(sq.Eq{"device_id": deviceID}).
+		OrderBy("id DESC")
+
+	s, args, err := query.ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	var events []*model.DeviceEvent
+
+	err = r.db.SelectContext(ctx, &events, s, args...)
+
+	return events, err
 }
 
 func (r *repo) UpdateDevice(ctx context.Context, device *model.Device) (bool, error) {
@@ -121,6 +167,27 @@ func (r *repo) UpdateDevice(ctx context.Context, device *model.Device) (bool, er
 	return rows > 0, nil
 }
 
+func (r *repo) UpdateLastDevice(ctx context.Context, device *model.Device) (bool, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.UpdateDevice")
+	defer span.Finish()
+
+	rows, err := r.db.Query("WITH last AS ( SELECT id FROM devices WHERE removed = 'false' ORDER BY id DESC LIMIT 1 ) "+
+		"UPDATE devices SET platform=$1, user_id=$2 FROM last WHERE devices.id = last.id RETURNING devices.id;", device.Platform, device.UserID)
+	if err != nil {
+		return false, err
+	}
+
+	rows.Next()
+	err = rows.Scan(&device.ID)
+	if err != nil {
+		return false, err
+	}
+
+	err = rows.Close()
+
+	return true, err
+}
+
 func (r *repo) RemoveDevice(ctx context.Context, deviceID uint64) (bool, error) {
 	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.RemoveDevice")
 	defer span.Finish()
@@ -145,4 +212,25 @@ func (r *repo) RemoveDevice(ctx context.Context, deviceID uint64) (bool, error) 
 	}
 
 	return rows > 0, nil
+}
+
+func (r *repo) RemoveLastDevice(ctx context.Context, deviceID *uint64) (bool, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "repo.device.RemoveDevice")
+	defer span.Finish()
+
+	rows, err := r.db.Query("WITH last AS ( SELECT id FROM devices WHERE removed = 'false' ORDER BY id DESC LIMIT 1 ) " +
+		"UPDATE devices SET removed = 'true' FROM last WHERE devices.id = last.id RETURNING devices.id;")
+	if err != nil {
+		return false, err
+	}
+
+	rows.Next()
+	err = rows.Scan(deviceID)
+	if err != nil {
+		return false, err
+	}
+
+	err = rows.Close()
+
+	return true, err
 }

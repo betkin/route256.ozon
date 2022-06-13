@@ -4,7 +4,6 @@ package act_device_api
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -23,12 +22,20 @@ type ActDeviceApiServiceClient interface {
 	CreateDeviceV1(ctx context.Context, in *CreateDeviceV1Request, opts ...grpc.CallOption) (*CreateDeviceV1Response, error)
 	// DescribeDeviceV1 - Describe a device
 	DescribeDeviceV1(ctx context.Context, in *DescribeDeviceV1Request, opts ...grpc.CallOption) (*DescribeDeviceV1Response, error)
+	// DescribeLastDeviceV1 - Describe last device
+	DescribeLastDeviceV1(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Device, error)
+	// LogDeviceV1 - List of device events
+	LogDeviceV1(ctx context.Context, in *LogDeviceV1Request, opts ...grpc.CallOption) (*LogDeviceV1Response, error)
 	// ListDevicesV1 - List of devices
 	ListDevicesV1(ctx context.Context, in *ListDevicesV1Request, opts ...grpc.CallOption) (*ListDevicesV1Response, error)
 	// UpdateDeviceV1 - Update a device
 	UpdateDeviceV1(ctx context.Context, in *UpdateDeviceV1Request, opts ...grpc.CallOption) (*UpdateDeviceV1Response, error)
+	// UpdateLastDeviceV1 - Update last device
+	UpdateLastDeviceV1(ctx context.Context, in *UpdateLastDeviceV1Request, opts ...grpc.CallOption) (*UpdateDeviceV1Response, error)
 	// RemoveDeviceV1 - Remove a device
 	RemoveDeviceV1(ctx context.Context, in *RemoveDeviceV1Request, opts ...grpc.CallOption) (*RemoveDeviceV1Response, error)
+	// RemoveLastDeviceV1 - Remove last device
+	RemoveLastDeviceV1(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*RemoveDeviceV1Response, error)
 }
 
 type actDeviceApiServiceClient struct {
@@ -57,6 +64,24 @@ func (c *actDeviceApiServiceClient) DescribeDeviceV1(ctx context.Context, in *De
 	return out, nil
 }
 
+func (c *actDeviceApiServiceClient) DescribeLastDeviceV1(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Device, error) {
+	out := new(Device)
+	err := c.cc.Invoke(ctx, "/ozonmp.act_device_api.v1.ActDeviceApiService/DescribeLastDeviceV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *actDeviceApiServiceClient) LogDeviceV1(ctx context.Context, in *LogDeviceV1Request, opts ...grpc.CallOption) (*LogDeviceV1Response, error) {
+	out := new(LogDeviceV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.act_device_api.v1.ActDeviceApiService/LogDeviceV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *actDeviceApiServiceClient) ListDevicesV1(ctx context.Context, in *ListDevicesV1Request, opts ...grpc.CallOption) (*ListDevicesV1Response, error) {
 	out := new(ListDevicesV1Response)
 	err := c.cc.Invoke(ctx, "/ozonmp.act_device_api.v1.ActDeviceApiService/ListDevicesV1", in, out, opts...)
@@ -75,9 +100,27 @@ func (c *actDeviceApiServiceClient) UpdateDeviceV1(ctx context.Context, in *Upda
 	return out, nil
 }
 
+func (c *actDeviceApiServiceClient) UpdateLastDeviceV1(ctx context.Context, in *UpdateLastDeviceV1Request, opts ...grpc.CallOption) (*UpdateDeviceV1Response, error) {
+	out := new(UpdateDeviceV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.act_device_api.v1.ActDeviceApiService/UpdateLastDeviceV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *actDeviceApiServiceClient) RemoveDeviceV1(ctx context.Context, in *RemoveDeviceV1Request, opts ...grpc.CallOption) (*RemoveDeviceV1Response, error) {
 	out := new(RemoveDeviceV1Response)
 	err := c.cc.Invoke(ctx, "/ozonmp.act_device_api.v1.ActDeviceApiService/RemoveDeviceV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *actDeviceApiServiceClient) RemoveLastDeviceV1(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*RemoveDeviceV1Response, error) {
+	out := new(RemoveDeviceV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.act_device_api.v1.ActDeviceApiService/RemoveLastDeviceV1", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -92,12 +135,20 @@ type ActDeviceApiServiceServer interface {
 	CreateDeviceV1(context.Context, *CreateDeviceV1Request) (*CreateDeviceV1Response, error)
 	// DescribeDeviceV1 - Describe a device
 	DescribeDeviceV1(context.Context, *DescribeDeviceV1Request) (*DescribeDeviceV1Response, error)
+	// DescribeLastDeviceV1 - Describe last device
+	DescribeLastDeviceV1(context.Context, *Empty) (*Device, error)
+	// LogDeviceV1 - List of device events
+	LogDeviceV1(context.Context, *LogDeviceV1Request) (*LogDeviceV1Response, error)
 	// ListDevicesV1 - List of devices
 	ListDevicesV1(context.Context, *ListDevicesV1Request) (*ListDevicesV1Response, error)
 	// UpdateDeviceV1 - Update a device
 	UpdateDeviceV1(context.Context, *UpdateDeviceV1Request) (*UpdateDeviceV1Response, error)
+	// UpdateLastDeviceV1 - Update last device
+	UpdateLastDeviceV1(context.Context, *UpdateLastDeviceV1Request) (*UpdateDeviceV1Response, error)
 	// RemoveDeviceV1 - Remove a device
 	RemoveDeviceV1(context.Context, *RemoveDeviceV1Request) (*RemoveDeviceV1Response, error)
+	// RemoveLastDeviceV1 - Remove last device
+	RemoveLastDeviceV1(context.Context, *Empty) (*RemoveDeviceV1Response, error)
 	mustEmbedUnimplementedActDeviceApiServiceServer()
 }
 
@@ -111,14 +162,26 @@ func (UnimplementedActDeviceApiServiceServer) CreateDeviceV1(context.Context, *C
 func (UnimplementedActDeviceApiServiceServer) DescribeDeviceV1(context.Context, *DescribeDeviceV1Request) (*DescribeDeviceV1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DescribeDeviceV1 not implemented")
 }
+func (UnimplementedActDeviceApiServiceServer) DescribeLastDeviceV1(context.Context, *Empty) (*Device, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DescribeLastDeviceV1 not implemented")
+}
+func (UnimplementedActDeviceApiServiceServer) LogDeviceV1(context.Context, *LogDeviceV1Request) (*LogDeviceV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LogDeviceV1 not implemented")
+}
 func (UnimplementedActDeviceApiServiceServer) ListDevicesV1(context.Context, *ListDevicesV1Request) (*ListDevicesV1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDevicesV1 not implemented")
 }
 func (UnimplementedActDeviceApiServiceServer) UpdateDeviceV1(context.Context, *UpdateDeviceV1Request) (*UpdateDeviceV1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeviceV1 not implemented")
 }
+func (UnimplementedActDeviceApiServiceServer) UpdateLastDeviceV1(context.Context, *UpdateLastDeviceV1Request) (*UpdateDeviceV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLastDeviceV1 not implemented")
+}
 func (UnimplementedActDeviceApiServiceServer) RemoveDeviceV1(context.Context, *RemoveDeviceV1Request) (*RemoveDeviceV1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveDeviceV1 not implemented")
+}
+func (UnimplementedActDeviceApiServiceServer) RemoveLastDeviceV1(context.Context, *Empty) (*RemoveDeviceV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveLastDeviceV1 not implemented")
 }
 func (UnimplementedActDeviceApiServiceServer) mustEmbedUnimplementedActDeviceApiServiceServer() {}
 
@@ -169,6 +232,42 @@ func _ActDeviceApiService_DescribeDeviceV1_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ActDeviceApiService_DescribeLastDeviceV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActDeviceApiServiceServer).DescribeLastDeviceV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.act_device_api.v1.ActDeviceApiService/DescribeLastDeviceV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActDeviceApiServiceServer).DescribeLastDeviceV1(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ActDeviceApiService_LogDeviceV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogDeviceV1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActDeviceApiServiceServer).LogDeviceV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.act_device_api.v1.ActDeviceApiService/LogDeviceV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActDeviceApiServiceServer).LogDeviceV1(ctx, req.(*LogDeviceV1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ActDeviceApiService_ListDevicesV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDevicesV1Request)
 	if err := dec(in); err != nil {
@@ -205,6 +304,24 @@ func _ActDeviceApiService_UpdateDeviceV1_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ActDeviceApiService_UpdateLastDeviceV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLastDeviceV1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActDeviceApiServiceServer).UpdateLastDeviceV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.act_device_api.v1.ActDeviceApiService/UpdateLastDeviceV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActDeviceApiServiceServer).UpdateLastDeviceV1(ctx, req.(*UpdateLastDeviceV1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ActDeviceApiService_RemoveDeviceV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemoveDeviceV1Request)
 	if err := dec(in); err != nil {
@@ -219,6 +336,24 @@ func _ActDeviceApiService_RemoveDeviceV1_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ActDeviceApiServiceServer).RemoveDeviceV1(ctx, req.(*RemoveDeviceV1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ActDeviceApiService_RemoveLastDeviceV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActDeviceApiServiceServer).RemoveLastDeviceV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.act_device_api.v1.ActDeviceApiService/RemoveLastDeviceV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActDeviceApiServiceServer).RemoveLastDeviceV1(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -239,6 +374,14 @@ var ActDeviceApiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ActDeviceApiService_DescribeDeviceV1_Handler,
 		},
 		{
+			MethodName: "DescribeLastDeviceV1",
+			Handler:    _ActDeviceApiService_DescribeLastDeviceV1_Handler,
+		},
+		{
+			MethodName: "LogDeviceV1",
+			Handler:    _ActDeviceApiService_LogDeviceV1_Handler,
+		},
+		{
 			MethodName: "ListDevicesV1",
 			Handler:    _ActDeviceApiService_ListDevicesV1_Handler,
 		},
@@ -247,8 +390,16 @@ var ActDeviceApiService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ActDeviceApiService_UpdateDeviceV1_Handler,
 		},
 		{
+			MethodName: "UpdateLastDeviceV1",
+			Handler:    _ActDeviceApiService_UpdateLastDeviceV1_Handler,
+		},
+		{
 			MethodName: "RemoveDeviceV1",
 			Handler:    _ActDeviceApiService_RemoveDeviceV1_Handler,
+		},
+		{
+			MethodName: "RemoveLastDeviceV1",
+			Handler:    _ActDeviceApiService_RemoveLastDeviceV1_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

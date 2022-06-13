@@ -160,6 +160,107 @@ func (o *deviceAPI) DescribeDeviceV1(
 	}, nil
 }
 
+func (o *deviceAPI) DescribeLastDeviceV1(
+	ctx context.Context,
+	req *pb.Empty,
+) (*pb.Device, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "api.DescribeDeviceV1")
+	defer span.Finish()
+
+	ctx = logger.LogLevelFromContext(ctx)
+
+	if err := req.Validate(); err != nil {
+		logger.ErrorKV(
+			ctx,
+			"DescribeDeviceV1 -- invalid argument",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	device, err := o.repo.DescribeLastDevice(ctx)
+	if err != nil && err != sql.ErrNoRows {
+		logger.ErrorKV(
+			ctx,
+			"DescribeDeviceV1 -- failed",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	if device == nil || err == sql.ErrNoRows {
+		logger.DebugKV(
+			ctx,
+			"DescribeDeviceV1 -- any device not found",
+		)
+		totalDeviceNotFound.Inc()
+
+		return nil, status.Error(codes.NotFound, "device not found")
+	}
+
+	logger.DebugKV(ctx, "DescribeDeviceV1 -- success")
+
+	return &pb.Device{
+		Id:        device.ID,
+		Platform:  device.Platform,
+		UserId:    device.UserID,
+		EnteredAt: tspb.New(*device.EnteredAt),
+	}, nil
+}
+
+func (o *deviceAPI) LogDeviceV1(
+	ctx context.Context,
+	req *pb.LogDeviceV1Request,
+) (*pb.LogDeviceV1Response, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "api.LogDeviceV1")
+	defer span.Finish()
+
+	ctx = logger.LogLevelFromContext(ctx)
+
+	if err := req.Validate(); err != nil {
+		logger.ErrorKV(
+			ctx,
+			"LogDeviceV1 -- invalid argument",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	logs, err := o.repo.LogDevice(ctx, req.GetDeviceId())
+	if err != nil {
+		logger.ErrorKV(
+			ctx,
+			"LogDeviceV1 -- failed",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	logger.DebugKV(ctx, "LogDeviceV1 -- success")
+
+	var pbLogs []*pb.DeviceLog
+
+	for _, log := range logs {
+		pbLogs = append(pbLogs,
+			&pb.DeviceLog{
+				Id:        log.ID,
+				Type:      uint64(log.Type),
+				Status:    uint64(log.Status),
+				CreatedAt: tspb.New(log.CreatedAt),
+				UpdatedAt: tspb.New(log.UpdatedAt),
+			},
+		)
+	}
+
+	return &pb.LogDeviceV1Response{
+		Items: pbLogs,
+	}, nil
+}
+
 func (o *deviceAPI) ListDevicesV1(
 	ctx context.Context,
 	req *pb.ListDevicesV1Request,
@@ -275,6 +376,68 @@ func (o *deviceAPI) UpdateDeviceV1(
 	}, nil
 }
 
+func (o *deviceAPI) UpdateLastDeviceV1(
+	ctx context.Context,
+	req *pb.UpdateLastDeviceV1Request,
+) (*pb.UpdateDeviceV1Response, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "api.UpdateDeviceV1")
+	defer span.Finish()
+
+	ctx = logger.LogLevelFromContext(ctx)
+
+	if err := req.Validate(); err != nil {
+		logger.ErrorKV(
+			ctx,
+			"UpdateDeviceV1 -- invalid argument",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	device := &model.Device{
+		UserID:   req.GetUserId(),
+		Platform: req.GetPlatform(),
+	}
+
+	success, err := o.repo.UpdateLastDevice(ctx, device)
+	if err != nil {
+		logger.ErrorKV(
+			ctx,
+			"UpdateDeviceV1 -- failed",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	if success {
+		cudActionsTotal.WithLabelValues("update").Inc()
+
+		err = o.eventRepo.Add(ctx, &model.DeviceEvent{
+			DeviceID: device.ID,
+			Type:     model.Updated,
+			Status:   model.Deferred,
+			Device:   device,
+		})
+		if err != nil {
+			logger.ErrorKV(
+				ctx,
+				"UpdateDeviceV1 -- failed record to event table",
+				"err", err,
+			)
+
+			return nil, status.Error(codes.Internal, err.Error())
+		}
+	}
+
+	logger.DebugKV(ctx, "UpdateDeviceV1 -- success")
+
+	return &pb.UpdateDeviceV1Response{
+		Success: success,
+	}, nil
+}
+
 func (o *deviceAPI) RemoveDeviceV1(
 	ctx context.Context,
 	req *pb.RemoveDeviceV1Request,
@@ -314,6 +477,65 @@ func (o *deviceAPI) RemoveDeviceV1(
 
 		err = o.eventRepo.Add(ctx, &model.DeviceEvent{
 			DeviceID: deviceId,
+			Type:     model.Removed,
+			Status:   model.Deferred,
+		})
+		if err != nil {
+			logger.ErrorKV(
+				ctx,
+				"RemoveDevicesV1 -- failed record to event table",
+				"err", err,
+			)
+
+			return nil, status.Error(codes.Internal, err.Error())
+		}
+	}
+
+	logger.DebugKV(ctx, "RemoveDevicesV1 -- success")
+
+	return &pb.RemoveDeviceV1Response{
+		Found: found,
+	}, nil
+}
+
+func (o *deviceAPI) RemoveLastDeviceV1(
+	ctx context.Context,
+	req *pb.Empty,
+) (*pb.RemoveDeviceV1Response, error) {
+	span, ctx := opentracing.StartSpanFromContext(ctx, "api.RemoveDeviceV1")
+	defer span.Finish()
+
+	ctx = logger.LogLevelFromContext(ctx)
+
+	if err := req.Validate(); err != nil {
+		logger.ErrorKV(
+			ctx,
+			"RemoveDevicesV1 -- invalid argument",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
+
+	var id uint64
+	found, err := o.repo.RemoveLastDevice(ctx, &id)
+	if err != nil {
+		logger.ErrorKV(
+			ctx,
+			"RemoveDevicesV1 -- failed",
+			"err", err,
+		)
+
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	if !found {
+		totalDeviceNotFound.Inc()
+	} else {
+		cudActionsTotal.WithLabelValues("remove").Inc()
+
+		err = o.eventRepo.Add(ctx, &model.DeviceEvent{
+			DeviceID: id,
 			Type:     model.Removed,
 			Status:   model.Deferred,
 		})

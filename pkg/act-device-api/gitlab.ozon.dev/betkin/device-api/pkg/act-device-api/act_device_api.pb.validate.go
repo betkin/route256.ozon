@@ -33,6 +33,70 @@ var (
 	_ = anypb.Any{}
 )
 
+// Validate checks the field values on Empty with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *Empty) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// EmptyValidationError is the validation error returned by Empty.Validate if
+// the designated constraints aren't met.
+type EmptyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EmptyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EmptyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EmptyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EmptyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EmptyValidationError) ErrorName() string { return "EmptyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e EmptyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEmpty.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EmptyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EmptyValidationError{}
+
 // Validate checks the field values on Device with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
 func (m *Device) Validate() error {
@@ -414,6 +478,162 @@ var _ interface {
 	ErrorName() string
 } = DescribeDeviceV1ResponseValidationError{}
 
+// Validate checks the field values on LogDeviceV1Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *LogDeviceV1Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetDeviceId() <= 0 {
+		return LogDeviceV1RequestValidationError{
+			field:  "DeviceId",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	return nil
+}
+
+// LogDeviceV1RequestValidationError is the validation error returned by
+// LogDeviceV1Request.Validate if the designated constraints aren't met.
+type LogDeviceV1RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LogDeviceV1RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LogDeviceV1RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LogDeviceV1RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LogDeviceV1RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LogDeviceV1RequestValidationError) ErrorName() string {
+	return "LogDeviceV1RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LogDeviceV1RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLogDeviceV1Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LogDeviceV1RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LogDeviceV1RequestValidationError{}
+
+// Validate checks the field values on LogDeviceV1Response with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *LogDeviceV1Response) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LogDeviceV1ResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// LogDeviceV1ResponseValidationError is the validation error returned by
+// LogDeviceV1Response.Validate if the designated constraints aren't met.
+type LogDeviceV1ResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LogDeviceV1ResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LogDeviceV1ResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LogDeviceV1ResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LogDeviceV1ResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LogDeviceV1ResponseValidationError) ErrorName() string {
+	return "LogDeviceV1ResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LogDeviceV1ResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLogDeviceV1Response.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LogDeviceV1ResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LogDeviceV1ResponseValidationError{}
+
 // Validate checks the field values on ListDevicesV1Request with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
@@ -654,6 +874,87 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateDeviceV1RequestValidationError{}
+
+// Validate checks the field values on UpdateLastDeviceV1Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *UpdateLastDeviceV1Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if utf8.RuneCountInString(m.GetPlatform()) < 1 {
+		return UpdateLastDeviceV1RequestValidationError{
+			field:  "Platform",
+			reason: "value length must be at least 1 runes",
+		}
+	}
+
+	if m.GetUserId() <= 0 {
+		return UpdateLastDeviceV1RequestValidationError{
+			field:  "UserId",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	return nil
+}
+
+// UpdateLastDeviceV1RequestValidationError is the validation error returned by
+// UpdateLastDeviceV1Request.Validate if the designated constraints aren't met.
+type UpdateLastDeviceV1RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateLastDeviceV1RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateLastDeviceV1RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateLastDeviceV1RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateLastDeviceV1RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateLastDeviceV1RequestValidationError) ErrorName() string {
+	return "UpdateLastDeviceV1RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateLastDeviceV1RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateLastDeviceV1Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateLastDeviceV1RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateLastDeviceV1RequestValidationError{}
 
 // Validate checks the field values on UpdateDeviceV1Response with the rules
 // defined in the proto definition for this message. If any rules are
@@ -969,3 +1270,108 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeviceEventValidationError{}
+
+// Validate checks the field values on DeviceLog with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *DeviceLog) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetId() <= 0 {
+		return DeviceLogValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetType() <= 0 {
+		return DeviceLogValidationError{
+			field:  "Type",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if m.GetStatus() <= 0 {
+		return DeviceLogValidationError{
+			field:  "Status",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeviceLogValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeviceLogValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	return nil
+}
+
+// DeviceLogValidationError is the validation error returned by
+// DeviceLog.Validate if the designated constraints aren't met.
+type DeviceLogValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeviceLogValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeviceLogValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeviceLogValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeviceLogValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeviceLogValidationError) ErrorName() string { return "DeviceLogValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DeviceLogValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeviceLog.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeviceLogValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeviceLogValidationError{}
