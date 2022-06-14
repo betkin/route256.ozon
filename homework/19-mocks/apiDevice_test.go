@@ -56,7 +56,7 @@ func TestAPIDevice(t *testing.T) {
 
 	t.Run("Unit testing: DescribeDevice", func(t *testing.T) {
 		ctx := context.TODO()
-		span, ctx := opentracing.StartSpanFromContext(ctx, "api.CreateDeviceV1")
+		span, ctx := opentracing.StartSpanFromContext(ctx, "api.DescribeDeviceV1")
 		defer span.Finish()
 
 		ctrlDevice := gomock.NewController(t)
@@ -90,7 +90,7 @@ func TestAPIDevice(t *testing.T) {
 
 	t.Run("Unit testing: RemoveDevice", func(t *testing.T) {
 		ctx := context.TODO()
-		span, ctx := opentracing.StartSpanFromContext(ctx, "api.CreateDeviceV1")
+		span, ctx := opentracing.StartSpanFromContext(ctx, "api.RemoveDeviceV1")
 		defer span.Finish()
 
 		ctrlDevice := gomock.NewController(t)
