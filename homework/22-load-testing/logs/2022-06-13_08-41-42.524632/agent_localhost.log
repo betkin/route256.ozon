@@ -1,0 +1,196 @@
+2022-06-13 08:41:42,872 [INFO] agent:402 Init
+2022-06-13 08:41:42,872 [INFO] agent:410 Trying to make telegraf executable: /usr/bin/telegraf
+2022-06-13 08:41:42,959 [INFO] agent:420 Trying to make customs script executable: /tmp/tmpBvmkEB/agent_customs.sh
+2022-06-13 08:41:42,959 [INFO] agent:235 Successfully loaded startup config.
+Startups: []
+Shutdowns: []
+
+2022-06-13 08:41:42,959 [INFO] agent:432 Starting AgentWorker: <AgentWorker(Thread-1, initial daemon)>
+2022-06-13 08:41:42,960 [DEBUG] agent:436 Check for any stdin command for shutdown
+2022-06-13 08:41:42,960 [INFO] agent:241 Running startup commands
+2022-06-13 08:41:42,960 [INFO] agent:250 Starting metrics collector..
+2022-06-13 08:41:43,105 [INFO] agent:255 Started with pid 15
+2022-06-13 08:41:43,105 [INFO] agent:263 Waiting for telegraf...
+2022-06-13 08:41:44,106 [INFO] agent:263 Waiting for telegraf...
+2022-06-13 08:41:45,107 [INFO] telegraf:311 STDERR: 2022-06-13T08:41:43Z I! Starting Telegraf v1.4.3
+2022-06-13 08:41:45,107 [INFO] telegraf:311 STDERR: 2022-06-13T08:41:43Z I! Loaded outputs: file
+2022-06-13 08:41:45,107 [INFO] telegraf:311 STDERR: 2022-06-13T08:41:43Z I! Loaded inputs: inputs.mem inputs.net inputs.diskio inputs.cpu inputs.kernel inputs.system
+2022-06-13 08:41:45,108 [INFO] telegraf:311 STDERR: 2022-06-13T08:41:43Z I! Tags enabled: host=8b3c688897ee
+2022-06-13 08:41:45,108 [INFO] telegraf:311 STDERR: 2022-06-13T08:41:43Z I! Agent Config: Interval:1s, Quiet:false, Hostname:"8b3c688897ee", Flush Interval:1s 
+2022-06-13 08:41:46,611 [DEBUG] agent:144 Now in buffer: [1655109704, 1655109705, 1655109706]
+2022-06-13 08:41:47,110 [DEBUG] agent:291 send 1245 bytes of data to collector
+2022-06-13 08:41:47,612 [DEBUG] agent:144 Now in buffer: [1655109705, 1655109706, 1655109707]
+2022-06-13 08:41:48,112 [DEBUG] agent:291 send 1580 bytes of data to collector
+2022-06-13 08:41:49,115 [DEBUG] agent:144 Now in buffer: [1655109706, 1655109707, 1655109708]
+2022-06-13 08:41:50,114 [DEBUG] agent:291 send 1564 bytes of data to collector
+2022-06-13 08:41:50,117 [DEBUG] agent:144 Now in buffer: [1655109707, 1655109708, 1655109709]
+2022-06-13 08:41:51,116 [DEBUG] agent:291 send 1582 bytes of data to collector
+2022-06-13 08:41:51,620 [DEBUG] agent:144 Now in buffer: [1655109708, 1655109709, 1655109710, 1655109711]
+2022-06-13 08:41:52,117 [DEBUG] agent:291 send 1565 bytes of data to collector
+2022-06-13 08:41:52,118 [DEBUG] agent:291 send 1564 bytes of data to collector
+2022-06-13 08:41:52,622 [DEBUG] agent:144 Now in buffer: [1655109712, 1655109710, 1655109711]
+2022-06-13 08:41:53,118 [DEBUG] agent:291 send 1565 bytes of data to collector
+2022-06-13 08:41:54,124 [DEBUG] agent:144 Now in buffer: [1655109712, 1655109713, 1655109711]
+2022-06-13 08:41:54,625 [DEBUG] agent:144 Now in buffer: [1655109712, 1655109713, 1655109714]
+2022-06-13 08:41:55,120 [DEBUG] agent:291 send 1563 bytes of data to collector
+2022-06-13 08:41:55,121 [DEBUG] agent:291 send 1580 bytes of data to collector
+2022-06-13 08:41:56,128 [DEBUG] agent:144 Now in buffer: [1655109713, 1655109714, 1655109715, 1655109716]
+2022-06-13 08:41:57,123 [DEBUG] agent:291 send 1565 bytes of data to collector
+2022-06-13 08:41:57,123 [DEBUG] agent:291 send 1581 bytes of data to collector
+2022-06-13 08:41:57,631 [DEBUG] agent:144 Now in buffer: [1655109715, 1655109716, 1655109717]
+2022-06-13 08:41:58,123 [DEBUG] agent:291 send 1564 bytes of data to collector
+2022-06-13 08:41:59,133 [DEBUG] agent:144 Now in buffer: [1655109716, 1655109717, 1655109718, 1655109719]
+2022-06-13 08:42:00,126 [DEBUG] agent:291 send 1579 bytes of data to collector
+2022-06-13 08:42:00,126 [DEBUG] agent:291 send 1581 bytes of data to collector
+2022-06-13 08:42:01,136 [DEBUG] agent:144 Now in buffer: [1655109718, 1655109719, 1655109720]
+2022-06-13 08:42:01,637 [DEBUG] agent:144 Now in buffer: [1655109719, 1655109720, 1655109721]
+2022-06-13 08:42:02,133 [DEBUG] agent:291 send 1580 bytes of data to collector
+2022-06-13 08:42:02,133 [DEBUG] agent:291 send 1604 bytes of data to collector
+2022-06-13 08:42:02,640 [DEBUG] agent:144 Now in buffer: [1655109720, 1655109721, 1655109722]
+2022-06-13 08:42:03,135 [DEBUG] agent:291 send 1585 bytes of data to collector
+2022-06-13 08:42:04,142 [DEBUG] agent:144 Now in buffer: [1655109721, 1655109722, 1655109723]
+2022-06-13 08:42:05,137 [DEBUG] agent:291 send 1570 bytes of data to collector
+2022-06-13 08:42:05,144 [DEBUG] agent:144 Now in buffer: [1655109722, 1655109723, 1655109724]
+2022-06-13 08:42:06,138 [DEBUG] agent:291 send 1587 bytes of data to collector
+2022-06-13 08:42:06,647 [DEBUG] agent:144 Now in buffer: [1655109723, 1655109724, 1655109725, 1655109726]
+2022-06-13 08:42:07,140 [DEBUG] agent:291 send 1588 bytes of data to collector
+2022-06-13 08:42:07,140 [DEBUG] agent:291 send 1587 bytes of data to collector
+2022-06-13 08:42:07,649 [DEBUG] agent:144 Now in buffer: [1655109725, 1655109726, 1655109727]
+2022-06-13 08:42:08,141 [DEBUG] agent:291 send 1606 bytes of data to collector
+2022-06-13 08:42:08,651 [DEBUG] agent:144 Now in buffer: [1655109728, 1655109726, 1655109727]
+2022-06-13 08:42:09,143 [DEBUG] agent:291 send 1572 bytes of data to collector
+2022-06-13 08:42:10,657 [DEBUG] agent:144 Now in buffer: [1655109728, 1655109729, 1655109730, 1655109727]
+2022-06-13 08:42:11,146 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:11,147 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:12,159 [DEBUG] agent:144 Now in buffer: [1655109729, 1655109730, 1655109731]
+2022-06-13 08:42:13,149 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:13,662 [DEBUG] agent:144 Now in buffer: [1655109730, 1655109731, 1655109732, 1655109733]
+2022-06-13 08:42:14,150 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:14,151 [DEBUG] agent:291 send 1588 bytes of data to collector
+2022-06-13 08:42:14,664 [DEBUG] agent:144 Now in buffer: [1655109732, 1655109733, 1655109734]
+2022-06-13 08:42:15,152 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:16,168 [DEBUG] agent:144 Now in buffer: [1655109733, 1655109734, 1655109735, 1655109736]
+2022-06-13 08:42:17,154 [DEBUG] agent:291 send 1573 bytes of data to collector
+2022-06-13 08:42:17,154 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:17,170 [DEBUG] agent:144 Now in buffer: [1655109735, 1655109736, 1655109737]
+2022-06-13 08:42:18,155 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:19,176 [DEBUG] agent:144 Now in buffer: [1655109736, 1655109737, 1655109738]
+2022-06-13 08:42:19,678 [DEBUG] agent:144 Now in buffer: [1655109737, 1655109738, 1655109739]
+2022-06-13 08:42:20,158 [DEBUG] agent:291 send 1588 bytes of data to collector
+2022-06-13 08:42:20,158 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:20,680 [DEBUG] agent:144 Now in buffer: [1655109738, 1655109739, 1655109740]
+2022-06-13 08:42:21,158 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:22,683 [DEBUG] agent:144 Now in buffer: [1655109739, 1655109740, 1655109741, 1655109742]
+2022-06-13 08:42:23,161 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:23,161 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:23,685 [DEBUG] agent:144 Now in buffer: [1655109741, 1655109742, 1655109743]
+2022-06-13 08:42:24,162 [DEBUG] agent:291 send 1608 bytes of data to collector
+2022-06-13 08:42:24,686 [DEBUG] agent:144 Now in buffer: [1655109742, 1655109743, 1655109744]
+2022-06-13 08:42:25,164 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:25,688 [DEBUG] agent:144 Now in buffer: [1655109743, 1655109744, 1655109745]
+2022-06-13 08:42:26,165 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:26,690 [DEBUG] agent:144 Now in buffer: [1655109744, 1655109745, 1655109746]
+2022-06-13 08:42:27,167 [DEBUG] agent:291 send 1574 bytes of data to collector
+2022-06-13 08:42:28,693 [DEBUG] agent:144 Now in buffer: [1655109745, 1655109746, 1655109747, 1655109748]
+2022-06-13 08:42:29,171 [DEBUG] agent:291 send 1575 bytes of data to collector
+2022-06-13 08:42:29,172 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:30,196 [DEBUG] agent:144 Now in buffer: [1655109747, 1655109748, 1655109749]
+2022-06-13 08:42:31,175 [DEBUG] agent:291 send 1574 bytes of data to collector
+2022-06-13 08:42:31,198 [DEBUG] agent:144 Now in buffer: [1655109748, 1655109749, 1655109750]
+2022-06-13 08:42:32,177 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:32,200 [DEBUG] agent:144 Now in buffer: [1655109749, 1655109750, 1655109751]
+2022-06-13 08:42:33,178 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:33,202 [DEBUG] agent:144 Now in buffer: [1655109750, 1655109751, 1655109752, 1655109753]
+2022-06-13 08:42:34,179 [DEBUG] agent:291 send 1573 bytes of data to collector
+2022-06-13 08:42:34,180 [DEBUG] agent:291 send 1572 bytes of data to collector
+2022-06-13 08:42:34,204 [DEBUG] agent:144 Now in buffer: [1655109752, 1655109753, 1655109754]
+2022-06-13 08:42:35,181 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:36,207 [DEBUG] agent:144 Now in buffer: [1655109753, 1655109754, 1655109755]
+2022-06-13 08:42:36,708 [DEBUG] agent:144 Now in buffer: [1655109754, 1655109755, 1655109756]
+2022-06-13 08:42:37,183 [DEBUG] agent:291 send 1607 bytes of data to collector
+2022-06-13 08:42:37,183 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:38,211 [DEBUG] agent:144 Now in buffer: [1655109755, 1655109756, 1655109757, 1655109758]
+2022-06-13 08:42:39,186 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:39,186 [DEBUG] agent:291 send 1573 bytes of data to collector
+2022-06-13 08:42:40,214 [DEBUG] agent:144 Now in buffer: [1655109760, 1655109757, 1655109758, 1655109759]
+2022-06-13 08:42:41,193 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:41,193 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:42,718 [DEBUG] agent:144 Now in buffer: [1655109760, 1655109761, 1655109762, 1655109759]
+2022-06-13 08:42:43,195 [DEBUG] agent:291 send 1575 bytes of data to collector
+2022-06-13 08:42:43,196 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:43,721 [DEBUG] agent:144 Now in buffer: [1655109761, 1655109762, 1655109763]
+2022-06-13 08:42:44,196 [DEBUG] agent:291 send 1573 bytes of data to collector
+2022-06-13 08:42:45,223 [DEBUG] agent:144 Now in buffer: [1655109762, 1655109763, 1655109764]
+2022-06-13 08:42:46,199 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:46,225 [DEBUG] agent:144 Now in buffer: [1655109763, 1655109764, 1655109765]
+2022-06-13 08:42:46,727 [DEBUG] agent:144 Now in buffer: [1655109764, 1655109765, 1655109766]
+2022-06-13 08:42:47,199 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:47,200 [DEBUG] agent:291 send 1607 bytes of data to collector
+2022-06-13 08:42:48,232 [DEBUG] agent:144 Now in buffer: [1655109765, 1655109766, 1655109767]
+2022-06-13 08:42:48,733 [DEBUG] agent:144 Now in buffer: [1655109766, 1655109767, 1655109768]
+2022-06-13 08:42:49,201 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:42:49,201 [DEBUG] agent:291 send 1574 bytes of data to collector
+2022-06-13 08:42:49,735 [DEBUG] agent:144 Now in buffer: [1655109767, 1655109768, 1655109769]
+2022-06-13 08:42:50,203 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:51,738 [DEBUG] agent:144 Now in buffer: [1655109768, 1655109769, 1655109770, 1655109771]
+2022-06-13 08:42:52,204 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:52,205 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:42:52,240 [DEBUG] agent:144 Now in buffer: [1655109770, 1655109771, 1655109772]
+2022-06-13 08:42:53,205 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:53,242 [DEBUG] agent:144 Now in buffer: [1655109771, 1655109772, 1655109773]
+2022-06-13 08:42:54,206 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:55,245 [DEBUG] agent:144 Now in buffer: [1655109772, 1655109773, 1655109774, 1655109775]
+2022-06-13 08:42:56,208 [DEBUG] agent:291 send 1574 bytes of data to collector
+2022-06-13 08:42:56,209 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:42:56,251 [DEBUG] agent:144 Now in buffer: [1655109774, 1655109775, 1655109776]
+2022-06-13 08:42:57,210 [DEBUG] agent:291 send 1589 bytes of data to collector
+2022-06-13 08:42:57,754 [DEBUG] agent:144 Now in buffer: [1655109775, 1655109776, 1655109777]
+2022-06-13 08:42:58,211 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:42:59,257 [DEBUG] agent:144 Now in buffer: [1655109776, 1655109777, 1655109778, 1655109779]
+2022-06-13 08:43:00,213 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:43:00,213 [DEBUG] agent:291 send 1560 bytes of data to collector
+2022-06-13 08:43:00,260 [DEBUG] agent:144 Now in buffer: [1655109778, 1655109779, 1655109780]
+2022-06-13 08:43:01,215 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:43:01,762 [DEBUG] agent:144 Now in buffer: [1655109779, 1655109780, 1655109781]
+2022-06-13 08:43:02,215 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:03,269 [DEBUG] agent:144 Now in buffer: [1655109780, 1655109781, 1655109782, 1655109783]
+2022-06-13 08:43:04,217 [DEBUG] agent:291 send 1575 bytes of data to collector
+2022-06-13 08:43:04,217 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:43:04,271 [DEBUG] agent:144 Now in buffer: [1655109782, 1655109783, 1655109784]
+2022-06-13 08:43:05,218 [DEBUG] agent:291 send 1577 bytes of data to collector
+2022-06-13 08:43:06,275 [DEBUG] agent:144 Now in buffer: [1655109783, 1655109784, 1655109785]
+2022-06-13 08:43:07,220 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:07,277 [DEBUG] agent:144 Now in buffer: [1655109784, 1655109785, 1655109786, 1655109787]
+2022-06-13 08:43:08,222 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:08,222 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:09,281 [DEBUG] agent:144 Now in buffer: [1655109786, 1655109787, 1655109788, 1655109789]
+2022-06-13 08:43:10,224 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:43:10,225 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:10,283 [DEBUG] agent:144 Now in buffer: [1655109788, 1655109789, 1655109790]
+2022-06-13 08:43:11,226 [DEBUG] agent:291 send 1577 bytes of data to collector
+2022-06-13 08:43:12,287 [DEBUG] agent:144 Now in buffer: [1655109789, 1655109790, 1655109791]
+2022-06-13 08:43:13,227 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:13,289 [DEBUG] agent:144 Now in buffer: [1655109792, 1655109793, 1655109790, 1655109791]
+2022-06-13 08:43:14,231 [DEBUG] agent:291 send 1592 bytes of data to collector
+2022-06-13 08:43:14,231 [DEBUG] agent:291 send 1610 bytes of data to collector
+2022-06-13 08:43:14,791 [DEBUG] agent:144 Now in buffer: [1655109792, 1655109793, 1655109794]
+2022-06-13 08:43:15,231 [DEBUG] agent:291 send 1590 bytes of data to collector
+2022-06-13 08:43:16,294 [DEBUG] agent:144 Now in buffer: [1655109793, 1655109794, 1655109795, 1655109796]
+2022-06-13 08:43:17,233 [DEBUG] agent:291 send 1576 bytes of data to collector
+2022-06-13 08:43:17,234 [DEBUG] agent:291 send 1593 bytes of data to collector
+2022-06-13 08:43:17,296 [DEBUG] agent:144 Now in buffer: [1655109795, 1655109796, 1655109797]
+2022-06-13 08:43:18,235 [DEBUG] agent:291 send 1591 bytes of data to collector
+2022-06-13 08:43:19,299 [DEBUG] agent:144 Now in buffer: [1655109796, 1655109797, 1655109798, 1655109799]
+2022-06-13 08:43:20,237 [DEBUG] agent:291 send 1608 bytes of data to collector
+2022-06-13 08:43:20,238 [DEBUG] agent:291 send 1594 bytes of data to collector
+2022-06-13 08:43:21,260 [WARNING] agent:22 Got signal 15, going to stop
+2022-06-13 08:43:21,260 [DEBUG] agent:441 Interrupted
+2022-06-13 08:43:21,260 [DEBUG] agent:450 Join the worker thread, waiting for cleanup
+2022-06-13 08:43:21,302 [DEBUG] agent:144 Now in buffer: [1655109798, 1655109799, 1655109800]
+2022-06-13 08:43:22,239 [INFO] agent:346 Terminating startup commands
+2022-06-13 08:43:22,239 [INFO] agent:350 Terminating collector process: <subprocess.Popen object at 0x7f0f93b4be90>
+2022-06-13 08:43:22,240 [DEBUG] agent:330 Terminating: 15
+2022-06-13 08:43:22,241 [INFO] agent:334 Retcode for PID 15 -15
+2022-06-13 08:43:22,242 [INFO] agent:353 Running shutdown commands
+2022-06-13 08:43:22,242 [INFO] agent:359 Worker thread finished
+2022-06-13 08:43:22,283 [WARNING] agent:27 Got signal 17, ignoring
