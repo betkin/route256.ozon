@@ -1,0 +1,31 @@
+android: {enabled: false, package: yandextank.plugins.Android}
+autostop: {enabled: true, package: yandextank.plugins.Autostop}
+bfg: {enabled: false, package: yandextank.plugins.Bfg}
+console: {enabled: true, package: yandextank.plugins.Console}
+core: {}
+influx: {enabled: false, package: yandextank.plugins.Influx}
+jmeter: {enabled: false, package: yandextank.plugins.JMeter}
+json_report: {enabled: true, package: yandextank.plugins.JsonReport}
+overload: {enabled: true, job_dsc: test description, job_name: ExampleTest, package: yandextank.plugins.DataUploader,
+  token_file: token.txt}
+pandora:
+  config_content:
+    pools:
+    - ammo: {file: ./ammo.json, type: http/json}
+      gun: {target: 'example.com:80', type: http}
+      id: HTTP pool
+      result: {destination: ./phout.log, type: phout}
+      rps:
+      - {duration: 10s, from: 1, to: 5, type: line}
+      - {duration: 30s, ops: 5, type: const}
+      - {duration: 10s, from: 5, to: 10, type: line}
+      - {duration: 30s, ops: 10, type: const}
+      startup: {times: 30, type: once}
+  enabled: true
+  package: yandextank.plugins.Pandora
+  pandora_cmd: /var/loadtest/files/pandora
+phantom: {enabled: false, package: yandextank.plugins.Phantom}
+rcassert: {enabled: true, package: yandextank.plugins.RCAssert}
+rcheck: {enabled: true, package: yandextank.plugins.ResourceCheck}
+shellexec: {enabled: true, package: yandextank.plugins.ShellExec}
+telegraf: {enabled: true, package: yandextank.plugins.Telegraf}

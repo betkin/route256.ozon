@@ -1,0 +1,56 @@
+2022-06-15 09:08:12,905 [INFO] agent:402 Init
+2022-06-15 09:08:12,905 [INFO] agent:410 Trying to make telegraf executable: /usr/bin/telegraf
+2022-06-15 09:08:12,986 [INFO] agent:420 Trying to make customs script executable: /tmp/tmpDCjN2S/agent_customs.sh
+2022-06-15 09:08:12,987 [INFO] agent:235 Successfully loaded startup config.
+Startups: []
+Shutdowns: []
+
+2022-06-15 09:08:12,987 [INFO] agent:432 Starting AgentWorker: <AgentWorker(Thread-1, initial daemon)>
+2022-06-15 09:08:12,987 [DEBUG] agent:436 Check for any stdin command for shutdown
+2022-06-15 09:08:12,987 [INFO] agent:241 Running startup commands
+2022-06-15 09:08:12,987 [INFO] agent:250 Starting metrics collector..
+2022-06-15 09:08:13,103 [INFO] agent:255 Started with pid 15
+2022-06-15 09:08:13,103 [INFO] agent:263 Waiting for telegraf...
+2022-06-15 09:08:14,103 [INFO] agent:263 Waiting for telegraf...
+2022-06-15 09:08:15,105 [INFO] telegraf:311 STDERR: 2022-06-15T09:08:13Z I! Starting Telegraf v1.4.3
+2022-06-15 09:08:15,105 [INFO] telegraf:311 STDERR: 2022-06-15T09:08:13Z I! Loaded outputs: file
+2022-06-15 09:08:15,105 [INFO] telegraf:311 STDERR: 2022-06-15T09:08:13Z I! Loaded inputs: inputs.kernel inputs.system inputs.mem inputs.net inputs.diskio inputs.cpu
+2022-06-15 09:08:15,105 [INFO] telegraf:311 STDERR: 2022-06-15T09:08:13Z I! Tags enabled: host=cba530e5c216
+2022-06-15 09:08:15,105 [INFO] telegraf:311 STDERR: 2022-06-15T09:08:13Z I! Agent Config: Interval:1s, Quiet:false, Hostname:"cba530e5c216", Flush Interval:1s 
+2022-06-15 09:08:16,108 [DEBUG] agent:144 Now in buffer: [1655284096, 1655284094, 1655284095]
+2022-06-15 09:08:17,107 [DEBUG] agent:291 send 1242 bytes of data to collector
+2022-06-15 09:08:18,111 [DEBUG] agent:144 Now in buffer: [1655284096, 1655284097, 1655284095]
+2022-06-15 09:08:19,109 [DEBUG] agent:291 send 1563 bytes of data to collector
+2022-06-15 09:08:19,113 [DEBUG] agent:144 Now in buffer: [1655284096, 1655284097, 1655284098]
+2022-06-15 09:08:19,614 [DEBUG] agent:144 Now in buffer: [1655284097, 1655284098, 1655284099]
+2022-06-15 09:08:20,110 [DEBUG] agent:291 send 1578 bytes of data to collector
+2022-06-15 09:08:20,110 [DEBUG] agent:291 send 1562 bytes of data to collector
+2022-06-15 09:08:20,616 [DEBUG] agent:144 Now in buffer: [1655284098, 1655284099, 1655284100]
+2022-06-15 09:08:21,112 [DEBUG] agent:291 send 1577 bytes of data to collector
+2022-06-15 09:08:22,619 [DEBUG] agent:144 Now in buffer: [1655284099, 1655284100, 1655284101, 1655284102]
+2022-06-15 09:08:23,114 [DEBUG] agent:291 send 1594 bytes of data to collector
+2022-06-15 09:08:23,114 [DEBUG] agent:291 send 1578 bytes of data to collector
+2022-06-15 09:08:23,621 [DEBUG] agent:144 Now in buffer: [1655284101, 1655284102, 1655284103]
+2022-06-15 09:08:24,115 [DEBUG] agent:291 send 1562 bytes of data to collector
+2022-06-15 09:08:25,124 [DEBUG] agent:144 Now in buffer: [1655284102, 1655284103, 1655284104]
+2022-06-15 09:08:25,625 [DEBUG] agent:144 Now in buffer: [1655284103, 1655284104, 1655284105]
+2022-06-15 09:08:26,116 [DEBUG] agent:291 send 1562 bytes of data to collector
+2022-06-15 09:08:26,117 [DEBUG] agent:291 send 1562 bytes of data to collector
+2022-06-15 09:08:27,128 [DEBUG] agent:144 Now in buffer: [1655284104, 1655284105, 1655284106]
+2022-06-15 09:08:28,117 [DEBUG] agent:291 send 1562 bytes of data to collector
+2022-06-15 09:08:28,130 [DEBUG] agent:144 Now in buffer: [1655284105, 1655284106, 1655284107]
+2022-06-15 09:08:29,119 [DEBUG] agent:291 send 1562 bytes of data to collector
+2022-06-15 09:08:29,131 [DEBUG] agent:144 Now in buffer: [1655284106, 1655284107, 1655284108, 1655284109]
+2022-06-15 09:08:30,120 [DEBUG] agent:291 send 1579 bytes of data to collector
+2022-06-15 09:08:30,120 [DEBUG] agent:291 send 1577 bytes of data to collector
+2022-06-15 09:08:30,579 [WARNING] agent:22 Got signal 15, going to stop
+2022-06-15 09:08:30,579 [DEBUG] agent:441 Interrupted
+2022-06-15 09:08:30,579 [DEBUG] agent:450 Join the worker thread, waiting for cleanup
+2022-06-15 09:08:30,650 [DEBUG] agent:144 Now in buffer: [1655284108, 1655284109, 1655284110]
+2022-06-15 09:08:31,121 [INFO] agent:346 Terminating startup commands
+2022-06-15 09:08:31,121 [INFO] agent:350 Terminating collector process: <subprocess.Popen object at 0x7f90927c1e90>
+2022-06-15 09:08:31,121 [DEBUG] agent:330 Terminating: 15
+2022-06-15 09:08:31,122 [INFO] agent:334 Retcode for PID 15 -15
+2022-06-15 09:08:31,122 [INFO] agent:353 Running shutdown commands
+2022-06-15 09:08:31,122 [INFO] agent:359 Worker thread finished
+2022-06-15 09:08:31,147 [WARNING] agent:27 Got signal 17, ignoring

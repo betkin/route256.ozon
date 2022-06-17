@@ -1,0 +1,16 @@
+pools:
+- ammo: {file: ./ammo.json, type: http/json}
+  gun: {target: 'act-device-api:8080', type: http}
+  id: HTTP pool
+  result: {destination: ./phout.log, type: phout}
+  rps:
+  - {duration: 10s, from: 1, to: 5, type: line}
+  - {duration: 30s, ops: 5, type: const}
+  - {duration: 10s, from: 5, to: 10, type: line}
+  - {duration: 30s, ops: 10, type: const}
+  - {duration: 10s, from: 10, to: 20, type: line}
+  - {duration: 30s, ops: 20, type: const}
+  - {duration: 10s, from: 20, to: 5, type: line}
+  - {duration: 30s, ops: 5, type: const}
+  - {duration: 10s, from: 5, to: 1, type: line}
+  startup: {times: 30, type: once}

@@ -1,0 +1,168 @@
+-expvar flag is DEPRECATED. Use monitoring config section instead
+2022-06-15T12:40:27.691Z	INFO	cli/cli.go:217	Reading config	{"file": "/var/loadtest/logs/2022-06-15_12-40-11.152385/pandora_config_HW25Pg.yaml"}
+2022-06-15T12:40:27.712Z	INFO	engine/engine.go:140	Pool run started	{"pool": "HTTP pool"}
+2022-06-15T12:40:28.712Z	INFO	cli/expvar.go:40	[ENGINE] 2 resp/s; 2 req/s; 30 users; 0 active
+
+2022-06-15T12:40:29.712Z	INFO	cli/expvar.go:40	[ENGINE] 1 resp/s; 1 req/s; 30 users; 0 active
+
+2022-06-15T12:40:30.712Z	INFO	cli/expvar.go:40	[ENGINE] 2 resp/s; 2 req/s; 30 users; 0 active
+
+2022-06-15T12:40:31.713Z	INFO	cli/expvar.go:40	[ENGINE] 3 resp/s; 3 req/s; 30 users; 0 active
+
+2022-06-15T12:40:32.712Z	INFO	cli/expvar.go:40	[ENGINE] 2 resp/s; 2 req/s; 30 users; 0 active
+
+2022-06-15T12:40:33.713Z	INFO	cli/expvar.go:40	[ENGINE] 4 resp/s; 4 req/s; 30 users; 0 active
+
+2022-06-15T12:40:34.712Z	INFO	cli/expvar.go:40	[ENGINE] 3 resp/s; 3 req/s; 30 users; 0 active
+
+2022-06-15T12:40:35.712Z	INFO	cli/expvar.go:40	[ENGINE] 4 resp/s; 4 req/s; 30 users; 0 active
+
+2022-06-15T12:40:36.715Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:37.712Z	INFO	cli/expvar.go:40	[ENGINE] 4 resp/s; 4 req/s; 30 users; 0 active
+
+2022-06-15T12:40:38.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:39.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:40.713Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:41.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:42.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:43.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:44.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:45.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:46.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:47.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:48.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:49.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:50.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:51.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:52.713Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:53.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:54.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:55.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:56.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:57.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:58.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:40:59.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:00.713Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:01.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:02.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:03.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:04.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:05.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:06.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:07.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:08.712Z	INFO	cli/expvar.go:40	[ENGINE] 6 resp/s; 6 req/s; 30 users; 0 active
+
+2022-06-15T12:41:09.712Z	INFO	cli/expvar.go:40	[ENGINE] 5 resp/s; 5 req/s; 30 users; 0 active
+
+2022-06-15T12:41:10.712Z	INFO	cli/expvar.go:40	[ENGINE] 7 resp/s; 7 req/s; 30 users; 0 active
+
+2022-06-15T12:41:11.712Z	INFO	cli/expvar.go:40	[ENGINE] 6 resp/s; 6 req/s; 30 users; 0 active
+
+2022-06-15T12:41:12.712Z	INFO	cli/expvar.go:40	[ENGINE] 8 resp/s; 8 req/s; 30 users; 0 active
+
+2022-06-15T12:41:13.712Z	INFO	cli/expvar.go:40	[ENGINE] 7 resp/s; 7 req/s; 30 users; 0 active
+
+2022-06-15T12:41:14.712Z	INFO	cli/expvar.go:40	[ENGINE] 9 resp/s; 9 req/s; 30 users; 0 active
+
+2022-06-15T12:41:15.712Z	INFO	cli/expvar.go:40	[ENGINE] 8 resp/s; 8 req/s; 30 users; 0 active
+
+2022-06-15T12:41:16.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:17.712Z	INFO	cli/expvar.go:40	[ENGINE] 9 resp/s; 9 req/s; 30 users; 0 active
+
+2022-06-15T12:41:18.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:19.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:20.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:21.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:22.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:23.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:24.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:25.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:26.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:27.715Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 11 req/s; 30 users; 1 active
+
+2022-06-15T12:41:28.749Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 1 active
+
+2022-06-15T12:41:29.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 9 req/s; 30 users; 0 active
+
+2022-06-15T12:41:30.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:31.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:32.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:33.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:34.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:35.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:36.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:37.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:38.717Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 11 req/s; 30 users; 1 active
+
+2022-06-15T12:41:39.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 9 req/s; 30 users; 0 active
+
+2022-06-15T12:41:40.715Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 11 req/s; 30 users; 1 active
+
+2022-06-15T12:41:41.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 9 req/s; 30 users; 0 active
+
+2022-06-15T12:41:42.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:43.713Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:44.713Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 30 users; 0 active
+
+2022-06-15T12:41:44.718Z	INFO	engine/engine.go:417	RPS schedule has been finished. Canceling instance start.	{"pool": "HTTP pool"}
+2022-06-15T12:41:45.712Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 20 users; 0 active
+
+2022-06-15T12:41:46.713Z	INFO	cli/expvar.go:40	[ENGINE] 10 resp/s; 10 req/s; 10 users; 0 active
+
+2022-06-15T12:41:47.617Z	INFO	engine/engine.go:351	All instances runs awaited.	{"pool": "HTTP pool", "awaited": 30}
+2022-06-15T12:41:47.618Z	INFO	engine/engine.go:168	Pool run finished successfully	{"pool": "HTTP pool"}
+2022-06-15T12:41:47.618Z	INFO	engine/engine.go:143	Pool run finished	{"pool": "HTTP pool"}
+2022-06-15T12:41:47.618Z	INFO	engine/engine.go:66	Engine finished
+2022-06-15T12:41:47.618Z	INFO	cli/cli.go:159	Pandora engine successfully finished it's work
+2022-06-15T12:41:47.618Z	INFO	cli/cli.go:171	Engine run successfully finished

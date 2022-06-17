@@ -1,0 +1,36 @@
+android: {enabled: false, package: yandextank.plugins.Android}
+autostop: {enabled: true, package: yandextank.plugins.Autostop}
+bfg: {enabled: false, package: yandextank.plugins.Bfg}
+console: {enabled: true, package: yandextank.plugins.Console}
+core: {}
+influx: {enabled: false, package: yandextank.plugins.Influx}
+jmeter: {enabled: false, package: yandextank.plugins.JMeter}
+json_report: {enabled: true, package: yandextank.plugins.JsonReport}
+overload: {enabled: true, job_dsc: test description, job_name: ActDeviceApiTest, package: yandextank.plugins.DataUploader,
+  token_file: token.txt}
+pandora:
+  config_content:
+    pools:
+    - ammo: {file: ./ammo.json, type: http/json}
+      gun: {target: 'act-device-api:8080', type: http}
+      id: HTTP pool
+      result: {destination: ./phout.log, type: phout}
+      rps:
+      - {duration: 10s, from: 1, to: 50, type: line}
+      - {duration: 30s, ops: 50, type: const}
+      - {duration: 10s, from: 50, to: 100, type: line}
+      - {duration: 30s, ops: 100, type: const}
+      - {duration: 10s, from: 100, to: 200, type: line}
+      - {duration: 30s, ops: 200, type: const}
+      - {duration: 10s, from: 200, to: 50, type: line}
+      - {duration: 30s, ops: 50, type: const}
+      - {duration: 10s, from: 50, to: 1, type: line}
+      startup: {times: 30, type: once}
+  enabled: true
+  package: yandextank.plugins.Pandora
+  pandora_cmd: /var/loadtest/files/pandora
+phantom: {enabled: false, package: yandextank.plugins.Phantom}
+rcassert: {enabled: true, package: yandextank.plugins.RCAssert}
+rcheck: {enabled: true, package: yandextank.plugins.ResourceCheck}
+shellexec: {enabled: true, package: yandextank.plugins.ShellExec}
+telegraf: {enabled: true, package: yandextank.plugins.Telegraf}

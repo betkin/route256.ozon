@@ -1,0 +1,70 @@
+phantom:
+  enabled: false
+  package: yandextank.plugins.Phantom
+overload:
+  enabled: true
+  package: yandextank.plugins.DataUploader
+  token_file: token.txt
+  job_name: ActDeviceApiTest
+  job_dsc: test description
+
+pandora:
+  package: yandextank.plugins.Pandora
+  enabled: true
+  pandora_cmd: /var/loadtest/files/pandora
+  config_content:
+      pools:
+          - id: HTTP pool                    # pool name (for your choice)
+            gun:
+              type: http                     # gun type
+              target: act-device-api:8080         # gun target
+            ammo:
+              type: http/json                     # ammo format
+              file: ./ammo.json               # ammo file path
+            result:
+              type: phout                    # report format (phout is compatible for Yandex.Tank)
+              destination: ./phout.log       # report file name
+            rps:                             # RPS scheduler - controls throughput over test
+                - type: line                     # linear growth load
+                  from: 1                        # from 1 responses per second
+                  to: 50                          # to 50 responses per second
+                  duration: 10s                   # for 10 seconds
+                - type: const                     # const load
+                  ops:   50                        # 50 responses per second
+                  duration: 30s
+                - type: line                     # linear growth load
+                  from: 50                        # from 50 responses per second
+                  to: 100                          # to 100 responses per second
+                  duration: 10s
+                - type: const                     # const growth load
+                  ops: 100                        # 100 responses per second
+                  duration: 30s
+                - type: line                     # linear growth load
+                  from: 100                        # from 100 responses per second
+                  to: 200                          # to 200 responses per second
+                  duration: 10s
+                - type: const                     # const growth load
+                  ops: 200                        # 200 responses per second
+                  duration: 30s
+                - type: line                     # linear growth load
+                  from: 200                        # from 200 responses per second
+                  to: 400                          # to 400 responses per second
+                  duration: 10s
+                - type: const                     # const growth load
+                  ops: 400                        # 400 responses per second
+                  duration: 30s
+                - type: line                     # linear decrease load
+                  from: 400                        # from 400 responses per second
+                  to: 50                          # to 50 responses per second
+                  duration: 10s
+                - type: const                     # const growth load
+                  ops: 50                        # 50 responses per second
+                  duration: 30s
+                - type: line                     # linear decrease load
+                  from: 50                        # from 50 responses per second
+                  to: 1                          # to 1 responses per second
+                  duration: 10s
+
+            startup:                         # startup scheduler - control the level of parallelism
+              type: once                     # start 5 instances
+              times: 30
