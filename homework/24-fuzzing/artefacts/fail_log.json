@@ -1,0 +1,14 @@
+{"Time":"2022-06-18T02:27:07.088975592+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"=== FUZZ  FuzzReverse\n"}
+{"Time":"2022-06-18T02:27:07.089389148+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"fuzz: elapsed: 0s, gathering baseline coverage: 0/8 completed\n"}
+{"Time":"2022-06-18T02:27:07.091876034+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"failure while testing seed corpus entry: FuzzReverse/seed#0\n"}
+{"Time":"2022-06-18T02:27:07.092825445+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"fuzz: elapsed: 0s, gathering baseline coverage: 0/8 completed\n"}
+{"Time":"2022-06-18T02:27:07.093334911+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Test":"FuzzReverse","Output":"--- FAIL: FuzzReverse (0.01s)\n"}
+{"Time":"2022-06-18T02:27:07.093348686+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Test":"FuzzReverse","Output":"    --- FAIL: FuzzReverse (0.00s)\n"}
+{"Time":"2022-06-18T02:27:07.093353876+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Test":"FuzzReverse","Output":"        reverse_test.go:23: ��掘擙掘擙� IS NOT CORRECT RESULT FOR 晓明晓明晓\n"}
+{"Time":"2022-06-18T02:27:07.093359557+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Test":"FuzzReverse","Output":"    \n"}
+{"Time":"2022-06-18T02:27:07.093364366+04:00","Action":"fail","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Test":"FuzzReverse","Elapsed":0}
+{"Time":"2022-06-18T02:27:07.093369365+04:00","Action":"fail","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Test":"FuzzReverse","Elapsed":0.01}
+{"Time":"2022-06-18T02:27:07.093373964+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"FAIL\n"}
+{"Time":"2022-06-18T02:27:07.093399582+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"exit status 1\n"}
+{"Time":"2022-06-18T02:27:07.093406545+04:00","Action":"output","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Output":"FAIL\tgitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test\t0.008s\n"}
+{"Time":"2022-06-18T02:27:07.093463021+04:00","Action":"fail","Package":"gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test","Elapsed":0.008}

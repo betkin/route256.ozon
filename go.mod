@@ -3,7 +3,7 @@ module gitlab.ozon.dev/betkin/device-api
 go 1.16
 
 require (
-	bou.ke/monkey v1.0.2 // indirect
+	bou.ke/monkey v1.0.2
 	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/Masterminds/squirrel v1.5.3
 	github.com/Shopify/sarama v1.34.0

@@ -37,6 +37,15 @@ unit:
     - if: $CI_COMMIT_REF_NAME =~ /^(test)|(release)\/.+$/
       when: always
 
+fuzzing:
+  stage: build
+  script:
+    - go test --fuzz=Fuzz -fuzztime=20s ./homework/24-fuzzing/test
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(24-fuzzing)\/.+$/
+      when: always
+
 linter:
   stage: build
   image: gitlab-registry.ozon.dev/betkin/device-api/golangci/golangci-lint
