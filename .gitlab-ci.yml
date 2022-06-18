@@ -39,6 +39,7 @@ unit:
 
 fuzzing:
   stage: build
+  image: gitlab-registry.ozon.dev/betkin/device-api/golang:1.18-alpine
   script:
     - go test --fuzz=Fuzz -fuzztime=20s ./homework/24-fuzzing/test
   allow_failure: true
