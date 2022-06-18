@@ -43,7 +43,7 @@ fuzzing:
     - go test --fuzz=Fuzz -fuzztime=20s ./homework/24-fuzzing/test
   allow_failure: true
   rules:
-    - if: $CI_COMMIT_REF_NAME == 24-fuzzing
+    - if: $CI_COMMIT_REF_NAME == '24-fuzzing'
       when: always
 
 linter:
