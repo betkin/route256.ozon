@@ -1,0 +1,11 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/10 completed
+fuzz: elapsed: 0s, gathering baseline coverage: 10/10 completed, now fuzzing with 1 workers
+fuzz: elapsed: 3s, execs: 80651 (26882/sec), new interesting: 0 (total: 10)
+fuzz: elapsed: 6s, execs: 166139 (28494/sec), new interesting: 0 (total: 10)
+fuzz: elapsed: 9s, execs: 265663 (33164/sec), new interesting: 0 (total: 10)
+fuzz: elapsed: 12s, execs: 356556 (30311/sec), new interesting: 0 (total: 10)
+fuzz: elapsed: 15s, execs: 441444 (28295/sec), new interesting: 0 (total: 10)
+fuzz: elapsed: 18s, execs: 527521 (28690/sec), new interesting: 0 (total: 10)
+fuzz: elapsed: 20s, execs: 584175 (27040/sec), new interesting: 0 (total: 10)
+PASS
+ok  	gitlab.ozon.dev/betkin/device-api/homework/24-fuzzing/test	20.099s
